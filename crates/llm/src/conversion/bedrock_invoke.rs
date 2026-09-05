@@ -32,6 +32,23 @@
 //! is talking to Anthropic puts the list in the header, so the header is lifted
 //! into the body and renamed, matching what Claude Code itself sends when it
 //! addresses Bedrock directly.
+//!
+//! One more edit is made for the prompt cache. Claude Code 2.1.26x injects
+//! mid-conversation `role: "system"` messages (its deferred-tool list, the
+//! `<total_tokens>` note, the output-style reminder) and moves its single trailing
+//! `cache_control` breakpoint onto the newest one each turn. Measured 2026-09-05
+//! through this gateway and directly against Bedrock: a cached prefix that ends on
+//! a `role: "system"` message is not found again once that message loses its
+//! breakpoint, so every new user turn re-wrote the whole history at cache-write
+//! price and read back only `tools` + `system`. The identical text as a
+//! `role: "user"` message walks back fine, and consecutive user messages are
+//! accepted. So system-role messages are re-addressed as user-role messages
+//! wrapped in `<system-reminder>` tags, which is how Claude Code itself delivers
+//! the same reminders to models without mid-conversation system support. See
+//! [`demote_system_messages`]. Bedrock also rejects message-level keys other than
+//! `role` and `content` (`messages.1.output_config: Extra inputs are not
+//! permitted`); those are dropped from the demoted messages, which spares the
+//! client's retry round trip.
 
 use std::collections::HashSet;
 use std::sync::{LazyLock, Mutex};
@@ -40,11 +57,10 @@ use agent_core::strng;
 use axum_core::body::Body;
 use base64::Engine;
 use bytes::Bytes;
+use tracing::{debug, warn};
 
 use crate::parse::aws_sse;
 use crate::types::messages::typed as messages_typed;
-use tracing::{debug, warn};
-
 use crate::{AIError, StreamingUsageGuard, types};
 
 /// Bedrock requires this in the body; it identifies the Anthropic API contract
@@ -261,6 +277,149 @@ fn merge_beta_values(
 	}
 }
 
+/// How mid-conversation `role: "system"` messages are sent to Bedrock.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum SystemMessageMode {
+	/// Re-address them as `role: "user"` messages whose text is wrapped in
+	/// `<system-reminder>` tags, so the prompt cache walks back across them.
+	AsUserReminder,
+	/// Forward them as received.
+	Passthrough,
+}
+
+/// `AGENTGATEWAY_BEDROCK_INVOKE_SYSTEM_MESSAGES=passthrough` restores the
+/// as-received behaviour without a new build. Anything else, including unset,
+/// selects [`SystemMessageMode::AsUserReminder`].
+static SYSTEM_MESSAGE_MODE: LazyLock<SystemMessageMode> =
+	LazyLock::new(
+		|| match std::env::var("AGENTGATEWAY_BEDROCK_INVOKE_SYSTEM_MESSAGES") {
+			Ok(raw) if raw.trim().eq_ignore_ascii_case("passthrough") => SystemMessageMode::Passthrough,
+			Ok(raw) if raw.trim().eq_ignore_ascii_case("user") || raw.trim().is_empty() => {
+				SystemMessageMode::AsUserReminder
+			},
+			Ok(raw) => {
+				warn!(
+					"bedrock invoke: unknown AGENTGATEWAY_BEDROCK_INVOKE_SYSTEM_MESSAGES={raw:?}; \
+				 expected `user` or `passthrough`, using `user`"
+				);
+				SystemMessageMode::AsUserReminder
+			},
+			Err(_) => SystemMessageMode::AsUserReminder,
+		},
+	);
+
+const SYSTEM_REMINDER_OPEN: &str = "<system-reminder>";
+const SYSTEM_REMINDER_CLOSE: &str = "</system-reminder>";
+
+/// Wrap reminder text the way Claude Code does when it delivers a reminder inside
+/// a user message. Text that already opens with the tag is left alone, so a
+/// message that passes through twice renders the same as one that passed once.
+fn as_system_reminder(text: &str) -> String {
+	if text.trim_start().starts_with(SYSTEM_REMINDER_OPEN) {
+		return text.to_owned();
+	}
+	format!("{SYSTEM_REMINDER_OPEN}\n{text}\n{SYSTEM_REMINDER_CLOSE}")
+}
+
+/// Re-address mid-conversation `role: "system"` messages as `role: "user"`.
+///
+/// The cache mechanism this serves is documented at the top of the module. Two
+/// details make turn N and turn N+1 render the same bytes for the same message,
+/// which is what lets the second request find the first one's cache entry:
+///
+/// * A string `content` is normalised to a one-element text array. Claude Code
+///   re-serialises a demoted message from an array to a string once its
+///   breakpoint moves on; the cache proved indifferent to that (probe D2,
+///   2026-09-05), but a stable form keeps this code's own output diffable.
+/// * `cache_control` on a text block is kept where it is. The whole point is that
+///   the block that had a breakpoint on turn N is a valid walk-back target on
+///   turn N+1, and that only works while its text is unchanged, so wrapping is
+///   idempotent.
+///
+/// Non-text parts are forwarded untouched. Message-level keys other than `role`
+/// and `content` are dropped from demoted messages because Bedrock's schema
+/// closes the message object too (`messages.1.output_config: Extra inputs are not
+/// permitted`, probe E); the client would otherwise get a 400 and retry without
+/// the key, so dropping it costs the client nothing it was going to keep. Dropped
+/// keys are named once in the log, like the top-level filter does.
+fn demote_system_messages(
+	body: &mut serde_json::Map<String, serde_json::Value>,
+	mode: SystemMessageMode,
+) {
+	if mode == SystemMessageMode::Passthrough {
+		return;
+	}
+	let Some(serde_json::Value::Array(messages)) = body.get_mut("messages") else {
+		return;
+	};
+	let mut dropped: Vec<String> = Vec::new();
+	let mut demoted = 0usize;
+	for message in messages.iter_mut() {
+		let Some(obj) = message.as_object_mut() else {
+			continue;
+		};
+		if obj.get("role").and_then(serde_json::Value::as_str) != Some("system") {
+			continue;
+		}
+		demoted += 1;
+		let content = match obj.remove("content") {
+			Some(serde_json::Value::String(text)) => Some(serde_json::Value::Array(vec![
+				serde_json::json!({"type": "text", "text": as_system_reminder(&text)}),
+			])),
+			Some(serde_json::Value::Array(parts)) => Some(serde_json::Value::Array(
+				parts
+					.into_iter()
+					.map(|mut part| {
+						if let Some(p) = part.as_object_mut()
+							&& p.get("type").and_then(serde_json::Value::as_str) == Some("text")
+							&& let Some(serde_json::Value::String(text)) = p.get("text")
+						{
+							let wrapped = as_system_reminder(text);
+							p.insert("text".to_string(), serde_json::Value::String(wrapped));
+						}
+						part
+					})
+					.collect(),
+			)),
+			other => other,
+		};
+		let extra: Vec<String> = obj.keys().filter(|k| *k != "role").cloned().collect();
+		for key in extra {
+			obj.remove(&key);
+			dropped.push(key);
+		}
+		obj.insert(
+			"role".to_string(),
+			serde_json::Value::String("user".to_string()),
+		);
+		if let Some(content) = content {
+			obj.insert("content".to_string(), content);
+		}
+	}
+	if demoted == 0 {
+		return;
+	}
+	debug!("bedrock invoke: re-addressed {demoted} system-role message(s) as user-role reminders");
+	if dropped.is_empty() {
+		return;
+	}
+	let fresh: Vec<String> = {
+		let mut reported = REPORTED_DROPS.lock().expect("drop set is never poisoned");
+		dropped
+			.iter()
+			.filter(|k| reported.insert(format!("messages[].{k}")))
+			.cloned()
+			.collect()
+	};
+	if !fresh.is_empty() {
+		warn!(
+			"bedrock invoke: dropping message-level fields the Anthropic InvokeModel schema \
+			 rejects from system-role messages: {}",
+			fresh.join(", ")
+		);
+	}
+}
+
 /// Render an Anthropic-native `InvokeModel` body.
 ///
 /// `model` and `stream` move out of the body: Bedrock takes the model in the URL
@@ -281,6 +440,7 @@ pub fn translate(
 	body.remove("model");
 	body.remove("stream");
 	retain_supported_fields(&mut body);
+	demote_system_messages(&mut body, *SYSTEM_MESSAGE_MODE);
 	merge_beta_values(&mut body, headers);
 	body
 		.entry("anthropic_version")
@@ -878,5 +1038,181 @@ mod tests {
 		// authoritative.
 		assert_eq!(sse_event_name("message_delta"), "message_delta");
 		assert_eq!(sse_event_name("some_future_event"), "");
+	}
+	/// Claude Code 2.1.26x turn-2 shape, captured 2026-09-05: the previous turn's
+	/// injected system message has lost its breakpoint and been re-serialised as a
+	/// string; the new one carries the breakpoint and a per-turn `output_config`.
+	fn claude_code_turn_two() -> types::messages::Request {
+		serde_json::from_value(json!({
+			"model": "claude-fable-5-1",
+			"max_tokens": 5,
+			"system": [{"type": "text", "text": "You are Claude Code.", "cache_control": {"type": "ephemeral", "ttl": "1h"}}],
+			"messages": [
+				{"role": "user", "content": [{"type": "text", "text": "Reply with only the word ok."}]},
+				{"role": "system", "content": "Deferred tools: EnterWorktree, ExitWorktree"},
+				{"role": "assistant", "content": [{"type": "text", "text": "ok"}]},
+				{"role": "user", "content": [{"type": "text", "text": "Reply with only the word ok again."}]},
+				{"role": "system",
+				 "content": [{"type": "text", "text": "<total_tokens>15000000 tokens left</total_tokens>",
+				              "cache_control": {"type": "ephemeral", "ttl": "1h"}}],
+				 "output_config": {"effort": "low"}}
+			]
+		}))
+		.expect("the captured request must deserialize")
+	}
+
+	fn demoted(req: &types::messages::Request, mode: SystemMessageMode) -> serde_json::Value {
+		let mut body = match serde_json::to_value(req).unwrap() {
+			serde_json::Value::Object(map) => map,
+			_ => unreachable!(),
+		};
+		demote_system_messages(&mut body, mode);
+		serde_json::Value::Object(body)
+	}
+
+	#[test]
+	fn system_role_messages_reach_bedrock_as_user_role_reminders() {
+		// Probe 2026-09-05 (docs/poc-prompt-cache-system-role-walkback.py in
+		// bedrock-lanes): a cached prefix ending on a role:system message is not
+		// found once that message loses its breakpoint (A2, A3 re-wrote 31k tokens),
+		// while the same text as role:user walks back (B2, C2, D2 read 31k). So no
+		// role:system message may reach Bedrock on this path.
+		let body = rendered(&claude_code_turn_two());
+		let roles: Vec<&str> = body["messages"]
+			.as_array()
+			.unwrap()
+			.iter()
+			.map(|m| m["role"].as_str().unwrap())
+			.collect();
+		assert_eq!(
+			roles,
+			vec!["user", "user", "assistant", "user", "user"],
+			"got {body}"
+		);
+		assert_eq!(
+			body["messages"][1]["content"],
+			json!([{"type": "text", "text": "<system-reminder>\nDeferred tools: EnterWorktree, ExitWorktree\n</system-reminder>"}]),
+			"string content is normalised to a wrapped text block, got {body}"
+		);
+		assert_eq!(
+			body["messages"][4]["content"][0]["text"],
+			json!(
+				"<system-reminder>\n<total_tokens>15000000 tokens left</total_tokens>\n</system-reminder>"
+			),
+			"got {body}"
+		);
+	}
+
+	#[test]
+	fn demoted_message_keeps_its_cache_breakpoint() {
+		// The block that carries the breakpoint on turn N is the walk-back target on
+		// turn N+1; stripping or moving it would recreate the miss this fixes.
+		let body = rendered(&claude_code_turn_two());
+		assert_eq!(
+			body["messages"][4]["content"][0]["cache_control"],
+			json!({"type": "ephemeral", "ttl": "1h"}),
+			"got {body}"
+		);
+		assert!(
+			body["messages"][1]["content"][0]
+				.get("cache_control")
+				.is_none(),
+			"a block without a breakpoint must not gain one, got {body}"
+		);
+	}
+
+	#[test]
+	fn string_and_array_forms_of_the_same_reminder_render_identically() {
+		// Claude Code sends the same reminder as a content array on the turn it is
+		// injected and as a plain string on later turns. Both must render to one
+		// form so the gateway's own output for that message never differs between
+		// turns.
+		let as_string: types::messages::Request = serde_json::from_value(json!({
+			"model": "m", "max_tokens": 5,
+			"messages": [{"role": "system", "content": "Be concise."}]
+		}))
+		.unwrap();
+		let as_array: types::messages::Request = serde_json::from_value(json!({
+			"model": "m", "max_tokens": 5,
+			"messages": [{"role": "system", "content": [{"type": "text", "text": "Be concise."}]}]
+		}))
+		.unwrap();
+		assert_eq!(
+			rendered(&as_string)["messages"],
+			rendered(&as_array)["messages"]
+		);
+	}
+
+	#[test]
+	fn wrapping_is_idempotent() {
+		// A reminder that already carries the tag (or a body that passes through two
+		// gateways) must not be nested a second time, or turn N+1 would differ from
+		// turn N.
+		let req: types::messages::Request = serde_json::from_value(json!({
+			"model": "m", "max_tokens": 5,
+			"messages": [{"role": "system", "content": "<system-reminder>\nBe concise.\n</system-reminder>"}]
+		}))
+		.unwrap();
+		let once = rendered(&req);
+		let twice: types::messages::Request = serde_json::from_value(once.clone()).unwrap();
+		assert_eq!(rendered(&twice)["messages"], once["messages"]);
+		assert_eq!(
+			once["messages"][0]["content"][0]["text"],
+			json!("<system-reminder>\nBe concise.\n</system-reminder>")
+		);
+	}
+
+	#[test]
+	fn message_level_output_config_is_dropped_from_demoted_messages() {
+		// Probe E, 2026-09-05: Bedrock answers 400 `messages.1.output_config: Extra
+		// inputs are not permitted`; Claude Code then retries without it. Dropping
+		// it here yields the same request one round trip sooner.
+		let body = rendered(&claude_code_turn_two());
+		let last = body["messages"][4].as_object().unwrap();
+		assert!(last.get("output_config").is_none(), "got {body}");
+		let mut keys: Vec<&String> = last.keys().collect();
+		keys.sort();
+		assert_eq!(keys, vec!["content", "role"], "got {body}");
+	}
+
+	#[test]
+	fn user_assistant_and_top_level_system_are_untouched_by_the_demotion() {
+		let req = claude_code_turn_two();
+		let before = serde_json::to_value(&req).unwrap();
+		let body = rendered(&req);
+		assert_eq!(body["system"], before["system"], "got {body}");
+		for i in [0usize, 2, 3] {
+			assert_eq!(
+				body["messages"][i], before["messages"][i],
+				"messages[{i}] must be forwarded verbatim, got {body}"
+			);
+		}
+		// Non-text parts inside a system-role message are forwarded as they came.
+		let req: types::messages::Request = serde_json::from_value(json!({
+			"model": "m", "max_tokens": 5,
+			"messages": [{"role": "system", "content": [
+				{"type": "text", "text": "see image"},
+				{"type": "image", "source": {"type": "url", "url": "https://example.test/i.png"}}
+			]}]
+		}))
+		.unwrap();
+		let body = rendered(&req);
+		assert_eq!(
+			body["messages"][0]["content"][1],
+			json!({"type": "image", "source": {"type": "url", "url": "https://example.test/i.png"}}),
+			"got {body}"
+		);
+	}
+
+	#[test]
+	fn passthrough_mode_forwards_system_role_messages_as_received() {
+		// The env override exists so the old behaviour is one variable away if a
+		// client turns out to depend on role:system echoes.
+		let req = claude_code_turn_two();
+		let before = serde_json::to_value(&req).unwrap();
+		let body = demoted(&req, SystemMessageMode::Passthrough);
+		assert_eq!(body["messages"], before["messages"]);
+		let body = demoted(&req, SystemMessageMode::AsUserReminder);
+		assert_ne!(body["messages"], before["messages"]);
 	}
 }
