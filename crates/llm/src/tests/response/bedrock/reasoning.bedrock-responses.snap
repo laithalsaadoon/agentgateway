@@ -1,5 +1,6 @@
 ---
 source: crates/llm/src/golden_tests.rs
+assertion_line: 672
 description: src/tests/response/bedrock/reasoning.json
 info:
   output:
@@ -25,14 +26,19 @@ info:
     "status": "completed",
     "output": [
       {
+        "type": "reasoning",
+        "id": "[id]",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": "Two plus two is four."
+          }
+        ],
+        "status": "completed"
+      },
+      {
         "type": "message",
         "content": [
-          {
-            "type": "output_text",
-            "annotations": [],
-            "logprobs": null,
-            "text": "Two plus two is four."
-          },
           {
             "type": "output_text",
             "annotations": [],

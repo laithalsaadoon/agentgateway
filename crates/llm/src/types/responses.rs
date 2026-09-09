@@ -945,13 +945,14 @@ pub mod typed {
 		IncompleteDetails, InputContent, InputItem, InputMessage, InputParam, InputRole,
 		InputTextContent, InputTokenDetails, Item, MessageItem, OutputContent, OutputItem,
 		OutputMessage, OutputMessageContent, OutputStatus, OutputTextContent, OutputTokenDetails,
-		Reasoning, ReasoningEffort, Response, ResponseCompletedEvent, ResponseContentPartAddedEvent,
-		ResponseContentPartDoneEvent, ResponseCreatedEvent, ResponseErrorEvent, ResponseFailedEvent,
-		ResponseFunctionCallArgumentsDeltaEvent, ResponseFunctionCallArgumentsDoneEvent,
-		ResponseInProgressEvent, ResponseIncompleteEvent, ResponseOutputItemAddedEvent,
-		ResponseOutputItemDoneEvent, ResponseRefusalDeltaEvent, ResponseRefusalDoneEvent,
-		ResponseTextDeltaEvent, ResponseTextDoneEvent, ResponseTextParam, ResponseUsage, Role, Status,
-		TextResponseFormatConfiguration, Tool, ToolChoiceFunction, ToolChoiceOptions, ToolChoiceParam,
+		Reasoning, ReasoningEffort, ReasoningItem, Response, ResponseCompletedEvent,
+		ResponseContentPartAddedEvent, ResponseContentPartDoneEvent, ResponseCreatedEvent,
+		ResponseErrorEvent, ResponseFailedEvent, ResponseFunctionCallArgumentsDeltaEvent,
+		ResponseFunctionCallArgumentsDoneEvent, ResponseInProgressEvent, ResponseIncompleteEvent,
+		ResponseOutputItemAddedEvent, ResponseOutputItemDoneEvent, ResponseRefusalDeltaEvent,
+		ResponseRefusalDoneEvent, ResponseTextDeltaEvent, ResponseTextDoneEvent, ResponseTextParam,
+		ResponseUsage, Role, Status, SummaryPart, SummaryTextContent, TextResponseFormatConfiguration,
+		Tool, ToolChoiceFunction, ToolChoiceOptions, ToolChoiceParam,
 	};
 	use serde::{Deserialize, Serialize};
 

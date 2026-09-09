@@ -2329,7 +2329,7 @@ pub mod from_responses {
 	use responses::{
 		AssistantRole, ErrorObject, FunctionToolCall, IncompleteDetails, InputTokenDetails,
 		OutputContent, OutputItem, OutputMessage, OutputStatus, OutputTextContent, OutputTokenDetails,
-		ResponseContentPartAddedEvent, ResponseContentPartDoneEvent, ResponseErrorEvent,
+		ReasoningItem, ResponseContentPartAddedEvent, ResponseContentPartDoneEvent, ResponseErrorEvent,
 		ResponseFunctionCallArgumentsDeltaEvent, ResponseFunctionCallArgumentsDoneEvent,
 		ResponseOutputItemAddedEvent, ResponseOutputItemDoneEvent, ResponseStreamEvent,
 		ResponseTextDeltaEvent, ResponseTextDoneEvent, ResponseUsage,
@@ -2780,6 +2780,34 @@ pub mod from_responses {
 						);
 					}
 				},
+				InputItem::Item(Item::Reasoning(item)) => {
+					// Replay encrypted reasoning the client got back from a previous turn (Codex sends
+					// every reasoning item with its `encrypted_content`). Bedrock requires the
+					// reasoningContent block to precede the text/toolUse blocks of the same assistant
+					// turn; Responses clients replay items in emitted order, so pushing it as its own
+					// assistant message here lets `push_or_merge_message` fold the following
+					// message/function_call items in behind it. Items without `encrypted_content`
+					// (Anthropic summaries, which carry no signature) have nothing Bedrock can verify
+					// and are dropped.
+					let Some(encrypted_content) = item
+						.encrypted_content
+						.as_deref()
+						.filter(|content| !content.is_empty())
+					else {
+						continue;
+					};
+					helpers::push_or_merge_message(
+						&mut messages,
+						bedrock::Message {
+							role: bedrock::Role::Assistant,
+							content: vec![bedrock::ContentBlock::ReasoningContent(
+								bedrock::ReasoningContentBlock::Redacted {
+									redacted_content: encrypted_content.to_string(),
+								},
+							)],
+						},
+					);
+				},
 				InputItem::Item(Item::FunctionCall(call)) => {
 					let Ok(input) = serde_json::from_str::<serde_json::Value>(&call.arguments) else {
 						tracing::warn!(
@@ -3135,8 +3163,16 @@ pub mod from_responses {
 		// output_index is the stable position of this tool call in the response output array.
 		let mut tool_calls: HashMap<i32, (String, String, String, u32)> = HashMap::new();
 
-		// Message item is always output_index 0; tool call items get sequential indices from 1.
-		let mut next_output_index: u32 = 1;
+		// Output items take the next free index in the order they first appear. The message item
+		// is opened lazily (first text delta, first tool call, or end of stream), so a reasoning
+		// item that streams first lands at output_index 0 and the message shifts to 1, matching
+		// the order the Responses API uses.
+		let mut next_output_index: u32 = 0;
+		let mut message_output_index: Option<u32> = None;
+		// Reasoning blocks still streaming, keyed by Converse content block index. Converse does
+		// not always send a ContentBlockStop for reasoning, so a block is also finished when a
+		// different block starts streaming or at end of stream.
+		let mut reasoning_blocks: Vec<(i32, ReasoningStreamBlock)> = Vec::new();
 
 		// Track sequence numbers and item IDs
 		let mut sequence_number: u64 = 0;
@@ -3186,34 +3222,32 @@ pub mod from_responses {
 
 			match event {
 				bedrock::ConverseStreamOutput::MessageStart(_start) => {
-					let mut events: Vec<(&'static str, ResponseStreamEvent)> = Vec::new();
-
+					// The message output item is opened lazily (see `message_output_index`) so a
+					// reasoning item that streams first can take output_index 0.
 					sequence_number += 1;
-					let created_event = response_builder.created_event(sequence_number);
-					events.push(("event", created_event));
-
-					sequence_number += 1;
-					let item_added_event =
-						ResponseStreamEvent::ResponseOutputItemAdded(ResponseOutputItemAddedEvent {
-							sequence_number,
-							output_index: 0,
-							item: OutputItem::Message(OutputMessage {
-								content: Vec::new(),
-								id: message_item_id.clone(),
-								role: AssistantRole::Assistant,
-								phase: None,
-								status: OutputStatus::InProgress,
-							}),
-						});
-					events.push(("event", item_added_event));
-
-					events
+					vec![("event", response_builder.created_event(sequence_number))]
 				},
 				bedrock::ConverseStreamOutput::ContentBlockStart(start) => {
-					seen_blocks.insert(start.content_block_index);
+					let mut events: Vec<(&'static str, ResponseStreamEvent)> = Vec::new();
+					finish_reasoning_blocks(
+						&mut reasoning_blocks,
+						|_| true,
+						&mut sequence_number,
+						&mut events,
+					);
 
 					match start.start {
 						Some(bedrock::ContentBlockStart::ToolUse(tu)) => {
+							seen_blocks.insert(start.content_block_index);
+							// Keep the message item ahead of tool calls in the output array even when
+							// the model emits no text before calling tools.
+							ensure_message_item(
+								&mut message_output_index,
+								&mut next_output_index,
+								&mut sequence_number,
+								&message_item_id,
+								&mut events,
+							);
 							let tool_call_item_id = format!("call_{:016x}", rand::rng().random::<u64>());
 							let output_index = next_output_index;
 							next_output_index += 1;
@@ -3250,23 +3284,40 @@ pub mod from_responses {
 										r#async: None,
 									}),
 								});
-
-							vec![("event", item_added_event)]
+							events.push(("event", item_added_event));
+						},
+						Some(bedrock::ContentBlockStart::ReasoningContent) => {
+							open_reasoning_block(
+								&mut reasoning_blocks,
+								start.content_block_index,
+								&mut next_output_index,
+								&mut sequence_number,
+								&mut events,
+							);
 						},
 						_ => {
+							seen_blocks.insert(start.content_block_index);
+							let output_index = ensure_message_item(
+								&mut message_output_index,
+								&mut next_output_index,
+								&mut sequence_number,
+								&message_item_id,
+								&mut events,
+							);
 							sequence_number += 1;
 							let part_added_event =
 								ResponseStreamEvent::ResponseContentPartAdded(ResponseContentPartAddedEvent {
 									sequence_number,
 									item_id: message_item_id.clone(),
-									output_index: 0,
+									output_index,
 									content_index: 0,
 									part: make_output_part(String::new()),
 								});
-
-							vec![("event", part_added_event)]
+							events.push(("event", part_added_event));
 						},
 					}
+
+					events
 				},
 				bedrock::ConverseStreamOutput::ContentBlockDelta(delta) => {
 					let mut out: Vec<(&'static str, ResponseStreamEvent)> = Vec::new();
@@ -3279,11 +3330,28 @@ pub mod from_responses {
 					}
 
 					if let Some(d) = delta.delta {
+						// Any block other than the one still streaming reasoning closes the pending
+						// reasoning items; Converse doesn't always send a ContentBlockStop for them.
+						let streaming_reasoning = matches!(d, bedrock::ContentBlockDelta::ReasoningContent(_));
+						finish_reasoning_blocks(
+							&mut reasoning_blocks,
+							|index| !(streaming_reasoning && index == delta.content_block_index),
+							&mut sequence_number,
+							&mut out,
+						);
+
 						match d {
 							bedrock::ContentBlockDelta::Text(text) => {
 								if let Some(completion) = completion.as_mut() {
 									completion.push_str(&text);
 								}
+								let output_index = ensure_message_item(
+									&mut message_output_index,
+									&mut next_output_index,
+									&mut sequence_number,
+									&message_item_id,
+									&mut out,
+								);
 								if !text_part_open {
 									text_part_open = true;
 									seen_blocks.insert(delta.content_block_index);
@@ -3293,7 +3361,7 @@ pub mod from_responses {
 										ResponseStreamEvent::ResponseContentPartAdded(ResponseContentPartAddedEvent {
 											sequence_number,
 											item_id: message_item_id.clone(),
-											output_index: 0,
+											output_index,
 											content_index: 0,
 											part: make_output_part(String::new()),
 										}),
@@ -3305,41 +3373,30 @@ pub mod from_responses {
 									ResponseStreamEvent::ResponseOutputTextDelta(ResponseTextDeltaEvent {
 										sequence_number,
 										item_id: message_item_id.clone(),
-										output_index: 0,
+										output_index,
 										content_index: 0,
 										delta: text,
 										logprobs: None,
 									});
 								out.push(("event", delta_event));
 							},
-							bedrock::ContentBlockDelta::ReasoningContent(rc) => match rc {
-								bedrock::ReasoningContentBlockDelta::Text(t) => {
-									sequence_number += 1;
-									let delta_event =
-										ResponseStreamEvent::ResponseOutputTextDelta(ResponseTextDeltaEvent {
-											sequence_number,
-											item_id: message_item_id.clone(),
-											output_index: 0,
-											content_index: 0,
-											delta: t,
-											logprobs: None,
-										});
-									out.push(("event", delta_event));
-								},
-								bedrock::ReasoningContentBlockDelta::RedactedContent(_) => {
-									sequence_number += 1;
-									let delta_event =
-										ResponseStreamEvent::ResponseOutputTextDelta(ResponseTextDeltaEvent {
-											sequence_number,
-											item_id: message_item_id.clone(),
-											output_index: 0,
-											content_index: 0,
-											delta: "[REDACTED]".to_string(),
-											logprobs: None,
-										});
-									out.push(("event", delta_event));
-								},
-								_ => {},
+							bedrock::ContentBlockDelta::ReasoningContent(rc) => {
+								let block = open_reasoning_block(
+									&mut reasoning_blocks,
+									delta.content_block_index,
+									&mut next_output_index,
+									&mut sequence_number,
+									&mut out,
+								);
+								match rc {
+									bedrock::ReasoningContentBlockDelta::Text(t) => block.text.push_str(&t),
+									bedrock::ReasoningContentBlockDelta::RedactedContent(chunk) => {
+										block.push_redacted_chunk(&chunk);
+									},
+									// The signature has no Responses-side slot (see `reasoning_output_item`).
+									bedrock::ReasoningContentBlockDelta::Signature(_)
+									| bedrock::ReasoningContentBlockDelta::Unknown => {},
+								}
 							},
 							bedrock::ContentBlockDelta::ToolUse(tu) => {
 								logged_tool_calls.append_arguments(delta.content_block_index as usize, &tu.input);
@@ -3369,7 +3426,17 @@ pub mod from_responses {
 					let mut events: Vec<(&'static str, ResponseStreamEvent)> = Vec::new();
 					let was_tracked = seen_blocks.remove(&stop.content_block_index);
 
-					if let Some((item_id, name, buffer, output_index)) =
+					if reasoning_blocks
+						.iter()
+						.any(|(index, _)| *index == stop.content_block_index)
+					{
+						finish_reasoning_blocks(
+							&mut reasoning_blocks,
+							|index| index == stop.content_block_index,
+							&mut sequence_number,
+							&mut events,
+						);
+					} else if let Some((item_id, name, buffer, output_index)) =
 						tool_calls.remove(&stop.content_block_index)
 					{
 						sequence_number += 1;
@@ -3402,6 +3469,13 @@ pub mod from_responses {
 							});
 						events.push(("event", item_done_event));
 					} else if was_tracked {
+						let output_index = ensure_message_item(
+							&mut message_output_index,
+							&mut next_output_index,
+							&mut sequence_number,
+							&message_item_id,
+							&mut events,
+						);
 						if text_part_open {
 							text_part_open = false;
 							sequence_number += 1;
@@ -3410,7 +3484,7 @@ pub mod from_responses {
 								ResponseStreamEvent::ResponseOutputTextDone(ResponseTextDoneEvent {
 									sequence_number,
 									item_id: message_item_id.clone(),
-									output_index: 0,
+									output_index,
 									content_index: 0,
 									text: message_text.clone(),
 									logprobs: None,
@@ -3422,7 +3496,7 @@ pub mod from_responses {
 							ResponseStreamEvent::ResponseContentPartDone(ResponseContentPartDoneEvent {
 								sequence_number,
 								item_id: message_item_id.clone(),
-								output_index: 0,
+								output_index,
 								content_index: 0,
 								part: make_output_part(message_text.clone()),
 							});
@@ -3456,11 +3530,24 @@ pub mod from_responses {
 						.map(responses_output_status)
 						.unwrap_or(OutputStatus::Completed);
 
+					finish_reasoning_blocks(
+						&mut reasoning_blocks,
+						|_| true,
+						&mut sequence_number,
+						&mut out,
+					);
+					let message_output_index = ensure_message_item(
+						&mut message_output_index,
+						&mut next_output_index,
+						&mut sequence_number,
+						&message_item_id,
+						&mut out,
+					);
 					sequence_number += 1;
 					let message_done_event =
 						ResponseStreamEvent::ResponseOutputItemDone(ResponseOutputItemDoneEvent {
 							sequence_number,
-							output_index: 0,
+							output_index: message_output_index,
 							item: OutputItem::Message(OutputMessage {
 								content: if message_text.is_empty() {
 									Vec::new()
@@ -3511,6 +3598,8 @@ pub mod from_responses {
 							cache_write_tokens: u.cache_write_input_tokens.map(|tokens| tokens as u32),
 						},
 						output_tokens_details: OutputTokenDetails {
+							// Converse usage has no reasoning-token field; reasoning tokens are folded
+							// into outputTokens, so 0 is the only value that isn't invented.
 							reasoning_tokens: 0,
 						},
 					});
@@ -3548,6 +3637,149 @@ pub mod from_responses {
 				},
 			}
 		})
+	}
+
+	/// A reasoning content block that is still streaming.
+	struct ReasoningStreamBlock {
+		item_id: String,
+		output_index: u32,
+		/// Plaintext reasoning (Anthropic), exposed as the item's `summary_text`.
+		text: String,
+		/// Decoded `redactedContent` bytes. Each Converse chunk is base64-encoded on its own, so
+		/// chunks are decoded as they arrive and re-encoded once when the item completes.
+		redacted: Vec<u8>,
+	}
+
+	impl ReasoningStreamBlock {
+		fn push_redacted_chunk(&mut self, chunk: &[u8]) {
+			use base64::Engine;
+			match base64::engine::general_purpose::STANDARD.decode(chunk) {
+				Ok(bytes) => self.redacted.extend_from_slice(&bytes),
+				Err(err) => {
+					tracing::warn!(error = %err, "redactedContent chunk is not base64; keeping raw bytes");
+					self.redacted.extend_from_slice(chunk);
+				},
+			}
+		}
+
+		fn into_done_item(self) -> ReasoningItem {
+			use base64::Engine;
+			let encrypted_content = (!self.redacted.is_empty())
+				.then(|| base64::engine::general_purpose::STANDARD.encode(&self.redacted));
+			super::reasoning_output_item(
+				self.item_id,
+				Some(self.text),
+				encrypted_content,
+				OutputStatus::Completed,
+			)
+		}
+	}
+
+	/// Emit `response.output_item.added` for the message item the first time it's needed and
+	/// return its output index.
+	fn ensure_message_item(
+		message_output_index: &mut Option<u32>,
+		next_output_index: &mut u32,
+		sequence_number: &mut u64,
+		message_item_id: &str,
+		out: &mut Vec<(&'static str, ResponseStreamEvent)>,
+	) -> u32 {
+		if let Some(index) = *message_output_index {
+			return index;
+		}
+		let index = *next_output_index;
+		*next_output_index += 1;
+		*message_output_index = Some(index);
+		*sequence_number += 1;
+		out.push((
+			"event",
+			ResponseStreamEvent::ResponseOutputItemAdded(ResponseOutputItemAddedEvent {
+				sequence_number: *sequence_number,
+				output_index: index,
+				item: OutputItem::Message(OutputMessage {
+					content: Vec::new(),
+					id: message_item_id.to_string(),
+					role: AssistantRole::Assistant,
+					phase: None,
+					status: OutputStatus::InProgress,
+				}),
+			}),
+		));
+		index
+	}
+
+	/// Return the in-flight reasoning block for `block_index`, opening it (and emitting its
+	/// `response.output_item.added`) on first sight.
+	fn open_reasoning_block<'a>(
+		reasoning_blocks: &'a mut Vec<(i32, ReasoningStreamBlock)>,
+		block_index: i32,
+		next_output_index: &mut u32,
+		sequence_number: &mut u64,
+		out: &mut Vec<(&'static str, ResponseStreamEvent)>,
+	) -> &'a mut ReasoningStreamBlock {
+		if let Some(position) = reasoning_blocks
+			.iter()
+			.position(|(index, _)| *index == block_index)
+		{
+			return &mut reasoning_blocks[position].1;
+		}
+		let output_index = *next_output_index;
+		*next_output_index += 1;
+		let item_id = super::new_reasoning_item_id();
+		*sequence_number += 1;
+		out.push((
+			"event",
+			ResponseStreamEvent::ResponseOutputItemAdded(ResponseOutputItemAddedEvent {
+				sequence_number: *sequence_number,
+				output_index,
+				item: OutputItem::Reasoning(ReasoningItem {
+					id: Some(item_id.clone()),
+					summary: Vec::new(),
+					content: None,
+					encrypted_content: None,
+					status: Some(OutputStatus::InProgress),
+				}),
+			}),
+		));
+		reasoning_blocks.push((
+			block_index,
+			ReasoningStreamBlock {
+				item_id,
+				output_index,
+				text: String::new(),
+				redacted: Vec::new(),
+			},
+		));
+		&mut reasoning_blocks
+			.last_mut()
+			.expect("block was just pushed")
+			.1
+	}
+
+	/// Emit `response.output_item.done` for every pending reasoning block whose Converse
+	/// content block index satisfies `finish`; the rest keep streaming.
+	fn finish_reasoning_blocks(
+		reasoning_blocks: &mut Vec<(i32, ReasoningStreamBlock)>,
+		finish: impl Fn(i32) -> bool,
+		sequence_number: &mut u64,
+		out: &mut Vec<(&'static str, ResponseStreamEvent)>,
+	) {
+		let (finished, kept): (Vec<_>, Vec<_>) = std::mem::take(reasoning_blocks)
+			.into_iter()
+			.partition(|(index, _)| finish(*index));
+		*reasoning_blocks = kept;
+		for (_, block) in finished {
+			let output_index = block.output_index;
+			*sequence_number += 1;
+			out.push((
+				"event",
+				ResponseStreamEvent::ResponseOutputItemDone(ResponseOutputItemDoneEvent {
+					sequence_number: *sequence_number,
+					output_index,
+					item: OutputItem::Reasoning(block.into_done_item()),
+				}),
+			));
+		}
 	}
 }
 
@@ -3917,6 +4149,34 @@ pub(crate) mod helpers {
 	}
 }
 
+/// Build a Responses `reasoning` output item. `summary_text` becomes a single
+/// `summary_text` part when present; `encrypted_content` is passed through as received.
+fn new_reasoning_item_id() -> String {
+	format!("rs_{:016x}", rand::rng().random::<u64>())
+}
+
+fn reasoning_output_item(
+	id: String,
+	summary_text: Option<String>,
+	encrypted_content: Option<String>,
+	status: responses::typed::OutputStatus,
+) -> responses::typed::ReasoningItem {
+	responses::typed::ReasoningItem {
+		id: Some(id),
+		summary: summary_text
+			.filter(|text| !text.is_empty())
+			.map(|text| {
+				vec![responses::typed::SummaryPart::SummaryText(
+					responses::typed::SummaryTextContent { text },
+				)]
+			})
+			.unwrap_or_default(),
+		content: None,
+		encrypted_content,
+		status: Some(status),
+	}
+}
+
 struct ConverseResponseAdapter {
 	model: String,
 	stop_reason: bedrock::StopReason,
@@ -4091,7 +4351,10 @@ impl ConverseResponseAdapter {
 		// Convert Bedrock content blocks to Responses OutputItem
 		let mut outputs: Vec<responsest::OutputItem> = Vec::new();
 
-		// Group content by type for proper message construction
+		// Group content by type for proper message construction. Reasoning blocks become
+		// their own `reasoning` output items ahead of the message, mirroring the order the
+		// Responses API uses, so reasoning never leaks into `output_text`.
+		let mut reasoning_items: Vec<responsest::OutputItem> = Vec::new();
 		let mut text_parts: Vec<responsest::OutputMessageContent> = Vec::new();
 		let mut tool_calls: Vec<responsest::OutputItem> = Vec::new();
 
@@ -4107,21 +4370,26 @@ impl ConverseResponseAdapter {
 					));
 				},
 				bedrock::ContentBlock::ReasoningContent(reasoning) => {
-					let text = match reasoning {
+					let (summary_text, encrypted_content) = match reasoning {
+						// Anthropic's signed plaintext reasoning: expose the text as the summary. The
+						// signature has no Responses-side slot (the completions path carries it in a
+						// vendor `reasoning_signature` field, not `encrypted_content`), so it's dropped.
 						bedrock::ReasoningContentBlock::Structured { reasoning_text } => {
-							reasoning_text.text.clone()
+							(Some(reasoning_text.text.clone()), None)
 						},
-						// Match the streaming path's opaque marker for encrypted reasoning.
-						bedrock::ReasoningContentBlock::Redacted { .. } => "[REDACTED]".to_string(),
-						bedrock::ReasoningContentBlock::Simple { text } => text.clone(),
+						// Encrypted reasoning (OpenAI models on Bedrock, xAI Grok): carry the base64
+						// blob as `encrypted_content` exactly as received so clients can replay it.
+						bedrock::ReasoningContentBlock::Redacted { redacted_content } => {
+							(None, Some(redacted_content.clone()))
+						},
+						bedrock::ReasoningContentBlock::Simple { text } => (Some(text.clone()), None),
 					};
-					text_parts.push(responsest::OutputMessageContent::OutputText(
-						responsest::OutputTextContent {
-							annotations: vec![],
-							logprobs: None,
-							text,
-						},
-					));
+					reasoning_items.push(responsest::OutputItem::Reasoning(reasoning_output_item(
+						new_reasoning_item_id(),
+						summary_text,
+						encrypted_content,
+						output_status,
+					)));
 				},
 				bedrock::ContentBlock::ToolUse(tool_use) => {
 					let arguments_str = serde_json::to_string(&tool_use.input).unwrap_or_default();
@@ -4159,7 +4427,7 @@ impl ConverseResponseAdapter {
 
 		outputs.extend(tool_calls);
 
-		let output = outputs;
+		let output = reasoning_items.into_iter().chain(outputs).collect();
 
 		// Determine status from stop reason
 		let status = match self.stop_reason {
@@ -4205,6 +4473,8 @@ impl ConverseResponseAdapter {
 				cache_write_tokens: u.cache_write_input_tokens.map(|tokens| tokens as u32),
 			},
 			output_tokens_details: responsest::OutputTokenDetails {
+				// Converse usage has no reasoning-token field; reasoning tokens are folded into
+				// outputTokens, so 0 is the only value that isn't invented.
 				reasoning_tokens: 0,
 			},
 		});
