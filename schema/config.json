@@ -3449,6 +3449,34 @@
           ]
         },
         {
+          "description": "Use a named profile from the shared AWS config files (`~/.aws/config` and\n`~/.aws/credentials`, or `AWS_CONFIG_FILE` / `AWS_SHARED_CREDENTIALS_FILE`).\nOnly that profile is consulted: environment credentials, container and\ninstance roles are not fallen back to. Profiles using `credential_process`,\n`sso_session`, or `source_profile` chains are supported; credentials are\ncached and refreshed ahead of their expiry.",
+          "type": "object",
+          "properties": {
+            "profile": {
+              "description": "Name of the profile in the shared AWS config file.",
+              "type": "string"
+            },
+            "region": {
+              "description": "AWS SigV4 signing region (for example, \"us-east-1\"). If unset, typed AWS\nbackends may provide this automatically; otherwise the profile's own\n`region` setting is used.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "serviceName": {
+              "description": "AWS SigV4 signing service name (for example, \"bedrock\", \"bedrock-agentcore\", or \"execute-api\").",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "profile"
+          ]
+        },
+        {
           "description": "Use implicit AWS authentication (environment variables, IAM roles, etc.)",
           "type": "object",
           "properties": {

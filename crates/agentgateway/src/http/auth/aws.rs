@@ -3,12 +3,15 @@ use std::future::Future;
 use std::sync::{Arc, LazyLock};
 use std::time::{Duration, SystemTime};
 
+use aws_config::meta::region::ProvideRegion;
+use aws_config::profile::{ProfileFileCredentialsProvider, ProfileFileRegionProvider};
 use aws_config::sts::AssumeRoleProvider;
 use aws_config::{BehaviorVersion, SdkConfig};
 use aws_credential_types::Credentials;
-use aws_credential_types::provider::ProvideCredentials;
+use aws_credential_types::provider::{ProvideCredentials, SharedCredentialsProvider};
 use aws_sigv4::http_request::{SignableBody, sign};
 use aws_sigv4::sign::v4::SigningParams;
+use aws_smithy_types::error::display::DisplayErrorContext;
 use aws_types::region::Region;
 use quick_cache::sync::{Cache as BoundedCache, EntryAction, EntryResult};
 use regex::Regex;
@@ -42,6 +45,32 @@ pub enum AwsAuth {
 		#[serde(skip_serializing_if = "Option::is_none")]
 		service_name: Option<String>,
 	},
+	/// Use a named profile from the shared AWS config files (`~/.aws/config` and
+	/// `~/.aws/credentials`, or `AWS_CONFIG_FILE` / `AWS_SHARED_CREDENTIALS_FILE`).
+	/// Only that profile is consulted: environment credentials, container and
+	/// instance roles are not fallen back to. Profiles using `credential_process`,
+	/// `sso_session`, or `source_profile` chains are supported; credentials are
+	/// cached and refreshed ahead of their expiry.
+	// The enum is untagged and every `Implicit` field is optional; `{profile: x}`
+	// still lands here because `deny_unknown_fields` makes `Implicit` reject the
+	// `profile` key (see `profile_tests`).
+	#[serde(rename_all = "camelCase")]
+	Profile {
+		/// Name of the profile in the shared AWS config file.
+		profile: String,
+		/// AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS
+		/// backends may provide this automatically; otherwise the profile's own
+		/// `region` setting is used.
+		#[serde(default, skip_serializing_if = "Option::is_none")]
+		region: Option<String>,
+		/// AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").
+		#[serde(skip_serializing_if = "Option::is_none")]
+		service_name: Option<String>,
+		/// Cached profile provider, region, and credentials, populated on first use.
+		#[serde(skip)]
+		#[cfg_attr(feature = "schema", schemars(skip))]
+		credentials_cache: AwsProfileCredentialsCache,
+	},
 	/// Use implicit AWS authentication (environment variables, IAM roles, etc.)
 	#[serde(rename_all = "camelCase")]
 	Implicit {
@@ -70,9 +99,105 @@ pub enum AwsAuth {
 #[derive(Default, Clone)]
 pub struct AwsCredentialsCache(Arc<Mutex<Option<Credentials>>>);
 
+impl AwsCredentialsCache {
+	/// Returns the cached credentials if they are still usable, dropping them
+	/// from the cache otherwise so the caller fetches fresh ones.
+	async fn get_valid(&self) -> Option<Credentials> {
+		let mut cached = self.0.lock().await;
+		match cached.as_ref() {
+			Some(creds) if credentials_valid(creds) => Some(creds.clone()),
+			Some(_) => {
+				*cached = None;
+				None
+			},
+			None => None,
+		}
+	}
+
+	async fn set(&self, creds: Credentials) {
+		*self.0.lock().await = Some(creds);
+	}
+}
+
 impl std::fmt::Debug for AwsCredentialsCache {
 	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
 		f.write_str("AwsCredentialsCache")
+	}
+}
+
+/// Per-profile state for [`AwsAuth::Profile`]: the provider and the profile's
+/// region are built once, and the credentials it returns are cached until they
+/// come within [`ASSUMED_CREDENTIAL_REFRESH_BUFFER`] of expiry. Nothing here is
+/// serialized or shown in Debug output.
+#[derive(Default, Clone)]
+pub struct AwsProfileCredentialsCache(Arc<AwsProfileCredentialsCacheInner>);
+
+#[derive(Default)]
+struct AwsProfileCredentialsCacheInner {
+	provider: OnceCell<SharedCredentialsProvider>,
+	region: OnceCell<Option<Region>>,
+	credentials: AwsCredentialsCache,
+}
+
+impl AwsProfileCredentialsCache {
+	/// The credentials provider for `profile`. This is deliberately the profile
+	/// provider alone, not the default chain: the default chain consults
+	/// environment variables first and falls through to container and instance
+	/// roles, either of which would silently sign as a different principal than
+	/// the one the profile names.
+	async fn provider(&self, profile: &str) -> &SharedCredentialsProvider {
+		self
+			.0
+			.provider
+			.get_or_init(|| async {
+				SharedCredentialsProvider::new(
+					ProfileFileCredentialsProvider::builder()
+						.profile_name(profile)
+						.build(),
+				)
+			})
+			.await
+	}
+
+	/// The `region` configured on `profile` (or via `AWS_REGION` and friends), if any.
+	async fn region(&self, profile: &str) -> Option<&Region> {
+		self
+			.0
+			.region
+			.get_or_init(|| async {
+				ProfileFileRegionProvider::builder()
+					.profile_name(profile)
+					.build()
+					.region()
+					.await
+			})
+			.await
+			.as_ref()
+	}
+
+	async fn credentials(&self, profile: &str) -> anyhow::Result<Credentials> {
+		if let Some(creds) = self.0.credentials.get_valid().await {
+			return Ok(creds);
+		}
+		let creds = self
+			.provider(profile)
+			.await
+			.provide_credentials()
+			.await
+			.map_err(|e| {
+				anyhow::anyhow!(
+					"failed to load AWS credentials for profile {profile:?}: {}",
+					DisplayErrorContext(&e)
+				)
+			})?;
+		self.0.credentials.set(creds.clone()).await;
+		Ok(creds)
+	}
+}
+
+impl std::fmt::Debug for AwsProfileCredentialsCache {
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		f.write_str("AwsProfileCredentialsCache")
 	}
 }
 
@@ -493,22 +618,22 @@ where
 impl AwsAuth {
 	fn service_name(&self) -> Option<&str> {
 		match self {
-			AwsAuth::ExplicitConfig { service_name, .. } | AwsAuth::Implicit { service_name, .. } => {
-				service_name.as_deref()
-			},
+			AwsAuth::ExplicitConfig { service_name, .. }
+			| AwsAuth::Profile { service_name, .. }
+			| AwsAuth::Implicit { service_name, .. } => service_name.as_deref(),
 		}
 	}
 
 	fn assume_role(&self) -> Option<&AwsAssumeRole> {
 		match self {
-			AwsAuth::ExplicitConfig { .. } => None,
+			AwsAuth::ExplicitConfig { .. } | AwsAuth::Profile { .. } => None,
 			AwsAuth::Implicit { assume_role, .. } => assume_role.as_ref(),
 		}
 	}
 
 	fn assume_role_cache(&self) -> Option<&AwsAssumeRoleCache> {
 		match self {
-			AwsAuth::ExplicitConfig { .. } => None,
+			AwsAuth::ExplicitConfig { .. } | AwsAuth::Profile { .. } => None,
 			AwsAuth::Implicit {
 				assume_role_cache, ..
 			} => Some(assume_role_cache),
@@ -531,7 +656,7 @@ impl AwsAuth {
 
 	fn source_credentials_cache(&self) -> Option<&AwsCredentialsCache> {
 		match self {
-			AwsAuth::ExplicitConfig { .. } => None,
+			AwsAuth::ExplicitConfig { .. } | AwsAuth::Profile { .. } => None,
 			AwsAuth::Implicit {
 				source_credentials_cache,
 				..
@@ -577,10 +702,34 @@ pub(super) async fn sign_request(
 			region: Some(region),
 			..
 		}
+		| AwsAuth::Profile {
+			region: Some(region),
+			..
+		}
 		| AwsAuth::Implicit {
 			region: Some(region),
 			..
 		} => region.as_str(),
+		AwsAuth::Profile {
+			region: None,
+			profile,
+			credentials_cache,
+			..
+		} => {
+			// Typed backends provide a region; otherwise use the profile's own region,
+			// never the ambient one, so a lane cannot quietly sign for the wrong region.
+			if let Some(aws_region) = req.extensions().get::<AwsRegion>() {
+				aws_region.region.as_str()
+			} else {
+				credentials_cache
+					.region(profile)
+					.await
+					.map(|r| r.as_ref())
+					.ok_or_else(|| {
+						anyhow::anyhow!("No region found in AWS profile {profile:?} or request extensions")
+					})?
+			}
+		},
 		AwsAuth::ExplicitConfig { region: None, .. } | AwsAuth::Implicit { region: None, .. } => {
 			// Try to get region from request extensions first, then fall back to AWS config
 			if let Some(aws_region) = req.extensions().get::<AwsRegion>() {
@@ -706,18 +855,17 @@ async fn load_source_credentials(aws_auth: &AwsAuth) -> anyhow::Result<Credentia
 
 			Ok(builder.build())
 		},
+		AwsAuth::Profile {
+			profile,
+			credentials_cache,
+			..
+		} => credentials_cache.credentials(profile).await,
 		AwsAuth::Implicit { .. } => {
 			let cache = aws_auth
 				.source_credentials_cache()
 				.expect("implicit AWS auth always has a source credential cache");
-			{
-				let mut cached = cache.0.lock().await;
-				if let Some(creds) = cached.as_ref() {
-					if credentials_valid(creds) {
-						return Ok(creds.clone());
-					}
-					*cached = None;
-				}
+			if let Some(creds) = cache.get_valid().await {
+				return Ok(creds);
 			}
 
 			// Load AWS configuration and credentials from environment/IAM
@@ -731,7 +879,7 @@ async fn load_source_credentials(aws_auth: &AwsAuth) -> anyhow::Result<Credentia
 				))?
 				.provide_credentials()
 				.await?;
-			*cache.0.lock().await = Some(creds.clone());
+			cache.set(creds.clone()).await;
 			Ok(creds)
 		},
 	}
@@ -1368,5 +1516,351 @@ mod assume_role_cache_tests {
 		assert!(err.is_err());
 		fetch(&cache, k, &calls, None).await.unwrap();
 		assert_eq!(calls.load(Ordering::Relaxed), 2);
+	}
+}
+
+#[cfg(test)]
+mod profile_tests {
+	use super::*;
+
+	fn parse(value: serde_json::Value) -> AwsAuth {
+		serde_json::from_value(value).expect("AwsAuth should deserialize")
+	}
+
+	#[test]
+	fn explicit_keys_deserialize_to_explicit_config() {
+		let auth = parse(serde_json::json!({
+			"accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+			"secretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+			"region": "us-east-1",
+		}));
+		assert!(
+			matches!(auth, AwsAuth::ExplicitConfig { region: Some(ref r), .. } if r == "us-east-1"),
+			"got {auth:?}"
+		);
+	}
+
+	#[test]
+	fn profile_deserializes_to_profile_not_implicit() {
+		let auth = parse(serde_json::json!({"profile": "bedrock-a"}));
+		let AwsAuth::Profile {
+			profile,
+			region,
+			service_name,
+			..
+		} = auth
+		else {
+			panic!("expected Profile, got {auth:?}");
+		};
+		assert_eq!(profile, "bedrock-a");
+		assert_eq!(region, None);
+		assert_eq!(service_name, None);
+
+		let auth = parse(serde_json::json!({
+			"profile": "bedrock-a",
+			"region": "us-east-1",
+			"serviceName": "bedrock-agentcore",
+		}));
+		let AwsAuth::Profile {
+			profile,
+			region,
+			service_name,
+			..
+		} = auth
+		else {
+			panic!("expected Profile, got {auth:?}");
+		};
+		assert_eq!(profile, "bedrock-a");
+		assert_eq!(region.as_deref(), Some("us-east-1"));
+		assert_eq!(service_name.as_deref(), Some("bedrock-agentcore"));
+	}
+
+	#[test]
+	fn profile_deserializes_from_yaml() {
+		let auth: AwsAuth =
+			serdes::yamlviajson::from_str("profile: bedrock-a\nregion: us-east-1\n").expect("yaml");
+		assert!(
+			matches!(auth, AwsAuth::Profile { ref profile, region: Some(ref r), .. } if profile == "bedrock-a" && r == "us-east-1"),
+			"got {auth:?}"
+		);
+	}
+
+	#[test]
+	fn empty_and_region_only_deserialize_to_implicit() {
+		for value in [
+			serde_json::json!({}),
+			serde_json::json!({"region": "us-east-1"}),
+			serde_json::json!({"serviceName": "bedrock"}),
+			serde_json::json!({"assumeRole": {"roleArn": "arn:aws:iam::123456789012:role/backend"}}),
+		] {
+			let auth = parse(value.clone());
+			assert!(
+				matches!(auth, AwsAuth::Implicit { .. }),
+				"{value} should be Implicit, got {auth:?}"
+			);
+		}
+	}
+
+	#[test]
+	fn profile_with_assume_role_is_rejected() {
+		// Neither variant accepts this shape; it must fail loudly rather than
+		// silently drop either the profile or the role.
+		let err = serde_json::from_value::<AwsAuth>(serde_json::json!({
+			"profile": "bedrock-a",
+			"assumeRole": {"roleArn": "arn:aws:iam::123456789012:role/backend"},
+		}))
+		.expect_err("profile + assumeRole must not deserialize");
+		let _ = err;
+	}
+
+	#[test]
+	fn profile_round_trips_and_serializes_only_wire_fields() {
+		let auth = parse(serde_json::json!({"profile": "bedrock-a", "region": "us-east-1"}));
+		let serialized = serde_json::to_value(&auth).expect("serialize");
+		assert_eq!(
+			serialized,
+			serde_json::json!({"profile": "bedrock-a", "region": "us-east-1"})
+		);
+		let again = parse(serialized);
+		assert!(matches!(again, AwsAuth::Profile { .. }), "got {again:?}");
+		// Debug shows the profile name (not a secret) and nothing from the cache.
+		let debug = format!("{auth:?}");
+		assert!(debug.contains("bedrock-a"), "{debug}");
+		assert!(debug.contains("AwsProfileCredentialsCache"), "{debug}");
+	}
+
+	#[test]
+	fn explicit_keys_stay_redacted_when_serialized() {
+		let auth = parse(serde_json::json!({
+			"accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+			"secretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+			"sessionToken": "FwoGZXIvYXdzEBYaDEXAMPLETOKEN",
+		}));
+		let serialized = serde_json::to_string(&auth).expect("serialize");
+		for secret in [
+			"AKIAIOSFODNN7EXAMPLE",
+			"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+			"FwoGZXIvYXdzEBYaDEXAMPLETOKEN",
+		] {
+			assert!(
+				!serialized.contains(secret),
+				"leaked {secret} in {serialized}"
+			);
+		}
+		let debug = format!("{auth:?}");
+		for secret in [
+			"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+			"FwoGZXIvYXdzEBYaDEXAMPLETOKEN",
+		] {
+			assert!(!debug.contains(secret), "leaked {secret} in {debug}");
+		}
+	}
+
+	/// Points the AWS SDK at a temporary config file for the duration of a test.
+	/// Holds the crate-wide env lock so concurrent tests do not observe it.
+	struct TempAwsConfig {
+		_guard: tokio::sync::MutexGuard<'static, ()>,
+		previous: Vec<(&'static str, Option<std::ffi::OsString>)>,
+		_dir: tempfile::TempDir,
+	}
+
+	impl TempAwsConfig {
+		// Only the file locations are overridden. The profile provider ignores
+		// `AWS_PROFILE` once a profile name is given, and `AWS_REGION` is not read by
+		// the profile region provider, so leaving them alone keeps this test from
+		// racing tests that read the ambient SDK config without the env lock.
+		const VARS: [&'static str; 2] = ["AWS_CONFIG_FILE", "AWS_SHARED_CREDENTIALS_FILE"];
+
+		async fn new(config: &str) -> Self {
+			let guard = crate::config::lock_env_for_tests_async().await;
+			let dir = tempfile::tempdir().expect("tempdir");
+			let config_path = dir.path().join("config");
+			std::fs::write(&config_path, config).expect("write config");
+			let previous = Self::VARS
+				.iter()
+				.map(|k| (*k, std::env::var_os(k)))
+				.collect();
+			unsafe {
+				std::env::set_var("AWS_CONFIG_FILE", &config_path);
+				std::env::set_var("AWS_SHARED_CREDENTIALS_FILE", "/dev/null");
+			}
+			Self {
+				_guard: guard,
+				previous,
+				_dir: dir,
+			}
+		}
+	}
+
+	impl Drop for TempAwsConfig {
+		fn drop(&mut self) {
+			for (key, value) in self.previous.drain(..) {
+				unsafe {
+					match value {
+						Some(v) => std::env::set_var(key, v),
+						None => std::env::remove_var(key),
+					}
+				}
+			}
+		}
+	}
+
+	const PROCESS_ACCESS_KEY_ID: &str = "AKIAPROFILETEST00001";
+
+	/// Writes a credential_process script that records each invocation and
+	/// prints a static, far-future credential. Returns (script path, call log path).
+	#[cfg(unix)]
+	fn credential_process_script(dir: &std::path::Path) -> (std::path::PathBuf, std::path::PathBuf) {
+		use std::os::unix::fs::PermissionsExt;
+		let calls = dir.join("calls");
+		let script = dir.join("cred.sh");
+		std::fs::write(
+			&script,
+			format!(
+				"#!/bin/sh\necho run >> {calls}\nprintf '%s' '{{\"Version\":1,\"AccessKeyId\":\"{PROCESS_ACCESS_KEY_ID}\",\"SecretAccessKey\":\"profile-test-secret\",\"SessionToken\":\"profile-test-token\",\"Expiration\":\"2099-01-01T00:00:00Z\"}}'\n",
+				calls = calls.display()
+			),
+		)
+		.expect("write script");
+		std::fs::set_permissions(&script, std::fs::Permissions::from_mode(0o755)).expect("chmod");
+		(script, calls)
+	}
+
+	fn profile_auth(profile: &str, region: Option<&str>) -> AwsAuth {
+		AwsAuth::Profile {
+			profile: profile.to_string(),
+			region: region.map(str::to_string),
+			service_name: None,
+			credentials_cache: Default::default(),
+		}
+	}
+
+	#[cfg(unix)]
+	#[tokio::test]
+	async fn profile_credential_process_resolves_and_caches() {
+		let dir = tempfile::tempdir().expect("tempdir");
+		let (script, calls) = credential_process_script(dir.path());
+		let env = TempAwsConfig::new(&format!(
+			"[profile lane-a]\nregion = eu-central-1\ncredential_process = {}\n\n[profile lane-b]\naws_access_key_id = AKIAOTHERPROFILE0002\naws_secret_access_key = other\n",
+			script.display()
+		))
+		.await;
+
+		let auth = profile_auth("lane-a", None);
+		let creds = load_source_credentials(&auth).await.expect("credentials");
+		assert_eq!(creds.access_key_id(), PROCESS_ACCESS_KEY_ID);
+		assert_eq!(creds.session_token(), Some("profile-test-token"));
+		assert!(
+			creds.expiry().is_some(),
+			"credential_process expiry is honored"
+		);
+
+		// Second load is served from the gateway cache: the process runs once.
+		let again = load_source_credentials(&auth).await.expect("credentials");
+		assert_eq!(again.access_key_id(), PROCESS_ACCESS_KEY_ID);
+		let runs = std::fs::read_to_string(&calls).expect("call log");
+		assert_eq!(runs.lines().count(), 1, "credential_process ran {runs:?}");
+
+		// A different lane is a different profile with its own credentials.
+		let other = profile_auth("lane-b", None);
+		let creds = load_source_credentials(&other).await.expect("credentials");
+		assert_eq!(creds.access_key_id(), "AKIAOTHERPROFILE0002");
+
+		// The profile's own region is the fallback when neither config nor the
+		// typed backend supplies one.
+		let mut req = crate::http::Request::new(crate::http::Body::empty());
+		*req.uri_mut() = "https://bedrock-runtime.eu-central-1.amazonaws.com/model/invoke"
+			.parse()
+			.unwrap();
+		*req.method_mut() = http::Method::POST;
+		sign_request(&mut req, &auth).await.expect("signing");
+		let authz = req
+			.headers()
+			.get(http::header::AUTHORIZATION)
+			.expect("authorization header")
+			.to_str()
+			.unwrap();
+		assert!(
+			authz.contains(&format!("Credential={PROCESS_ACCESS_KEY_ID}/")),
+			"signed with the profile's credentials: {authz}"
+		);
+		assert!(
+			authz.contains("/eu-central-1/bedrock/"),
+			"credential scope uses the profile's region: {authz}"
+		);
+		assert_eq!(
+			std::fs::read_to_string(&calls)
+				.expect("call log")
+				.lines()
+				.count(),
+			1,
+			"signing reused the cached credentials"
+		);
+		drop(env);
+	}
+
+	#[cfg(unix)]
+	#[tokio::test]
+	async fn profile_region_precedence_is_config_then_extension_then_profile() {
+		let dir = tempfile::tempdir().expect("tempdir");
+		let (script, _calls) = credential_process_script(dir.path());
+		let env = TempAwsConfig::new(&format!(
+			"[profile lane-a]\nregion = eu-central-1\ncredential_process = {}\n",
+			script.display()
+		))
+		.await;
+
+		async fn sign(auth: AwsAuth, extension: Option<&str>) -> String {
+			let mut req = crate::http::Request::new(crate::http::Body::empty());
+			*req.uri_mut() = "https://bedrock-runtime.amazonaws.com/model/invoke"
+				.parse()
+				.unwrap();
+			*req.method_mut() = http::Method::POST;
+			if let Some(region) = extension {
+				req.extensions_mut().insert(AwsRegion {
+					region: region.to_string(),
+				});
+			}
+			sign_request(&mut req, &auth).await.expect("signing");
+			req
+				.headers()
+				.get(http::header::AUTHORIZATION)
+				.unwrap()
+				.to_str()
+				.unwrap()
+				.to_string()
+		}
+
+		let authz = sign(profile_auth("lane-a", Some("us-west-2")), Some("us-east-1")).await;
+		assert!(
+			authz.contains("/us-west-2/"),
+			"configured region wins: {authz}"
+		);
+		let authz = sign(profile_auth("lane-a", None), Some("us-east-1")).await;
+		assert!(
+			authz.contains("/us-east-1/"),
+			"extension beats profile: {authz}"
+		);
+		let authz = sign(profile_auth("lane-a", None), None).await;
+		assert!(
+			authz.contains("/eu-central-1/"),
+			"profile region is the fallback: {authz}"
+		);
+		drop(env);
+	}
+
+	#[tokio::test]
+	async fn missing_profile_fails_instead_of_falling_through() {
+		let env = TempAwsConfig::new("[profile lane-a]\nregion = eu-central-1\naws_access_key_id = AKIAOTHERPROFILE0002\naws_secret_access_key = other\n").await;
+		let auth = profile_auth("does-not-exist", Some("us-east-1"));
+		let err = load_source_credentials(&auth)
+			.await
+			.expect_err("unknown profile must not resolve");
+		let msg = err.to_string();
+		assert!(
+			msg.contains("does-not-exist"),
+			"error names the profile: {msg}"
+		);
+		drop(env);
 	}
 }

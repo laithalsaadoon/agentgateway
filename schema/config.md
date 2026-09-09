@@ -286,6 +286,8 @@
 |`binds[].listeners[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -628,6 +630,8 @@
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -906,6 +910,8 @@
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -1184,6 +1190,8 @@
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -1460,6 +1468,8 @@
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -1774,6 +1784,8 @@
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -2052,6 +2064,8 @@
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -2328,6 +2342,8 @@
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -2655,6 +2671,8 @@
 |`binds[].listeners[].routes[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -2889,6 +2907,8 @@
 |`binds[].listeners[].routes[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -3315,6 +3335,8 @@
 |`binds[].listeners[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -3602,6 +3624,8 @@
 |`binds[].listeners[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -3971,6 +3995,8 @@
 |`binds[].listeners[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -4271,6 +4297,8 @@
 |`binds[].listeners[].routes[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -4574,6 +4602,8 @@
 |`binds[].listeners[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -4864,6 +4894,8 @@
 |`binds[].listeners[].routes[].policies.extProc.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.extProc.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.extProc.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.extProc.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.extProc.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.extProc.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -5155,6 +5187,8 @@
 |`binds[].listeners[].routes[].policies.substrateIngress.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].policies.substrateIngress.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].policies.substrateIngress.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].policies.substrateIngress.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].policies.substrateIngress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].policies.substrateIngress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].policies.substrateIngress.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].policies.substrateIngress.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -5527,6 +5561,8 @@
 |`binds[].listeners[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -5847,6 +5883,8 @@
 |`binds[].listeners[].routes[].backends[].ai.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -6272,6 +6310,8 @@
 |`binds[].listeners[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -6564,6 +6604,8 @@
 |`binds[].listeners[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -6876,6 +6918,8 @@
 |`binds[].listeners[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -7194,6 +7238,8 @@
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -7472,6 +7518,8 @@
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -7750,6 +7798,8 @@
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -8026,6 +8076,8 @@
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -8340,6 +8392,8 @@
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -8618,6 +8672,8 @@
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -8894,6 +8950,8 @@
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -9246,6 +9304,8 @@
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -9671,6 +9731,8 @@
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -9963,6 +10025,8 @@
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -10275,6 +10339,8 @@
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -10593,6 +10659,8 @@
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -10871,6 +10939,8 @@
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -11149,6 +11219,8 @@
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -11425,6 +11497,8 @@
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -11739,6 +11813,8 @@
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -12017,6 +12093,8 @@
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -12293,6 +12371,8 @@
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -12608,6 +12688,8 @@
 |`binds[].listeners[].routes[].backends[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -13033,6 +13115,8 @@
 |`binds[].listeners[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -13325,6 +13409,8 @@
 |`binds[].listeners[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -13637,6 +13723,8 @@
 |`binds[].listeners[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -13955,6 +14043,8 @@
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -14233,6 +14323,8 @@
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -14511,6 +14603,8 @@
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -14787,6 +14881,8 @@
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -15101,6 +15197,8 @@
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -15379,6 +15477,8 @@
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -15655,6 +15755,8 @@
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -16009,6 +16111,8 @@
 |`binds[].listeners[].tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -16330,6 +16434,8 @@
 |`binds[].listeners[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].policies.extAuthz.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].policies.extAuthz.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].policies.extAuthz.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -16630,6 +16736,8 @@
 |`binds[].listeners[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -16933,6 +17041,8 @@
 |`binds[].listeners[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].policies.extProc.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].policies.extProc.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].policies.extProc.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].policies.extProc.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].policies.extProc.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -17223,6 +17333,8 @@
 |`binds[].listeners[].policies.extProc.policies.backendAuth.aws.region`|string||
 |`binds[].listeners[].policies.extProc.policies.backendAuth.aws.sessionToken`|string||
 |`binds[].listeners[].policies.extProc.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`binds[].listeners[].policies.extProc.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`binds[].listeners[].policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`binds[].listeners[].policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`binds[].listeners[].policies.extProc.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`binds[].listeners[].policies.extProc.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -17625,6 +17737,8 @@
 |`frontendPolicies.networkExtAuthz.policies.backendAuth.aws.region`|string||
 |`frontendPolicies.networkExtAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`frontendPolicies.networkExtAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`frontendPolicies.networkExtAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`frontendPolicies.networkExtAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`frontendPolicies.networkExtAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`frontendPolicies.networkExtAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`frontendPolicies.networkExtAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -17926,6 +18040,8 @@
 |`frontendPolicies.substrateEgress.policies.backendAuth.aws.region`|string||
 |`frontendPolicies.substrateEgress.policies.backendAuth.aws.sessionToken`|string||
 |`frontendPolicies.substrateEgress.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`frontendPolicies.substrateEgress.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`frontendPolicies.substrateEgress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`frontendPolicies.substrateEgress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`frontendPolicies.substrateEgress.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`frontendPolicies.substrateEgress.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -18218,6 +18334,8 @@
 |`frontendPolicies.accessLog.otlp.policies.backendAuth.aws.region`|string||
 |`frontendPolicies.accessLog.otlp.policies.backendAuth.aws.sessionToken`|string||
 |`frontendPolicies.accessLog.otlp.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`frontendPolicies.accessLog.otlp.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`frontendPolicies.accessLog.otlp.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`frontendPolicies.accessLog.otlp.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`frontendPolicies.accessLog.otlp.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`frontendPolicies.accessLog.otlp.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -18511,6 +18629,8 @@
 |`frontendPolicies.logging.otlp.policies.backendAuth.aws.region`|string||
 |`frontendPolicies.logging.otlp.policies.backendAuth.aws.sessionToken`|string||
 |`frontendPolicies.logging.otlp.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`frontendPolicies.logging.otlp.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`frontendPolicies.logging.otlp.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`frontendPolicies.logging.otlp.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`frontendPolicies.logging.otlp.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`frontendPolicies.logging.otlp.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -18799,6 +18919,8 @@
 |`frontendPolicies.tracing.policies.backendAuth.aws.region`|string||
 |`frontendPolicies.tracing.policies.backendAuth.aws.sessionToken`|string||
 |`frontendPolicies.tracing.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`frontendPolicies.tracing.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`frontendPolicies.tracing.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`frontendPolicies.tracing.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`frontendPolicies.tracing.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`frontendPolicies.tracing.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -19174,6 +19296,8 @@
 |`policies[].policy.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`policies[].policy.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -19516,6 +19640,8 @@
 |`policies[].policy.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`policies[].policy.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -19794,6 +19920,8 @@
 |`policies[].policy.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`policies[].policy.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -20072,6 +20200,8 @@
 |`policies[].policy.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`policies[].policy.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -20348,6 +20478,8 @@
 |`policies[].policy.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`policies[].policy.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -20662,6 +20794,8 @@
 |`policies[].policy.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`policies[].policy.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -20940,6 +21074,8 @@
 |`policies[].policy.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`policies[].policy.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -21216,6 +21352,8 @@
 |`policies[].policy.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`policies[].policy.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -21543,6 +21681,8 @@
 |`policies[].policy.backendTunnel.policies.backendAuth.aws.region`|string||
 |`policies[].policy.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -21777,6 +21917,8 @@
 |`policies[].policy.backendAuth.aws.region`|string||
 |`policies[].policy.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -22203,6 +22345,8 @@
 |`policies[].policy.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string||
 |`policies[].policy.remoteRateLimit.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.remoteRateLimit.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.remoteRateLimit.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.remoteRateLimit.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.remoteRateLimit.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -22490,6 +22634,8 @@
 |`policies[].policy.remoteRateLimit.policies.backendAuth.aws.region`|string||
 |`policies[].policy.remoteRateLimit.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.remoteRateLimit.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.remoteRateLimit.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.remoteRateLimit.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.remoteRateLimit.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -22859,6 +23005,8 @@
 |`policies[].policy.extAuthz.conditional[].policies.backendAuth.aws.region`|string||
 |`policies[].policy.extAuthz.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.extAuthz.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.extAuthz.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.extAuthz.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.extAuthz.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -23159,6 +23307,8 @@
 |`policies[].policy.extAuthz.policies.backendAuth.aws.region`|string||
 |`policies[].policy.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -23462,6 +23612,8 @@
 |`policies[].policy.extProc.conditional[].policies.backendAuth.aws.region`|string||
 |`policies[].policy.extProc.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.extProc.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.extProc.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.extProc.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.extProc.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -23752,6 +23904,8 @@
 |`policies[].policy.extProc.policies.backendAuth.aws.region`|string||
 |`policies[].policy.extProc.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.extProc.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.extProc.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.extProc.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.extProc.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -24043,6 +24197,8 @@
 |`policies[].policy.substrateIngress.policies.backendAuth.aws.region`|string||
 |`policies[].policy.substrateIngress.policies.backendAuth.aws.sessionToken`|string||
 |`policies[].policy.substrateIngress.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`policies[].policy.substrateIngress.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`policies[].policy.substrateIngress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`policies[].policy.substrateIngress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`policies[].policy.substrateIngress.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`policies[].policy.substrateIngress.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -24415,6 +24571,8 @@
 |`backends[].mcp.targets[].policies.backendAuth.aws.region`|string||
 |`backends[].mcp.targets[].policies.backendAuth.aws.sessionToken`|string||
 |`backends[].mcp.targets[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].mcp.targets[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].mcp.targets[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].mcp.targets[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].mcp.targets[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].mcp.targets[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -24735,6 +24893,8 @@
 |`backends[].ai.policies.backendAuth.aws.region`|string||
 |`backends[].ai.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -25160,6 +25320,8 @@
 |`backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`backends[].ai.policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -25452,6 +25614,8 @@
 |`backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`backends[].ai.policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -25764,6 +25928,8 @@
 |`backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -26082,6 +26248,8 @@
 |`backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -26360,6 +26528,8 @@
 |`backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -26638,6 +26808,8 @@
 |`backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -26914,6 +27086,8 @@
 |`backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -27228,6 +27402,8 @@
 |`backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -27506,6 +27682,8 @@
 |`backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -27782,6 +27960,8 @@
 |`backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -28134,6 +28314,8 @@
 |`backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string||
 |`backends[].ai.groups[].providers[].policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.groups[].providers[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.groups[].providers[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.groups[].providers[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.groups[].providers[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -28559,6 +28741,8 @@
 |`backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -28851,6 +29035,8 @@
 |`backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -29163,6 +29349,8 @@
 |`backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -29481,6 +29669,8 @@
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -29759,6 +29949,8 @@
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -30037,6 +30229,8 @@
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -30313,6 +30507,8 @@
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -30627,6 +30823,8 @@
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -30905,6 +31103,8 @@
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -31181,6 +31381,8 @@
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -31494,6 +31696,8 @@
 |`backends[].policies.backendAuth.aws.region`|string||
 |`backends[].policies.backendAuth.aws.sessionToken`|string||
 |`backends[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -31919,6 +32123,8 @@
 |`backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`backends[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -32211,6 +32417,8 @@
 |`backends[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`backends[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -32523,6 +32731,8 @@
 |`backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -32841,6 +33051,8 @@
 |`backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -33119,6 +33331,8 @@
 |`backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -33397,6 +33611,8 @@
 |`backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -33673,6 +33889,8 @@
 |`backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -33987,6 +34205,8 @@
 |`backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -34265,6 +34485,8 @@
 |`backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -34541,6 +34763,8 @@
 |`backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -34937,6 +35161,8 @@
 |`routeGroups[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -35279,6 +35505,8 @@
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -35557,6 +35785,8 @@
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -35835,6 +36065,8 @@
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -36111,6 +36343,8 @@
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -36425,6 +36659,8 @@
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -36703,6 +36939,8 @@
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -36979,6 +37217,8 @@
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -37306,6 +37546,8 @@
 |`routeGroups[].routes[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -37540,6 +37782,8 @@
 |`routeGroups[].routes[].policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -37966,6 +38210,8 @@
 |`routeGroups[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -38253,6 +38499,8 @@
 |`routeGroups[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.remoteRateLimit.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -38622,6 +38870,8 @@
 |`routeGroups[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -38922,6 +39172,8 @@
 |`routeGroups[].routes[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -39225,6 +39477,8 @@
 |`routeGroups[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.extProc.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -39515,6 +39769,8 @@
 |`routeGroups[].routes[].policies.extProc.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.extProc.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.extProc.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.extProc.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.extProc.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.extProc.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -39806,6 +40062,8 @@
 |`routeGroups[].routes[].policies.substrateIngress.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].policies.substrateIngress.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].policies.substrateIngress.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].policies.substrateIngress.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].policies.substrateIngress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].policies.substrateIngress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].policies.substrateIngress.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].policies.substrateIngress.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -40178,6 +40436,8 @@
 |`routeGroups[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].mcp.targets[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -40498,6 +40758,8 @@
 |`routeGroups[].routes[].backends[].ai.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -40923,6 +41185,8 @@
 |`routeGroups[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -41215,6 +41479,8 @@
 |`routeGroups[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -41527,6 +41793,8 @@
 |`routeGroups[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -41845,6 +42113,8 @@
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -42123,6 +42393,8 @@
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -42401,6 +42673,8 @@
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -42677,6 +42951,8 @@
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -42991,6 +43267,8 @@
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -43269,6 +43547,8 @@
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -43545,6 +43825,8 @@
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -43897,6 +44179,8 @@
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -44322,6 +44606,8 @@
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -44614,6 +44900,8 @@
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -44926,6 +45214,8 @@
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -45244,6 +45534,8 @@
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -45522,6 +45814,8 @@
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -45800,6 +46094,8 @@
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -46076,6 +46372,8 @@
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -46390,6 +46688,8 @@
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -46668,6 +46968,8 @@
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -46944,6 +47246,8 @@
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -47259,6 +47563,8 @@
 |`routeGroups[].routes[].backends[].policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -47684,6 +47990,8 @@
 |`routeGroups[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -47976,6 +48284,8 @@
 |`routeGroups[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -48288,6 +48598,8 @@
 |`routeGroups[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -48606,6 +48918,8 @@
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -48884,6 +49198,8 @@
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -49162,6 +49478,8 @@
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -49438,6 +49756,8 @@
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -49752,6 +50072,8 @@
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -50030,6 +50352,8 @@
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -50306,6 +50630,8 @@
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routeGroups[].routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -50688,6 +51014,8 @@
 |`gateways.*.listeners[].extAuthz.conditional[].policies.backendAuth.aws.region`|string||
 |`gateways.*.listeners[].extAuthz.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`gateways.*.listeners[].extAuthz.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`gateways.*.listeners[].extAuthz.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`gateways.*.listeners[].extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`gateways.*.listeners[].extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`gateways.*.listeners[].extAuthz.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`gateways.*.listeners[].extAuthz.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -50988,6 +51316,8 @@
 |`gateways.*.listeners[].extAuthz.policies.backendAuth.aws.region`|string||
 |`gateways.*.listeners[].extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`gateways.*.listeners[].extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`gateways.*.listeners[].extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`gateways.*.listeners[].extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`gateways.*.listeners[].extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`gateways.*.listeners[].extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`gateways.*.listeners[].extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -51291,6 +51621,8 @@
 |`gateways.*.listeners[].extProc.conditional[].policies.backendAuth.aws.region`|string||
 |`gateways.*.listeners[].extProc.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`gateways.*.listeners[].extProc.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`gateways.*.listeners[].extProc.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`gateways.*.listeners[].extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`gateways.*.listeners[].extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`gateways.*.listeners[].extProc.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`gateways.*.listeners[].extProc.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -51581,6 +51913,8 @@
 |`gateways.*.listeners[].extProc.policies.backendAuth.aws.region`|string||
 |`gateways.*.listeners[].extProc.policies.backendAuth.aws.sessionToken`|string||
 |`gateways.*.listeners[].extProc.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`gateways.*.listeners[].extProc.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`gateways.*.listeners[].extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`gateways.*.listeners[].extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`gateways.*.listeners[].extProc.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`gateways.*.listeners[].extProc.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -52009,6 +52343,8 @@
 |`gateways.*.extAuthz.conditional[].policies.backendAuth.aws.region`|string||
 |`gateways.*.extAuthz.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`gateways.*.extAuthz.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`gateways.*.extAuthz.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`gateways.*.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`gateways.*.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`gateways.*.extAuthz.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`gateways.*.extAuthz.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -52309,6 +52645,8 @@
 |`gateways.*.extAuthz.policies.backendAuth.aws.region`|string||
 |`gateways.*.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`gateways.*.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`gateways.*.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`gateways.*.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`gateways.*.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`gateways.*.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`gateways.*.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -52612,6 +52950,8 @@
 |`gateways.*.extProc.conditional[].policies.backendAuth.aws.region`|string||
 |`gateways.*.extProc.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`gateways.*.extProc.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`gateways.*.extProc.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`gateways.*.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`gateways.*.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`gateways.*.extProc.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`gateways.*.extProc.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -52902,6 +53242,8 @@
 |`gateways.*.extProc.policies.backendAuth.aws.region`|string||
 |`gateways.*.extProc.policies.backendAuth.aws.sessionToken`|string||
 |`gateways.*.extProc.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`gateways.*.extProc.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`gateways.*.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`gateways.*.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`gateways.*.extProc.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`gateways.*.extProc.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -53350,6 +53692,8 @@
 |`routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -53692,6 +54036,8 @@
 |`routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -53970,6 +54316,8 @@
 |`routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -54248,6 +54596,8 @@
 |`routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -54524,6 +54874,8 @@
 |`routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -54838,6 +55190,8 @@
 |`routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -55116,6 +55470,8 @@
 |`routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -55392,6 +55748,8 @@
 |`routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -55719,6 +56077,8 @@
 |`routes[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`routes[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -55953,6 +56313,8 @@
 |`routes[].policies.backendAuth.aws.region`|string||
 |`routes[].policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -56379,6 +56741,8 @@
 |`routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string||
 |`routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.remoteRateLimit.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -56666,6 +57030,8 @@
 |`routes[].policies.remoteRateLimit.policies.backendAuth.aws.region`|string||
 |`routes[].policies.remoteRateLimit.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.remoteRateLimit.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.remoteRateLimit.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.remoteRateLimit.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.remoteRateLimit.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -57035,6 +57401,8 @@
 |`routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string||
 |`routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -57335,6 +57703,8 @@
 |`routes[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`routes[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -57638,6 +58008,8 @@
 |`routes[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string||
 |`routes[].policies.extProc.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.extProc.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.extProc.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.extProc.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.extProc.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -57928,6 +58300,8 @@
 |`routes[].policies.extProc.policies.backendAuth.aws.region`|string||
 |`routes[].policies.extProc.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.extProc.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.extProc.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.extProc.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.extProc.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -58219,6 +58593,8 @@
 |`routes[].policies.substrateIngress.policies.backendAuth.aws.region`|string||
 |`routes[].policies.substrateIngress.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].policies.substrateIngress.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].policies.substrateIngress.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].policies.substrateIngress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].policies.substrateIngress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].policies.substrateIngress.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].policies.substrateIngress.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -58591,6 +58967,8 @@
 |`routes[].backends[].mcp.targets[].policies.backendAuth.aws.region`|string||
 |`routes[].backends[].mcp.targets[].policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].mcp.targets[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].mcp.targets[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].mcp.targets[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].mcp.targets[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].mcp.targets[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].mcp.targets[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -58911,6 +59289,8 @@
 |`routes[].backends[].ai.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -59336,6 +59716,8 @@
 |`routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -59628,6 +60010,8 @@
 |`routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -59940,6 +60324,8 @@
 |`routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -60258,6 +60644,8 @@
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -60536,6 +60924,8 @@
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -60814,6 +61204,8 @@
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -61090,6 +61482,8 @@
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -61404,6 +61798,8 @@
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -61682,6 +62078,8 @@
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -61958,6 +62356,8 @@
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -62310,6 +62710,8 @@
 |`routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.groups[].providers[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -62735,6 +63137,8 @@
 |`routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.groups[].providers[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -63027,6 +63431,8 @@
 |`routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.groups[].providers[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -63339,6 +63745,8 @@
 |`routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.groups[].providers[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -63657,6 +64065,8 @@
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -63935,6 +64345,8 @@
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -64213,6 +64625,8 @@
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -64489,6 +64903,8 @@
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -64803,6 +65219,8 @@
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -65081,6 +65499,8 @@
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -65357,6 +65777,8 @@
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].ai.groups[].providers[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -65672,6 +66094,8 @@
 |`routes[].backends[].policies.backendAuth.aws.region`|string||
 |`routes[].backends[].policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -66097,6 +66521,8 @@
 |`routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -66389,6 +66815,8 @@
 |`routes[].backends[].policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -66701,6 +67129,8 @@
 |`routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -67019,6 +67449,8 @@
 |`routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -67297,6 +67729,8 @@
 |`routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -67575,6 +68009,8 @@
 |`routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -67851,6 +68287,8 @@
 |`routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -68165,6 +68603,8 @@
 |`routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -68443,6 +68883,8 @@
 |`routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -68719,6 +69161,8 @@
 |`routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`routes[].backends[].policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -69074,6 +69518,8 @@
 |`tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`tcpRoutes[].backends[].policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -69385,6 +69831,8 @@
 |`llm.providers[].defaults.auth.aws.region`|string||
 |`llm.providers[].defaults.auth.aws.sessionToken`|string||
 |`llm.providers[].defaults.auth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.providers[].defaults.auth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.providers[].defaults.auth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.providers[].defaults.auth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.providers[].defaults.auth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.providers[].defaults.auth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -69806,6 +70254,8 @@
 |`llm.providers[].defaults.backendTunnel.policies.backendAuth.aws.region`|string||
 |`llm.providers[].defaults.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`llm.providers[].defaults.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.providers[].defaults.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.providers[].defaults.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.providers[].defaults.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.providers[].defaults.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.providers[].defaults.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -70116,6 +70566,8 @@
 |`llm.models[].auth.aws.region`|string||
 |`llm.models[].auth.aws.sessionToken`|string||
 |`llm.models[].auth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.models[].auth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.models[].auth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.models[].auth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.models[].auth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.models[].auth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -70537,6 +70989,8 @@
 |`llm.models[].backendTunnel.policies.backendAuth.aws.region`|string||
 |`llm.models[].backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`llm.models[].backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.models[].backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.models[].backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.models[].backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.models[].backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.models[].backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -70828,6 +71282,8 @@
 |`llm.models[].guardrails.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`llm.models[].guardrails.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`llm.models[].guardrails.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.models[].guardrails.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.models[].guardrails.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.models[].guardrails.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.models[].guardrails.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.models[].guardrails.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -71106,6 +71562,8 @@
 |`llm.models[].guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`llm.models[].guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`llm.models[].guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.models[].guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.models[].guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.models[].guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.models[].guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.models[].guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -71384,6 +71842,8 @@
 |`llm.models[].guardrails.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`llm.models[].guardrails.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`llm.models[].guardrails.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.models[].guardrails.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.models[].guardrails.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.models[].guardrails.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.models[].guardrails.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.models[].guardrails.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -71660,6 +72120,8 @@
 |`llm.models[].guardrails.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`llm.models[].guardrails.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`llm.models[].guardrails.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.models[].guardrails.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.models[].guardrails.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.models[].guardrails.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.models[].guardrails.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.models[].guardrails.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -71974,6 +72436,8 @@
 |`llm.models[].guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`llm.models[].guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`llm.models[].guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.models[].guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.models[].guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.models[].guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.models[].guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.models[].guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -72252,6 +72716,8 @@
 |`llm.models[].guardrails.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`llm.models[].guardrails.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`llm.models[].guardrails.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.models[].guardrails.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.models[].guardrails.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.models[].guardrails.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.models[].guardrails.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.models[].guardrails.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -72528,6 +72994,8 @@
 |`llm.models[].guardrails.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`llm.models[].guardrails.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`llm.models[].guardrails.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.models[].guardrails.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.models[].guardrails.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.models[].guardrails.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.models[].guardrails.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.models[].guardrails.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -72898,6 +73366,8 @@
 |`llm.policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string||
 |`llm.policies.extAuthz.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.extAuthz.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.extAuthz.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -73198,6 +73668,8 @@
 |`llm.policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`llm.policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -73501,6 +73973,8 @@
 |`llm.policies.extProc.conditional[].policies.backendAuth.aws.region`|string||
 |`llm.policies.extProc.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.extProc.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.extProc.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.extProc.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.extProc.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -73791,6 +74265,8 @@
 |`llm.policies.extProc.policies.backendAuth.aws.region`|string||
 |`llm.policies.extProc.policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.extProc.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.extProc.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.extProc.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.extProc.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -74178,6 +74654,8 @@
 |`llm.policies.guardrails.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`llm.policies.guardrails.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.guardrails.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.guardrails.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.guardrails.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.guardrails.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.guardrails.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.guardrails.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -74456,6 +74934,8 @@
 |`llm.policies.guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`llm.policies.guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.guardrails.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -74734,6 +75214,8 @@
 |`llm.policies.guardrails.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`llm.policies.guardrails.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.guardrails.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.guardrails.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.guardrails.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.guardrails.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.guardrails.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.guardrails.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -75010,6 +75492,8 @@
 |`llm.policies.guardrails.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`llm.policies.guardrails.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.guardrails.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.guardrails.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.guardrails.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.guardrails.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.guardrails.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.guardrails.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -75324,6 +75808,8 @@
 |`llm.policies.guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`llm.policies.guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.guardrails.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -75602,6 +76088,8 @@
 |`llm.policies.guardrails.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`llm.policies.guardrails.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.guardrails.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.guardrails.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.guardrails.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.guardrails.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.guardrails.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.guardrails.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -75878,6 +76366,8 @@
 |`llm.policies.guardrails.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`llm.policies.guardrails.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.guardrails.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.guardrails.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.guardrails.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.guardrails.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.guardrails.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.guardrails.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -76177,6 +76667,8 @@
 |`llm.policies.remoteRateLimit.policies.backendAuth.aws.region`|string||
 |`llm.policies.remoteRateLimit.policies.backendAuth.aws.sessionToken`|string||
 |`llm.policies.remoteRateLimit.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`llm.policies.remoteRateLimit.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`llm.policies.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`llm.policies.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`llm.policies.remoteRateLimit.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`llm.policies.remoteRateLimit.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -76492,6 +76984,8 @@
 |`mcp.targets[].policies.backendAuth.aws.region`|string||
 |`mcp.targets[].policies.backendAuth.aws.sessionToken`|string||
 |`mcp.targets[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.targets[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.targets[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.targets[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.targets[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.targets[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -76834,6 +77328,8 @@
 |`mcp.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string||
 |`mcp.policies.mcpGuardrails.processors[].policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.mcpGuardrails.processors[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.mcpGuardrails.processors[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.mcpGuardrails.processors[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.mcpGuardrails.processors[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -77176,6 +77672,8 @@
 |`mcp.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string||
 |`mcp.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.ai.promptGuard.request[].openAIModeration.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -77454,6 +77952,8 @@
 |`mcp.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`mcp.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.ai.promptGuard.request[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -77732,6 +78232,8 @@
 |`mcp.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`mcp.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.ai.promptGuard.request[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -78008,6 +78510,8 @@
 |`mcp.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`mcp.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.ai.promptGuard.request[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -78322,6 +78826,8 @@
 |`mcp.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string||
 |`mcp.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.ai.promptGuard.response[].bedrockGuardrails.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -78600,6 +79106,8 @@
 |`mcp.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string||
 |`mcp.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.ai.promptGuard.response[].googleModelArmor.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -78876,6 +79384,8 @@
 |`mcp.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string||
 |`mcp.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.ai.promptGuard.response[].azureContentSafety.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -79203,6 +79713,8 @@
 |`mcp.policies.backendTunnel.policies.backendAuth.aws.region`|string||
 |`mcp.policies.backendTunnel.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.backendTunnel.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.backendTunnel.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.backendTunnel.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.backendTunnel.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.backendTunnel.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -79437,6 +79949,8 @@
 |`mcp.policies.backendAuth.aws.region`|string||
 |`mcp.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -79863,6 +80377,8 @@
 |`mcp.policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string||
 |`mcp.policies.remoteRateLimit.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.remoteRateLimit.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.remoteRateLimit.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.remoteRateLimit.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.remoteRateLimit.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.remoteRateLimit.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -80150,6 +80666,8 @@
 |`mcp.policies.remoteRateLimit.policies.backendAuth.aws.region`|string||
 |`mcp.policies.remoteRateLimit.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.remoteRateLimit.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.remoteRateLimit.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.remoteRateLimit.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.remoteRateLimit.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.remoteRateLimit.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -80519,6 +81037,8 @@
 |`mcp.policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string||
 |`mcp.policies.extAuthz.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.extAuthz.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.extAuthz.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -80819,6 +81339,8 @@
 |`mcp.policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`mcp.policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -81122,6 +81644,8 @@
 |`mcp.policies.extProc.conditional[].policies.backendAuth.aws.region`|string||
 |`mcp.policies.extProc.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.extProc.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.extProc.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.extProc.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.extProc.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.extProc.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -81412,6 +81936,8 @@
 |`mcp.policies.extProc.policies.backendAuth.aws.region`|string||
 |`mcp.policies.extProc.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.extProc.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.extProc.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.extProc.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.extProc.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.extProc.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -81703,6 +82229,8 @@
 |`mcp.policies.substrateIngress.policies.backendAuth.aws.region`|string||
 |`mcp.policies.substrateIngress.policies.backendAuth.aws.sessionToken`|string||
 |`mcp.policies.substrateIngress.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`mcp.policies.substrateIngress.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`mcp.policies.substrateIngress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`mcp.policies.substrateIngress.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`mcp.policies.substrateIngress.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`mcp.policies.substrateIngress.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -82099,6 +82627,8 @@
 |`ui.policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string||
 |`ui.policies.extAuthz.conditional[].policies.backendAuth.aws.sessionToken`|string||
 |`ui.policies.extAuthz.conditional[].policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`ui.policies.extAuthz.conditional[].policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`ui.policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`ui.policies.extAuthz.conditional[].policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`ui.policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`ui.policies.extAuthz.conditional[].policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
@@ -82399,6 +82929,8 @@
 |`ui.policies.extAuthz.policies.backendAuth.aws.region`|string||
 |`ui.policies.extAuthz.policies.backendAuth.aws.sessionToken`|string||
 |`ui.policies.extAuthz.policies.backendAuth.aws.serviceName`|string|AWS SigV4 signing service name (for example, "bedrock", "bedrock-agentcore", or "execute-api").|
+|`ui.policies.extAuthz.policies.backendAuth.aws.profile`|string|Name of the profile in the shared AWS config file.|
+|`ui.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the profile's own<br>`region` setting is used.|
 |`ui.policies.extAuthz.policies.backendAuth.aws.region`|string|AWS SigV4 signing region (for example, "us-east-1"). If unset, typed AWS<br>backends may provide this automatically; otherwise the ambient AWS region<br>is used.|
 |`ui.policies.extAuthz.policies.backendAuth.aws.assumeRole`|object|Optional AWS STS role to assume before signing requests.|
 |`ui.policies.extAuthz.policies.backendAuth.aws.assumeRole.roleArn`|string|AWS IAM role ARN to assume.|
