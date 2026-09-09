@@ -2415,3 +2415,256 @@ fn test_responses_replayed_assistant_message_without_status_or_annotations_is_ac
 	assert!(rendered.contains("toolUse"), "got {rendered}");
 	assert!(rendered.contains("toolResult"), "got {rendered}");
 }
+
+const REDACTED_REASONING_BLOB: &str = "AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyA=";
+
+fn converse_stream_body(events: &[(&str, serde_json::Value)]) -> axum_core::body::Body {
+	use aws_smithy_eventstream::frame::write_message_to;
+	use aws_smithy_types::event_stream::{Header, HeaderValue, Message};
+
+	let mut encoded = bytes::BytesMut::new();
+	for (event_type, payload) in events {
+		let message = Message::new(Bytes::from(serde_json::to_vec(payload).unwrap()))
+			.add_header(Header::new(
+				":message-type",
+				HeaderValue::String("event".to_string().into()),
+			))
+			.add_header(Header::new(
+				":event-type",
+				HeaderValue::String(event_type.to_string().into()),
+			));
+		write_message_to(&message, &mut encoded).expect("event must encode");
+	}
+	axum_core::body::Body::from(encoded.freeze())
+}
+
+#[test]
+fn test_responses_redacted_reasoning_becomes_reasoning_item() {
+	// OpenAI models on Bedrock (gpt-6-astra, gpt-5.6-sol) return their reasoning only as an
+	// encrypted redactedContent blob. It must surface as a Responses `reasoning` item carrying
+	// `encrypted_content`, never as "[REDACTED]" text inside the message.
+	let bytes = Bytes::from(
+		serde_json::to_vec(&json!({
+			"output": {"message": {"role": "assistant", "content": [
+				{"reasoningContent": {"redactedContent": REDACTED_REASONING_BLOB}},
+				{"text": "0.05"}
+			]}},
+			"stopReason": "end_turn",
+			"usage": {"inputTokens": 40, "outputTokens": 120, "totalTokens": 160}
+		}))
+		.unwrap(),
+	);
+	let response =
+		super::from_responses::translate_response(&bytes, "global.openai.gpt-6-astra", None)
+			.expect("redacted reasoning response must translate");
+	let rendered: serde_json::Value = serde_json::from_slice(&response.serialize().unwrap()).unwrap();
+	let output = rendered["output"].as_array().expect("output array");
+	assert_eq!(output.len(), 2, "got {rendered}");
+	assert_eq!(output[0]["type"], "reasoning", "got {rendered}");
+	assert!(
+		output[0]["id"]
+			.as_str()
+			.unwrap_or_default()
+			.starts_with("rs_"),
+		"got {rendered}"
+	);
+	assert_eq!(output[0]["summary"], json!([]), "got {rendered}");
+	assert_eq!(
+		output[0]["encrypted_content"], REDACTED_REASONING_BLOB,
+		"got {rendered}"
+	);
+	assert_eq!(output[1]["type"], "message", "got {rendered}");
+	assert_eq!(output[1]["content"].as_array().map(Vec::len), Some(1));
+	assert_eq!(output[1]["content"][0]["text"], "0.05", "got {rendered}");
+	assert!(
+		!rendered.to_string().contains("[REDACTED]"),
+		"got {rendered}"
+	);
+}
+
+#[tokio::test]
+async fn test_responses_stream_redacted_reasoning_becomes_reasoning_item() {
+	// Streaming twin of the buffered case: the redactedContent delta opens a reasoning item at
+	// output_index 0 whose done event carries `encrypted_content`; the message item shifts to
+	// output_index 1 and its text excludes any "[REDACTED]" marker.
+	let body = converse_stream_body(&[
+		("messageStart", json!({"role": "assistant"})),
+		(
+			"contentBlockDelta",
+			json!({"contentBlockIndex": 0, "delta": {"reasoningContent": {"redactedContent": REDACTED_REASONING_BLOB}}}),
+		),
+		("contentBlockStop", json!({"contentBlockIndex": 0})),
+		(
+			"contentBlockDelta",
+			json!({"contentBlockIndex": 1, "delta": {"text": "0."}}),
+		),
+		(
+			"contentBlockDelta",
+			json!({"contentBlockIndex": 1, "delta": {"text": "05"}}),
+		),
+		("contentBlockStop", json!({"contentBlockIndex": 1})),
+		("messageStop", json!({"stopReason": "end_turn"})),
+		(
+			"metadata",
+			json!({"usage": {"inputTokens": 40, "outputTokens": 120, "totalTokens": 160}}),
+		),
+	]);
+
+	let out = super::from_responses::translate_stream(
+		body,
+		1024 * 1024,
+		crate::StreamingUsageGuard::default(),
+		"global.openai.gpt-6-astra",
+		"req_1",
+		crate::LogContentFields::default(),
+		None,
+	)
+	.collect()
+	.await
+	.unwrap()
+	.to_bytes();
+	let raw = String::from_utf8(out.to_vec()).unwrap();
+	assert!(!raw.contains("[REDACTED]"), "got {raw}");
+
+	let events: Vec<serde_json::Value> = raw
+		.lines()
+		.filter_map(|line| line.strip_prefix("data: "))
+		.map(|data| serde_json::from_str(data).expect("event json"))
+		.collect();
+	let sequence: Vec<u64> = events
+		.iter()
+		.map(|e| e["sequence_number"].as_u64().unwrap())
+		.collect();
+	assert!(
+		sequence.windows(2).all(|w| w[0] < w[1]),
+		"sequence numbers must be monotonic: {sequence:?}"
+	);
+
+	let reasoning_added = events
+		.iter()
+		.find(|e| e["type"] == "response.output_item.added" && e["item"]["type"] == "reasoning")
+		.unwrap_or_else(|| panic!("no reasoning output_item.added in {raw}"));
+	assert_eq!(reasoning_added["output_index"], 0);
+	let reasoning_done = events
+		.iter()
+		.find(|e| e["type"] == "response.output_item.done" && e["item"]["type"] == "reasoning")
+		.unwrap_or_else(|| panic!("no reasoning output_item.done in {raw}"));
+	assert_eq!(reasoning_done["output_index"], 0);
+	assert_eq!(
+		reasoning_done["item"]["encrypted_content"],
+		REDACTED_REASONING_BLOB
+	);
+	assert_eq!(reasoning_done["item"]["summary"], json!([]));
+	assert_eq!(reasoning_done["item"]["id"], reasoning_added["item"]["id"]);
+	assert!(
+		reasoning_done["item"]["id"]
+			.as_str()
+			.unwrap_or_default()
+			.starts_with("rs_")
+	);
+
+	let message_added = events
+		.iter()
+		.find(|e| e["type"] == "response.output_item.added" && e["item"]["type"] == "message")
+		.unwrap_or_else(|| panic!("no message output_item.added in {raw}"));
+	assert_eq!(message_added["output_index"], 1);
+	let text_done = events
+		.iter()
+		.find(|e| e["type"] == "response.output_text.done")
+		.unwrap_or_else(|| panic!("no output_text.done in {raw}"));
+	assert_eq!(text_done["text"], "0.05");
+	assert_eq!(text_done["output_index"], 1);
+	let message_done = events
+		.iter()
+		.find(|e| e["type"] == "response.output_item.done" && e["item"]["type"] == "message")
+		.unwrap_or_else(|| panic!("no message output_item.done in {raw}"));
+	assert_eq!(message_done["output_index"], 1);
+	assert_eq!(message_done["item"]["content"][0]["text"], "0.05");
+}
+
+#[test]
+fn test_responses_replayed_reasoning_item_becomes_redacted_reasoning_block() {
+	// Codex replays the previous turn's reasoning item (with `encrypted_content`) ahead of the
+	// assistant message and function_call. It must land as a redactedContent reasoningContent
+	// block at the head of the same Converse assistant message.
+	let req: types::responses::Request = serde_json::from_value(json!({
+		"model": "global.openai.gpt-6-astra",
+		"max_output_tokens": 64,
+		"tools": [{
+			"type": "function",
+			"name": "exec_command",
+			"description": "Run a command",
+			"parameters": {"type": "object", "properties": {"cmd": {"type": "string"}}},
+			"strict": false
+		}],
+		"input": [
+			{"type": "message", "id": "msg_1", "role": "user", "content": [{"type": "input_text", "text": "How many entries in harbor?"}]},
+			{"type": "reasoning", "id": "rs_1", "summary": [], "encrypted_content": REDACTED_REASONING_BLOB},
+			{"type": "message", "id": "msg_2", "role": "assistant", "content": [{"type": "output_text", "text": "I'll count them."}]},
+			{"type": "function_call", "id": "fc_1", "call_id": "call_1", "name": "exec_command", "arguments": "{\"cmd\":\"ls harbor | wc -l\"}"},
+			{"type": "function_call_output", "id": "fco_1", "call_id": "call_1", "output": "6\n"}
+		]
+	}))
+	.expect("valid responses request");
+
+	let body = super::from_responses::translate(&req, &reasoning_test_provider(), None, None, None)
+		.expect("replayed reasoning item must translate")
+		.body;
+	let translated: serde_json::Value = serde_json::from_slice(&body).unwrap();
+	let messages = translated["messages"].as_array().expect("messages");
+	assert_eq!(messages.len(), 3, "got {translated}");
+	assert_eq!(messages[1]["role"], "assistant", "got {translated}");
+	let assistant_content = messages[1]["content"]
+		.as_array()
+		.expect("assistant content");
+	assert_eq!(
+		assistant_content[0],
+		json!({"reasoningContent": {"redactedContent": REDACTED_REASONING_BLOB}}),
+		"got {translated}"
+	);
+	assert_eq!(
+		assistant_content[1],
+		json!({"text": "I'll count them."}),
+		"got {translated}"
+	);
+	assert!(
+		assistant_content[2].get("toolUse").is_some(),
+		"got {translated}"
+	);
+	assert!(
+		messages[2]["content"][0].get("toolResult").is_some(),
+		"got {translated}"
+	);
+}
+
+#[test]
+fn test_responses_replayed_reasoning_item_without_encrypted_content_is_dropped() {
+	// A summary-only reasoning item (what Anthropic reasoning is emitted as) has nothing Bedrock
+	// can verify on replay, so it must not produce a reasoningContent block.
+	let req: types::responses::Request = serde_json::from_value(json!({
+		"model": "global.openai.gpt-6-astra",
+		"max_output_tokens": 64,
+		"input": [
+			{"type": "message", "id": "msg_1", "role": "user", "content": [{"type": "input_text", "text": "Hi"}]},
+			{"type": "reasoning", "id": "rs_1", "summary": [{"type": "summary_text", "text": "thinking"}]},
+			{"type": "reasoning", "id": "rs_2", "summary": [], "encrypted_content": ""},
+			{"type": "message", "id": "msg_2", "role": "assistant", "content": [{"type": "output_text", "text": "Hello."}]},
+			{"type": "message", "id": "msg_3", "role": "user", "content": [{"type": "input_text", "text": "Again"}]}
+		]
+	}))
+	.expect("valid responses request");
+
+	let body = super::from_responses::translate(&req, &reasoning_test_provider(), None, None, None)
+		.expect("summary-only reasoning item must not fail the request")
+		.body;
+	let translated: serde_json::Value = serde_json::from_slice(&body).unwrap();
+	assert!(
+		!translated.to_string().contains("reasoningContent"),
+		"got {translated}"
+	);
+	assert_eq!(
+		translated["messages"][1]["content"],
+		json!([{"text": "Hello."}]),
+		"got {translated}"
+	);
+}

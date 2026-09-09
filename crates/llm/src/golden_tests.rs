@@ -758,6 +758,9 @@ mod responses {
 				(r#""created_at":[0-9]+"#, r#""created_at":123"#),
 				(r#""id":"(resp|msg|call)_[0-9a-f]+""#, r#""id":"$1_xxx""#),
 				(r#""item_id":"(msg|call)_[0-9a-f]+""#, r#""item_id":"$1_xxx""#),
+				// Reasoning item ids minted by the Bedrock adapter (16 hex digits); upstream OpenAI
+				// `rs_` ids are longer and stay verbatim in passthrough snapshots.
+				(r#""id":"rs_[0-9a-f]{16}""#, r#""id":"rs_xxx""#),
 				(r#""call_id":"call_[0-9a-f]+""#, r#""call_id":"call_xxx""#),
 			],
 		}, {
