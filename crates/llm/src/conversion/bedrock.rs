@@ -1079,7 +1079,21 @@ pub mod from_completions {
 			.as_ref()
 			.and_then(completions_response_format_to_bedrock_output_config);
 
-		let supports_caching = helpers::supports_prompt_caching(&model_id);
+		// Forward the client's prompt-cache mode to OpenAI models. In explicit mode the client owns
+		// the breakpoints, so the gateway's own cache points are switched off for this request.
+		let client_cache_options =
+			helpers::openai_prompt_cache_options(&model_id, req.prompt_cache_options.as_ref());
+		let client_owns_cache_points =
+			helpers::prompt_cache_mode_is_explicit(client_cache_options.as_ref());
+		if let Some(options) = client_cache_options {
+			helpers::insert_additional_model_request_field(
+				&mut additional_model_request_fields,
+				"prompt_cache_options",
+				options,
+			);
+		}
+
+		let supports_caching = helpers::supports_prompt_caching(&model_id) && !client_owns_cache_points;
 		if let Some(system_blocks) = &mut system_content {
 			tracing::debug!(
 				"Prompt caching policy: {:?}, model: {}, supports caching: {}",
@@ -2547,7 +2561,17 @@ pub mod from_responses {
 			(vec![], None)
 		};
 
-		let supports_caching = req.model.as_deref().is_some_and(supports_prompt_caching);
+		// Forward the client's prompt-cache mode to OpenAI models. In explicit mode the client owns
+		// the breakpoints, so the gateway's own cache points are switched off for this request.
+		let client_cache_options = req
+			.prompt_cache_options
+			.as_ref()
+			.and_then(|options| serde_json::to_value(options).ok());
+		let client_cache_options =
+			openai_prompt_cache_options(&model_id, client_cache_options.as_ref());
+		let client_owns_cache_points = prompt_cache_mode_is_explicit(client_cache_options.as_ref());
+		let supports_caching =
+			req.model.as_deref().is_some_and(supports_prompt_caching) && !client_owns_cache_points;
 		let mut cache_points_used = 0;
 
 		// Convert input to Bedrock messages and system content
@@ -2977,8 +3001,15 @@ pub mod from_responses {
 				ReasoningEffort::Max => Some(ThinkingEffort::Max),
 			}
 		});
-		let (additional_model_request_fields, _) =
+		let (mut additional_model_request_fields, _) =
 			super::anthropic_reasoning_fields(&model_id, catalog, explicit_thinking_budget, effort);
+		if let Some(options) = client_cache_options {
+			insert_additional_model_request_field(
+				&mut additional_model_request_fields,
+				"prompt_cache_options",
+				options,
+			);
+		}
 
 		let tool_config = if !tools.is_empty() {
 			Some(bedrock::ToolConfiguration { tools, tool_choice })
@@ -3951,6 +3982,46 @@ pub(crate) mod helpers {
 	/// follow OpenAI's request shape, not Anthropic's.
 	pub fn is_openai_model(model_id: &str) -> bool {
 		model_id.to_lowercase().contains("openai.")
+	}
+
+	/// The client's `prompt_cache_options` (`mode`, `ttl`), forwarded verbatim under Converse
+	/// `additionalModelRequestFields` for OpenAI-vended models only. GPT-5.6 on Bedrock caches
+	/// implicitly by default (an automatic breakpoint on the latest message, billed as a cache
+	/// write on every uncached turn); `{"mode": "explicit"}` with no breakpoints turns that off.
+	/// Probed live 2026-09-11 against global.openai.gpt-5.6-sol through Converse: a 3,148-token
+	/// prompt carrying the field reported no cacheWriteInputTokens on two calls, while the same
+	/// prompt without it wrote 3,146 and then read 3,146. Other vendors never see the field;
+	/// Bedrock would reject it for them as an unknown parameter.
+	pub fn openai_prompt_cache_options(
+		model_id: &str,
+		options: Option<&serde_json::Value>,
+	) -> Option<serde_json::Value> {
+		if !is_openai_model(model_id) {
+			return None;
+		}
+		options.filter(|value| value.is_object()).cloned()
+	}
+
+	/// True when the client put the request in explicit prompt-cache mode. The client then owns
+	/// every breakpoint, so the gateway must not add its own cache points: they would re-enable
+	/// the cache writes the client asked to avoid.
+	pub fn prompt_cache_mode_is_explicit(options: Option<&serde_json::Value>) -> bool {
+		options
+			.and_then(|value| value.get("mode"))
+			.and_then(serde_json::Value::as_str)
+			.is_some_and(|mode| mode.eq_ignore_ascii_case("explicit"))
+	}
+
+	pub fn insert_additional_model_request_field(
+		fields: &mut Option<serde_json::Value>,
+		key: &str,
+		value: serde_json::Value,
+	) {
+		fields
+			.get_or_insert_with(|| serde_json::json!({}))
+			.as_object_mut()
+			.expect("additional model request fields must be a JSON object")
+			.insert(key.to_string(), value);
 	}
 
 	/// The `reasoning.effort` value Bedrock accepts for OpenAI models: one of

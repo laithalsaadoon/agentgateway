@@ -654,6 +654,7 @@ fn test_completions_request_metadata_only_uses_bedrock_header() {
 		max_tokens: None,
 		service_tier: None,
 		web_search_options: None,
+		prompt_cache_options: None,
 		stream_options: None,
 		store: None,
 		reasoning_effort: None,
@@ -753,6 +754,7 @@ fn test_completions_json_schema_response_format_maps_to_converse_output_config()
 		max_tokens: None,
 		service_tier: None,
 		web_search_options: None,
+		prompt_cache_options: None,
 		stream_options: None,
 		store: None,
 		reasoning_effort: None,
@@ -834,6 +836,7 @@ fn test_completions_reasoning_effort_maps_to_enabled_thinking_budget() {
 		max_tokens: None,
 		service_tier: None,
 		web_search_options: None,
+		prompt_cache_options: None,
 		stream_options: None,
 		store: None,
 		reasoning_effort: Some(types::completions::typed::ReasoningEffort::Xhigh),
@@ -913,6 +916,7 @@ fn test_completions_explicit_thinking_budget_forces_enabled_thinking() {
 		max_tokens: None,
 		service_tier: None,
 		web_search_options: None,
+		prompt_cache_options: None,
 		stream_options: None,
 		store: None,
 		reasoning_effort: Some(types::completions::typed::ReasoningEffort::High),
@@ -2666,5 +2670,259 @@ fn test_responses_replayed_reasoning_item_without_encrypted_content_is_dropped()
 		translated["messages"][1]["content"],
 		json!([{"text": "Hello."}]),
 		"got {translated}"
+	);
+}
+
+// --- Client prompt_cache_options forwarded to OpenAI models on the Converse path ---
+//
+// GPT-5.6 on Bedrock caches implicitly by default and bills a cache write on every uncached
+// turn; `prompt_cache_options: {"mode": "explicit"}` with no breakpoints turns that off. The
+// Converse translation used to drop the top-level field, so a client's explicit mode never
+// reached Bedrock. Probed 2026-09-11 via Converse: with the field a 3,148-token prompt reported
+// no cacheWriteInputTokens; without it the same prompt wrote 3,146 and then read 3,146.
+
+fn prompt_cache_completions_request(
+	model: &str,
+	options: Option<serde_json::Value>,
+	reasoning_effort: Option<&str>,
+) -> types::completions::Request {
+	let mut body = json!({
+		"model": model,
+		"max_completion_tokens": 64,
+		"messages": [
+			{ "role": "system", "content": "You are a terse assistant." },
+			{ "role": "user", "content": "hello" }
+		]
+	});
+	if let Some(options) = options {
+		body["prompt_cache_options"] = options;
+	}
+	if let Some(effort) = reasoning_effort {
+		body["reasoning_effort"] = json!(effort);
+	}
+	serde_json::from_value(body).expect("valid completions request")
+}
+
+fn prompt_cache_responses_request(
+	model: &str,
+	options: Option<serde_json::Value>,
+	reasoning_effort: Option<&str>,
+) -> types::responses::Request {
+	let mut body = json!({
+		"model": model,
+		"max_output_tokens": 64,
+		"instructions": "You are a terse assistant.",
+		"input": "hello"
+	});
+	if let Some(options) = options {
+		body["prompt_cache_options"] = options;
+	}
+	if let Some(effort) = reasoning_effort {
+		body["reasoning"] = json!({ "effort": effort });
+	}
+	serde_json::from_value(body).expect("valid responses request")
+}
+
+fn prompt_cache_completions_body(
+	req: &types::completions::Request,
+	prompt_caching: Option<&crate::PromptCachingConfig>,
+) -> serde_json::Value {
+	let body =
+		super::from_completions::translate(req, &reasoning_test_provider(), None, prompt_caching, None)
+			.unwrap()
+			.body;
+	serde_json::from_slice(&body).unwrap()
+}
+
+fn prompt_cache_responses_body(
+	req: &types::responses::Request,
+	prompt_caching: Option<&crate::PromptCachingConfig>,
+) -> serde_json::Value {
+	let body =
+		super::from_responses::translate(req, &reasoning_test_provider(), None, prompt_caching, None)
+			.unwrap()
+			.body;
+	serde_json::from_slice(&body).unwrap()
+}
+
+fn gateway_system_caching() -> crate::PromptCachingConfig {
+	crate::PromptCachingConfig {
+		cache_system: true,
+		cache_messages: true,
+		cache_tools: false,
+		min_tokens: None,
+		cache_message_offset: 0,
+	}
+}
+
+fn system_has_cache_point(body: &serde_json::Value) -> bool {
+	body["system"]
+		.as_array()
+		.is_some_and(|blocks| blocks.iter().any(|block| block.get("cachePoint").is_some()))
+}
+
+/// Satisfies both `is_openai_model` and `supports_prompt_caching` (the latter trusts any
+/// application inference profile), so the gateway would inject its own cache points here.
+const OPENAI_APP_PROFILE: &str =
+	"arn:aws:bedrock:us-east-1:123456789012:application-inference-profile/openai.gpt-5.6-sol";
+
+#[test]
+fn test_completions_prompt_cache_options_forwarded_for_openai_bedrock_model() {
+	let req = prompt_cache_completions_request(
+		"global.openai.gpt-5.6-sol",
+		Some(json!({ "mode": "explicit" })),
+		None,
+	);
+	let body = prompt_cache_completions_body(&req, None);
+	assert_eq!(
+		body["additionalModelRequestFields"],
+		json!({ "prompt_cache_options": { "mode": "explicit" } }),
+		"got {body}"
+	);
+}
+
+#[test]
+fn test_completions_prompt_cache_options_preserves_ttl_and_merges_with_reasoning_effort() {
+	let req = prompt_cache_completions_request(
+		"us.openai.gpt-5.6-sol",
+		Some(json!({ "mode": "explicit", "ttl": "30m" })),
+		Some("high"),
+	);
+	let body = prompt_cache_completions_body(&req, None);
+	assert_eq!(
+		body["additionalModelRequestFields"],
+		json!({
+			"reasoning": { "effort": "high" },
+			"prompt_cache_options": { "mode": "explicit", "ttl": "30m" }
+		}),
+		"got {body}"
+	);
+}
+
+#[test]
+fn test_completions_without_prompt_cache_options_sends_no_cache_fields() {
+	let req = prompt_cache_completions_request("global.openai.gpt-5.6-sol", None, None);
+	let body = prompt_cache_completions_body(&req, None);
+	assert!(
+		body.get("additionalModelRequestFields").is_none(),
+		"got {body}"
+	);
+}
+
+#[test]
+fn test_completions_prompt_cache_options_not_forwarded_for_claude_bedrock_model() {
+	let req = prompt_cache_completions_request(
+		"global.anthropic.claude-sonnet-5",
+		Some(json!({ "mode": "explicit" })),
+		Some("medium"),
+	);
+	let body = prompt_cache_completions_body(&req, None);
+	let fields = &body["additionalModelRequestFields"];
+	assert!(fields.get("prompt_cache_options").is_none(), "got {body}");
+	assert!(fields.get("thinking").is_some(), "got {body}");
+}
+
+#[test]
+fn test_completions_explicit_cache_mode_suppresses_gateway_cache_points() {
+	let caching = gateway_system_caching();
+	let implicit = prompt_cache_completions_request(OPENAI_APP_PROFILE, None, None);
+	let body = prompt_cache_completions_body(&implicit, Some(&caching));
+	assert!(system_has_cache_point(&body), "got {body}");
+
+	let explicit = prompt_cache_completions_request(
+		OPENAI_APP_PROFILE,
+		Some(json!({ "mode": "explicit" })),
+		None,
+	);
+	let body = prompt_cache_completions_body(&explicit, Some(&caching));
+	assert!(!system_has_cache_point(&body), "got {body}");
+	assert_eq!(
+		body["additionalModelRequestFields"]["prompt_cache_options"],
+		json!({ "mode": "explicit" })
+	);
+
+	// Implicit mode leaves the gateway's own cache policy in force.
+	let implicit = prompt_cache_completions_request(
+		OPENAI_APP_PROFILE,
+		Some(json!({ "mode": "implicit" })),
+		None,
+	);
+	let body = prompt_cache_completions_body(&implicit, Some(&caching));
+	assert!(system_has_cache_point(&body), "got {body}");
+}
+
+#[test]
+fn test_responses_prompt_cache_options_forwarded_for_openai_bedrock_model() {
+	let req = prompt_cache_responses_request(
+		"global.openai.gpt-5.6-sol",
+		Some(json!({ "mode": "explicit" })),
+		None,
+	);
+	let body = prompt_cache_responses_body(&req, None);
+	assert_eq!(
+		body["additionalModelRequestFields"],
+		json!({ "prompt_cache_options": { "mode": "explicit" } }),
+		"got {body}"
+	);
+}
+
+#[test]
+fn test_responses_prompt_cache_options_preserves_ttl_and_merges_with_reasoning_effort() {
+	let req = prompt_cache_responses_request(
+		"global.openai.gpt-6-astra",
+		Some(json!({ "mode": "explicit", "ttl": "30m" })),
+		Some("high"),
+	);
+	let body = prompt_cache_responses_body(&req, None);
+	assert_eq!(
+		body["additionalModelRequestFields"],
+		json!({
+			"reasoning": { "effort": "high" },
+			"prompt_cache_options": { "mode": "explicit", "ttl": "30m" }
+		}),
+		"got {body}"
+	);
+}
+
+#[test]
+fn test_responses_without_prompt_cache_options_sends_no_cache_fields() {
+	let req = prompt_cache_responses_request("global.openai.gpt-5.6-sol", None, None);
+	let body = prompt_cache_responses_body(&req, None);
+	assert!(
+		body.get("additionalModelRequestFields").is_none(),
+		"got {body}"
+	);
+}
+
+#[test]
+fn test_responses_prompt_cache_options_not_forwarded_for_claude_bedrock_model() {
+	let req = prompt_cache_responses_request(
+		"global.anthropic.claude-sonnet-5",
+		Some(json!({ "mode": "explicit" })),
+		Some("medium"),
+	);
+	let body = prompt_cache_responses_body(&req, None);
+	let fields = &body["additionalModelRequestFields"];
+	assert!(fields.get("prompt_cache_options").is_none(), "got {body}");
+	assert!(fields.get("thinking").is_some(), "got {body}");
+}
+
+#[test]
+fn test_responses_explicit_cache_mode_suppresses_gateway_cache_points() {
+	let caching = gateway_system_caching();
+	let implicit = prompt_cache_responses_request(OPENAI_APP_PROFILE, None, None);
+	let body = prompt_cache_responses_body(&implicit, Some(&caching));
+	assert!(system_has_cache_point(&body), "got {body}");
+
+	let explicit = prompt_cache_responses_request(
+		OPENAI_APP_PROFILE,
+		Some(json!({ "mode": "explicit" })),
+		None,
+	);
+	let body = prompt_cache_responses_body(&explicit, Some(&caching));
+	assert!(!system_has_cache_point(&body), "got {body}");
+	assert_eq!(
+		body["additionalModelRequestFields"]["prompt_cache_options"],
+		json!({ "mode": "explicit" })
 	);
 }

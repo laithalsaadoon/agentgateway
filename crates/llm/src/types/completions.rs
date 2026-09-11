@@ -1075,6 +1075,13 @@ pub mod typed {
 		#[serde(skip_serializing_if = "Option::is_none")]
 		pub web_search_options: Option<WebSearchOptions>,
 
+		/// Options controlling implicit and explicit prompt-cache breakpoints
+		/// (`{"mode": "implicit" | "explicit", "ttl": "30m"}`), as accepted by OpenAI GPT-5.6
+		/// models on Bedrock. Kept as opaque JSON: the Converse translation forwards it under
+		/// `additionalModelRequestFields` for OpenAI-vended models and otherwise leaves it alone.
+		#[serde(skip_serializing_if = "Option::is_none")]
+		pub prompt_cache_options: Option<serde_json::Value>,
+
 		/// Deprecated in favor of `tool_choice`.
 		///
 		/// Controls which (if any) function is called by the model.

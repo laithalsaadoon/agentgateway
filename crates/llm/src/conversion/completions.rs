@@ -1120,6 +1120,7 @@ pub mod from_messages {
 			service_tier: None,
 			parallel_tool_calls,
 			web_search_options: None,
+			prompt_cache_options: None,
 		}
 	}
 }
