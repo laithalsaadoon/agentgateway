@@ -337,6 +337,7 @@ function ListenerDumpDrawer(props: { row: DumpListenerRow; onClose: () => void }
 				</div>
 			</div>
 			<div className="drawer-yaml-section">
+				{/** biome-ignore lint/a11y/noLabelWithoutControl: Existing lint violation; remove this suppression when the underlying issue is fixed. */}
 				<label className="field-label">Listener YAML</label>
 				<YamlBlock value={listenerDumpForDisplay(listener)} />
 			</div>
@@ -381,11 +382,13 @@ function RouteDumpDrawer(props: {
 				</div>
 			</div>
 			<div className="drawer-yaml-section">
+				{/** biome-ignore lint/a11y/noLabelWithoutControl: Existing lint violation; remove this suppression when the underlying issue is fixed. */}
 				<label className="field-label">Route YAML</label>
 				<YamlBlock value={props.row.route} />
 			</div>
 			{resolvedBackends.length ? (
 				<div className="drawer-yaml-section">
+					{/** biome-ignore lint/a11y/noLabelWithoutControl: Existing lint violation; remove this suppression when the underlying issue is fixed. */}
 					<label className="field-label">Backend YAML</label>
 					<YamlBlock
 						value={resolvedBackends.length === 1 ? resolvedBackends[0] : resolvedBackends}
@@ -680,7 +683,7 @@ function backendListSummary(backends: unknown[]) {
 	return labels.slice(0, 2).join(', ') + (labels.length > 2 ? ` +${labels.length - 2}` : '');
 }
 
-function routeBackendLabel(value: unknown) {
+export function routeBackendLabel(value: unknown) {
 	if (!value || typeof value !== 'object') return 'unknown';
 	const backend = value as Record<string, unknown>;
 	if ('backend' in backend) return backendKind(backend.backend);

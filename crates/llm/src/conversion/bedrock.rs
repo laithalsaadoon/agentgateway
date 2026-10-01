@@ -22,30 +22,61 @@ pub const BEDROCK_TOOL_NAME_MAX_LEN: usize = 64;
 pub struct BedrockRequest {
 	pub body: Vec<u8>,
 	pub tool_name_map: BedrockToolNameMap,
+	pub namespaces: super::namespace_tools::NamespaceToolMap,
 }
 
-/// Reasoning controls for Bedrock's `additionalModelRequestFields`, shaped per vendor.
-///
-/// OpenAI-vended models on Bedrock (`openai.gpt-5.6-*` inference profiles, `openai.gpt-oss-*`)
-/// take `reasoning.effort` and reject Anthropic's `thinking` object with
-/// `unknown_parameter: 'thinking'` (probed live 2026-09-01 against global.openai.gpt-5.6-terra
-/// and openai.gpt-oss-20b-1:0, and 2026-09-04 against global.openai.gpt-5.6-sol). Every other
-/// model keeps the Anthropic thinking mapping. The bool reports whether manual (budgeted)
-/// thinking is on, which is incompatible with custom sampling parameters.
+fn reasoning_fields(
+	model: &str,
+	catalog: crate::model_catalog::Catalog<'_>,
+	explicit_budget: Option<u64>,
+	effort: Option<serde_json::Value>,
+	anthropic_effort: Option<messages::typed::ThinkingEffort>,
+) -> Result<(Option<serde_json::Value>, bool), AIError> {
+	let target_model = model.to_ascii_lowercase();
+	// Bedrock's OpenAI models reject OpenAI's `minimal` effort (GPT-5.6 with `unsupported_value`,
+	// gpt-oss with a validation error); `low` is the nearest value both accept (probed live
+	// 2026-10-01 on us.openai.gpt-5.6-luna and openai.gpt-oss-120b-1:0).
+	let effort = match effort {
+		Some(effort) if target_model.contains("openai.") && effort.as_str() == Some("minimal") => {
+			Some(serde_json::json!("low"))
+		},
+		effort => effort,
+	};
+	let fields = if target_model.contains("gpt-oss") || target_model.contains("deepseek") {
+		effort.map(|effort| serde_json::json!({ "reasoning_effort": effort }))
+	} else if target_model.contains("openai.") {
+		effort.map(|effort| serde_json::json!({ "reasoning": { "effort": effort } }))
+	} else if target_model.contains("amazon.nova-2-") {
+		match effort.filter(|effort| effort.as_str() != Some("none")) {
+			Some(effort) => {
+				if !matches!(effort.as_str(), Some("low" | "medium" | "high")) {
+					return Err(AIError::UnsupportedConversion(strng::literal!(
+						"Nova 2 reasoning_effort must be low, medium, or high"
+					)));
+				}
+				Some(
+					serde_json::json!({ "reasoningConfig": { "type": "enabled", "maxReasoningEffort": effort } }),
+				)
+			},
+			None => None,
+		}
+	} else {
+		return Ok(anthropic_reasoning_fields(
+			model,
+			catalog,
+			explicit_budget,
+			anthropic_effort,
+		));
+	};
+	Ok((fields, false))
+}
+
 fn anthropic_reasoning_fields(
 	model: &str,
 	catalog: crate::model_catalog::Catalog<'_>,
 	explicit_budget: Option<u64>,
 	effort: Option<messages::typed::ThinkingEffort>,
 ) -> (Option<serde_json::Value>, bool) {
-	if helpers::is_openai_model(model) {
-		let fields = effort.map(|effort| {
-			serde_json::json!({
-				"reasoning": { "effort": helpers::openai_reasoning_effort_name(effort) }
-			})
-		});
-		return (fields, false);
-	}
 	let capabilities = crate::model_catalog::anthropic_thinking_capabilities(model, catalog);
 	if let Some(budget_tokens) = explicit_budget
 		&& capabilities.legacy
@@ -76,43 +107,6 @@ fn anthropic_reasoning_fields(
 		}),
 		budget_tokens.is_some(),
 	)
-}
-
-/// Fill in the fields OpenAI marks optional on replayed assistant output but the typed
-/// `OutputMessage` requires. Codex CLI replays a prior turn's assistant message as
-/// `{"type":"message","role":"assistant","content":[{"type":"output_text","text":...}]}`
-/// with no `status` and no `annotations`; OpenAI and Bedrock's OpenAI-compatible endpoint
-/// accept that, while the strict typed conversion rejected the whole request with
-/// "data did not match any variant of untagged enum InputParam". Only assistant messages
-/// are touched, and only missing fields are added.
-fn normalize_replayed_assistant_messages(input: &mut serde_json::Value) {
-	let Some(items) = input.as_array_mut() else {
-		return;
-	};
-	for item in items.iter_mut() {
-		let Some(obj) = item.as_object_mut() else {
-			continue;
-		};
-		let is_assistant_message = obj.get("type").and_then(|t| t.as_str()) == Some("message")
-			&& obj.get("role").and_then(|r| r.as_str()) == Some("assistant");
-		if !is_assistant_message {
-			continue;
-		}
-		obj
-			.entry("status")
-			.or_insert_with(|| serde_json::Value::String("completed".to_string()));
-		if let Some(parts) = obj.get_mut("content").and_then(|c| c.as_array_mut()) {
-			for part in parts.iter_mut() {
-				if let Some(part) = part.as_object_mut()
-					&& part.get("type").and_then(|t| t.as_str()) == Some("output_text")
-				{
-					part
-						.entry("annotations")
-						.or_insert_with(|| serde_json::Value::Array(Vec::new()));
-				}
-			}
-		}
-	}
 }
 
 /// Per-request mapping between client tool names and Bedrock-safe tool names.
@@ -350,11 +344,10 @@ pub mod from_rerank {
 		if req.documents.is_empty() {
 			return Err(AIError::MissingField("rerank documents".into()));
 		}
-		let model = provider
+		let model = req
 			.model
 			.as_deref()
-			.or(req.model.as_deref())
-			.unwrap_or_default();
+			.ok_or_else(|| AIError::MissingField("model not specified".into()))?;
 		let sources = req
 			.documents
 			.iter()
@@ -416,18 +409,14 @@ pub mod from_rerank {
 }
 
 pub mod from_embeddings {
-	use crate::bedrock::Provider;
 	use crate::types::ResponseType;
 	use crate::{AIError, json, logged_response_parsing, types};
 
-	pub fn translate(
-		req: &types::embeddings::Request,
-		provider: &Provider,
-	) -> Result<Vec<u8>, AIError> {
+	pub fn translate(req: &types::embeddings::Request) -> Result<Vec<u8>, AIError> {
 		let typed = json::convert::<_, types::embeddings::typed::Request>(req)
 			.map_err(AIError::RequestMarshal)?;
 
-		let model = provider.model.as_deref().unwrap_or(&typed.model);
+		let model = typed.model.as_str();
 
 		// Bedrock has three embedding model families with incompatible APIs:
 		// Cohere accepts batched text arrays; Titan and Nova accept a single string.
@@ -652,7 +641,7 @@ pub mod from_completions {
 	use std::collections::HashMap;
 	use std::time::Instant;
 
-	use axum_core::body::Body;
+	use agent_http::Body;
 	use bytes::Bytes;
 	use itertools::Itertools;
 	use types::bedrock;
@@ -714,10 +703,9 @@ pub mod from_completions {
 		cache_points_used: &mut usize,
 	) -> Vec<bedrock::ContentBlock> {
 		let mut content = Vec::new();
-		// Replay a previously-emitted thinking block first. Anthropic (via Bedrock Converse) requires
-		// the reasoningContent block to precede the text/toolUse blocks of the same assistant turn,
-		// and to carry the original cryptographic signature so Bedrock can validate it. Only replay
-		// when a non-empty signature is present — Bedrock rejects an unsigned thinking block.
+		// This Completions path replays signed thinking before text/toolUse blocks.
+		// Anthropic requires the original signature; other Bedrock models can accept
+		// unsigned reasoning, but this path currently omits it.
 		if let Some(signature) = msg.reasoning_signature.as_deref().filter(|s| !s.is_empty()) {
 			content.push(bedrock::ContentBlock::ReasoningContent(
 				bedrock::ReasoningContentBlock::Structured {
@@ -847,6 +835,7 @@ pub mod from_completions {
 		Ok(super::BedrockRequest {
 			body,
 			tool_name_map,
+			namespaces: Default::default(),
 		})
 	}
 
@@ -1060,12 +1049,16 @@ pub mod from_completions {
 			.reasoning_effort
 			.as_ref()
 			.and_then(crate::types::anthropic_effort_for_reasoning_effort);
-		let (mut additional_model_request_fields, manual_thinking) = super::anthropic_reasoning_fields(
+		let (mut additional_model_request_fields, manual_thinking) = super::reasoning_fields(
 			&model_id,
 			catalog,
 			req.vendor_extensions.thinking_budget_tokens,
+			req
+				.reasoning_effort
+				.as_ref()
+				.map(|effort| serde_json::json!(effort)),
 			effort,
-		);
+		)?;
 		// Anthropic manual thinking is incompatible with custom sampling parameters.
 		if !manual_thinking && let Some(top_k) = top_k {
 			additional_model_request_fields
@@ -1252,6 +1245,7 @@ pub mod from_completions {
 		// This is static for all chunks!
 		let created = chrono::Utc::now().timestamp() as u32;
 		let mut saw_token = false;
+		let mut last_token_at: Option<Instant> = None;
 		// Track tool call JSON buffers by content block index
 		let mut tool_calls: HashMap<i32, String> = HashMap::new();
 		// Bedrock indexes every content block, while OpenAI indexes only tool calls.
@@ -1320,14 +1314,19 @@ pub mod from_completions {
 					}
 				},
 				bedrock::ConverseStreamOutput::ContentBlockDelta(d) => {
+					let now = Instant::now();
 					if !saw_token {
 						saw_token = true;
+						last_token_at = Some(now);
 						log.update(|r| {
-							r.response.first_token = Some(Instant::now());
+							r.response.first_token = Some(now);
 						});
+					} else if let Some(prev) = last_token_at.replace(now) {
+						let gap = now.duration_since(prev);
+						log.update(|r| r.response.inter_chunk_latencies.record(gap));
 					}
 
-					let delta = d.delta.map(|delta| {
+					let delta = d.delta.and_then(|delta| {
 						let mut dr = completions::StreamResponseDelta::default();
 						match delta {
 							bedrock::ContentBlockDelta::ReasoningContent(
@@ -1337,9 +1336,7 @@ pub mod from_completions {
 							},
 							bedrock::ContentBlockDelta::ReasoningContent(
 								bedrock::ReasoningContentBlockDelta::RedactedContent(_),
-							) => {
-								dr.reasoning_content = Some("[REDACTED]".to_string());
-							},
+							) => return None,
 							bedrock::ContentBlockDelta::ReasoningContent(
 								bedrock::ReasoningContentBlockDelta::Signature(sig),
 							) => {
@@ -1382,7 +1379,7 @@ pub mod from_completions {
 								}
 							},
 						};
-						dr
+						Some(dr)
 					});
 
 					if let Some(delta) = delta {
@@ -1511,7 +1508,7 @@ pub mod from_messages {
 	use std::time::Instant;
 
 	use agent_core::strng;
-	use axum_core::body::Body;
+	use agent_http::Body;
 	use bytes::Bytes;
 	use types::bedrock;
 	use types::messages::typed as messages;
@@ -1534,6 +1531,7 @@ pub mod from_messages {
 		Ok(super::BedrockRequest {
 			body,
 			tool_name_map,
+			namespaces: Default::default(),
 		})
 	}
 
@@ -1799,19 +1797,12 @@ pub mod from_messages {
 											None
 										}
 									},
-									// Converse has no tool-reference member, so the names ride as JSON
-									// rather than vanishing. This does NOT make the tools callable --
-									// only InvokeModel can attach their schemas -- but it keeps the
-									// request valid and the information visible instead of 400ing.
 									messages::ToolResultContentPart::ToolReference {
 										tool_name,
 										cache_control,
 									} => {
 										has_cache_control |= cache_control.is_some();
-										Some(bedrock::ToolResultContentBlock::Json(serde_json::json!({
-											"type": "tool_reference",
-											"tool_name": tool_name,
-										})))
+										Some(bedrock::ToolResultContentBlock::Text(tool_name))
 									},
 									messages::ToolResultContentPart::Document { .. }
 									| messages::ToolResultContentPart::SearchResult { .. }
@@ -1841,14 +1832,12 @@ pub mod from_messages {
 						bedrock::ContentBlock::ReasoningContent(bedrock::ReasoningContentBlock::Structured {
 							reasoning_text: bedrock::ReasoningText {
 								text: thinking,
-								signature: Some(signature),
+								signature: Some(signature).filter(|s| !s.is_empty()),
 							},
 						}),
 						false,
 					),
 					messages::ContentBlock::WebSearchToolResult { .. } => continue,
-					// Round-trip encrypted reasoning so multi-turn clients can replay the
-					// opaque payload Bedrock returned (see to_anthropic's redacted_thinking).
 					messages::ContentBlock::RedactedThinking { data } => (
 						bedrock::ContentBlock::ReasoningContent(bedrock::ReasoningContentBlock::Redacted {
 							redacted_content: data,
@@ -2062,6 +2051,7 @@ pub mod from_messages {
 		tool_name_map: Option<super::BedrockToolNameMap>,
 	) -> Body {
 		let mut saw_token = false;
+		let mut last_token_at: Option<Instant> = None;
 		let mut seen_blocks: HashSet<i32> = HashSet::new();
 		let mut pending_stop_reason: Option<bedrock::StopReason> = None;
 		let mut pending_usage: Option<bedrock::TokenUsage> = None;
@@ -2189,11 +2179,16 @@ pub mod from_messages {
 					}
 
 					if let Some(d) = delta.delta {
+						let now = Instant::now();
 						if !saw_token {
 							saw_token = true;
+							last_token_at = Some(now);
 							log.update(|r| {
-								r.response.first_token = Some(Instant::now());
+								r.response.first_token = Some(now);
 							});
+						} else if let Some(prev) = last_token_at.replace(now) {
+							let gap = now.duration_since(prev);
+							log.update(|r| r.response.inter_chunk_latencies.record(gap));
 						}
 
 						let anthropic_delta = match d {
@@ -2336,7 +2331,7 @@ pub mod from_responses {
 	use std::time::Instant;
 
 	use agent_core::strng;
-	use axum_core::body::Body;
+	use agent_http::Body;
 	use bytes::Bytes;
 	use helpers::*;
 	use rand::RngExt;
@@ -2442,12 +2437,10 @@ pub mod from_responses {
 		prompt_caching: Option<&crate::PromptCachingConfig>,
 		catalog: crate::model_catalog::Catalog<'_>,
 	) -> Result<super::BedrockRequest, AIError> {
-		let mut raw = serde_json::to_value(req).map_err(AIError::RequestMarshal)?;
-		if let Some(input) = raw.get_mut("input") {
-			super::normalize_replayed_assistant_messages(input);
-		}
-		let typed: responses::CreateResponse =
-			serde_json::from_value(raw).map_err(AIError::RequestMarshal)?;
+		let mut typed =
+			json::convert::<_, responses::CreateResponse>(req).map_err(AIError::RequestMarshal)?;
+		let namespaces =
+			crate::conversion::namespace_tools::NamespaceToolMap::rewrite_request(&mut typed)?;
 		let explicit_thinking_budget = extract_responses_thinking_budget_tokens(req);
 		let model_id = typed.model.clone().unwrap_or_default();
 		let (xlated, tool_name_map) = translate_internal(
@@ -2463,6 +2456,7 @@ pub mod from_responses {
 		Ok(super::BedrockRequest {
 			body,
 			tool_name_map,
+			namespaces,
 		})
 	}
 
@@ -2805,18 +2799,15 @@ pub mod from_responses {
 					}
 				},
 				InputItem::Item(Item::Reasoning(item)) => {
-					// Replay encrypted reasoning the client got back from a previous turn (Codex sends
-					// every reasoning item with its `encrypted_content`). Bedrock requires the
-					// reasoningContent block to precede the text/toolUse blocks of the same assistant
-					// turn; Responses clients replay items in emitted order, so pushing it as its own
-					// assistant message here lets `push_or_merge_message` fold the following
-					// message/function_call items in behind it. Items without `encrypted_content`
-					// (Anthropic summaries, which carry no signature) have nothing Bedrock can verify
-					// and are dropped.
-					let Some(encrypted_content) = item
-						.encrypted_content
-						.as_deref()
-						.filter(|content| !content.is_empty())
+					// Replay only encrypted reasoning (Codex sends every reasoning item back with its
+					// `encrypted_content`). Plaintext reasoning carries no signature, and Bedrock
+					// rejects an unsigned reasoningText in assistant history for Claude ("thinking.signature:
+					// Field required") and for GPT-5.6 ("doesn't support the reasoningContent.reasoningText.text
+					// field"), so it is dropped rather than replayed. Bedrock requires the reasoningContent
+					// block to precede the text/toolUse blocks of the same assistant turn; Responses clients
+					// replay items in emitted order, so pushing it as its own assistant message lets
+					// `push_or_merge_message` fold the following message/function_call items in behind it.
+					let Some(redacted_content) = item.encrypted_content.filter(|content| !content.is_empty())
 					else {
 						continue;
 					};
@@ -2825,9 +2816,7 @@ pub mod from_responses {
 						bedrock::Message {
 							role: bedrock::Role::Assistant,
 							content: vec![bedrock::ContentBlock::ReasoningContent(
-								bedrock::ReasoningContentBlock::Redacted {
-									redacted_content: encrypted_content.to_string(),
-								},
+								bedrock::ReasoningContentBlock::Redacted { redacted_content },
 							)],
 						},
 					);
@@ -3001,8 +2990,17 @@ pub mod from_responses {
 				ReasoningEffort::Max => Some(ThinkingEffort::Max),
 			}
 		});
-		let (mut additional_model_request_fields, _) =
-			super::anthropic_reasoning_fields(&model_id, catalog, explicit_thinking_budget, effort);
+		let (mut additional_model_request_fields, _) = super::reasoning_fields(
+			&model_id,
+			catalog,
+			explicit_thinking_budget,
+			req
+				.reasoning
+				.as_ref()
+				.and_then(|r| r.effort.as_ref())
+				.map(|effort| serde_json::json!(effort)),
+			effort,
+		)?;
 		if let Some(options) = client_cache_options {
 			insert_additional_model_request_field(
 				&mut additional_model_request_fields,
@@ -3146,11 +3144,15 @@ pub mod from_responses {
 		bytes: &Bytes,
 		model: &str,
 		tool_name_map: Option<&super::BedrockToolNameMap>,
+		namespaces: Option<&crate::conversion::namespace_tools::NamespaceToolMap>,
 	) -> Result<Box<dyn ResponseType>, AIError> {
 		let resp = serde_json::from_slice::<bedrock::ConverseResponse>(bytes)
 			.map_err(logged_response_parsing(bytes))?;
 		let adapter = super::ConverseResponseAdapter::from_response(resp, model)?;
-		let typed = adapter.to_responses_typed(tool_name_map);
+		let mut typed = adapter.to_responses_typed(tool_name_map);
+		if let Some(namespaces) = namespaces {
+			namespaces.restore_response(&mut typed);
+		}
 		let passthrough =
 			json::convert::<_, types::responses::Response>(&typed).map_err(AIError::ResponseParsing)?;
 		Ok(Box::new(passthrough))
@@ -3173,6 +3175,7 @@ pub mod from_responses {
 		))
 	}
 
+	#[allow(clippy::too_many_arguments)]
 	pub fn translate_stream(
 		b: Body,
 		buffer_limit: usize,
@@ -3181,12 +3184,16 @@ pub mod from_responses {
 		_message_id: &str,
 		log_content: crate::LogContentFields,
 		tool_name_map: Option<super::BedrockToolNameMap>,
+		namespaces: Option<std::sync::Arc<crate::conversion::namespace_tools::NamespaceToolMap>>,
 	) -> Body {
 		let mut saw_token = false;
+		let mut last_token_at: Option<Instant> = None;
 		let mut pending_stop_reason: Option<bedrock::StopReason> = None;
 		let mut pending_usage: Option<bedrock::TokenUsage> = None;
 		let mut seen_blocks: HashSet<i32> = HashSet::new();
-		let mut completion = log_content.completion.then(String::new);
+		// Finished output items keyed by output_index; terminal events carry them as the full
+		// `response.output`, even when content logging is disabled.
+		let mut completed_items: Vec<(u32, OutputItem)> = Vec::new();
 		let mut logged_tool_calls =
 			crate::conversion::messages::StreamingToolCalls::new(log_content.tool_calls);
 
@@ -3251,7 +3258,7 @@ pub mod from_responses {
 				},
 			};
 
-			match event {
+			let mut events = match event {
 				bedrock::ConverseStreamOutput::MessageStart(_start) => {
 					// The message output item is opened lazily (see `message_output_index`) so a
 					// reasoning item that streams first can take output_index 0.
@@ -3265,6 +3272,7 @@ pub mod from_responses {
 						|_| true,
 						&mut sequence_number,
 						&mut events,
+						&mut completed_items,
 					);
 
 					match start.start {
@@ -3353,11 +3361,16 @@ pub mod from_responses {
 				bedrock::ConverseStreamOutput::ContentBlockDelta(delta) => {
 					let mut out: Vec<(&'static str, ResponseStreamEvent)> = Vec::new();
 
+					let now = Instant::now();
 					if !saw_token {
 						saw_token = true;
+						last_token_at = Some(now);
 						log.update(|r| {
-							r.response.first_token = Some(Instant::now());
+							r.response.first_token = Some(now);
 						});
+					} else if let Some(prev) = last_token_at.replace(now) {
+						let gap = now.duration_since(prev);
+						log.update(|r| r.response.inter_chunk_latencies.record(gap));
 					}
 
 					if let Some(d) = delta.delta {
@@ -3369,13 +3382,11 @@ pub mod from_responses {
 							|index| !(streaming_reasoning && index == delta.content_block_index),
 							&mut sequence_number,
 							&mut out,
+							&mut completed_items,
 						);
 
 						match d {
 							bedrock::ContentBlockDelta::Text(text) => {
-								if let Some(completion) = completion.as_mut() {
-									completion.push_str(&text);
-								}
 								let output_index = ensure_message_item(
 									&mut message_output_index,
 									&mut next_output_index,
@@ -3466,6 +3477,7 @@ pub mod from_responses {
 							|index| index == stop.content_block_index,
 							&mut sequence_number,
 							&mut events,
+							&mut completed_items,
 						);
 					} else if let Some((item_id, name, buffer, output_index)) =
 						tool_calls.remove(&stop.content_block_index)
@@ -3482,21 +3494,23 @@ pub mod from_responses {
 						);
 						events.push(("event", args_done_event));
 
+						let item = OutputItem::FunctionCall(FunctionToolCall {
+							arguments: buffer,
+							call_id: item_id.clone(),
+							namespace: None,
+							name,
+							caller: None,
+							id: Some(item_id),
+							status: Some(OutputStatus::Completed),
+							r#async: None,
+						});
+						completed_items.push((output_index, item.clone()));
 						sequence_number += 1;
 						let item_done_event =
 							ResponseStreamEvent::ResponseOutputItemDone(ResponseOutputItemDoneEvent {
 								sequence_number,
 								output_index,
-								item: OutputItem::FunctionCall(FunctionToolCall {
-									arguments: buffer,
-									call_id: item_id.clone(),
-									namespace: None,
-									name,
-									caller: None,
-									id: Some(item_id),
-									status: Some(OutputStatus::Completed),
-									r#async: None,
-								}),
+								item,
 							});
 						events.push(("event", item_done_event));
 					} else if was_tracked {
@@ -3566,6 +3580,7 @@ pub mod from_responses {
 						|_| true,
 						&mut sequence_number,
 						&mut out,
+						&mut completed_items,
 					);
 					let message_output_index = ensure_message_item(
 						&mut message_output_index,
@@ -3574,30 +3589,36 @@ pub mod from_responses {
 						&message_item_id,
 						&mut out,
 					);
+					let item = OutputItem::Message(OutputMessage {
+						content: if message_text.is_empty() {
+							Vec::new()
+						} else {
+							vec![
+								crate::types::responses::typed::OutputMessageContent::OutputText(
+									OutputTextContent {
+										annotations: Vec::new(),
+										logprobs: None,
+										text: message_text.clone(),
+									},
+								),
+							]
+						},
+						id: message_item_id.clone(),
+						role: AssistantRole::Assistant,
+						phase: None,
+						status: output_status,
+					});
+					if !message_text.is_empty() {
+						completed_items.push((message_output_index, item.clone()));
+					}
+					completed_items.sort_by_key(|(index, _)| *index);
+					let output: Vec<OutputItem> = completed_items.drain(..).map(|(_, item)| item).collect();
 					sequence_number += 1;
 					let message_done_event =
 						ResponseStreamEvent::ResponseOutputItemDone(ResponseOutputItemDoneEvent {
 							sequence_number,
 							output_index: message_output_index,
-							item: OutputItem::Message(OutputMessage {
-								content: if message_text.is_empty() {
-									Vec::new()
-								} else {
-									vec![
-										crate::types::responses::typed::OutputMessageContent::OutputText(
-											OutputTextContent {
-												annotations: Vec::new(),
-												logprobs: None,
-												text: message_text.clone(),
-											},
-										),
-									]
-								},
-								id: message_item_id.clone(),
-								role: AssistantRole::Assistant,
-								phase: None,
-								status: output_status,
-							}),
+							item,
 						});
 					out.push(("event", message_done_event));
 
@@ -3613,9 +3634,7 @@ pub mod from_responses {
 					};
 					let finish_reason = crate::types::serialize_str(&response_status);
 					log.update(|r| {
-						if let Some(completion) = completion.take() {
-							r.response.completion = Some(vec![completion]);
-						}
+						r.response.completion = log_content.completion.then(|| vec![message_text.clone()]);
 						r.response.output_messages =
 							logged_tool_calls.take_output_messages(finish_reason.clone());
 					});
@@ -3636,7 +3655,7 @@ pub mod from_responses {
 					});
 
 					sequence_number += 1;
-					let done_event = match stop {
+					let mut done_event = match stop {
 						Some(bedrock::StopReason::EndTurn) | Some(bedrock::StopReason::StopSequence) | None => {
 							response_builder.completed_event(sequence_number, usage_obj)
 						},
@@ -3663,10 +3682,23 @@ pub mod from_responses {
 						},
 					};
 
+					match &mut done_event {
+						ResponseStreamEvent::ResponseCompleted(event) => event.response.output = output,
+						ResponseStreamEvent::ResponseIncomplete(event) => event.response.output = output,
+						ResponseStreamEvent::ResponseFailed(event) => event.response.output = output,
+						_ => {},
+					}
+
 					out.push(("event", done_event));
 					out
 				},
+			};
+			if let Some(namespaces) = &namespaces {
+				for (_, event) in &mut events {
+					namespaces.restore_event(event);
+				}
 			}
+			events
 		})
 	}
 
@@ -3788,12 +3820,14 @@ pub mod from_responses {
 	}
 
 	/// Emit `response.output_item.done` for every pending reasoning block whose Converse
-	/// content block index satisfies `finish`; the rest keep streaming.
+	/// content block index satisfies `finish`, recording each in `completed`; the rest keep
+	/// streaming.
 	fn finish_reasoning_blocks(
 		reasoning_blocks: &mut Vec<(i32, ReasoningStreamBlock)>,
 		finish: impl Fn(i32) -> bool,
 		sequence_number: &mut u64,
 		out: &mut Vec<(&'static str, ResponseStreamEvent)>,
+		completed: &mut Vec<(u32, OutputItem)>,
 	) {
 		let (finished, kept): (Vec<_>, Vec<_>) = std::mem::take(reasoning_blocks)
 			.into_iter()
@@ -3801,13 +3835,15 @@ pub mod from_responses {
 		*reasoning_blocks = kept;
 		for (_, block) in finished {
 			let output_index = block.output_index;
+			let item = OutputItem::Reasoning(block.into_done_item());
+			completed.push((output_index, item.clone()));
 			*sequence_number += 1;
 			out.push((
 				"event",
 				ResponseStreamEvent::ResponseOutputItemDone(ResponseOutputItemDoneEvent {
 					sequence_number: *sequence_number,
 					output_index,
-					item: OutputItem::Reasoning(block.into_done_item()),
+					item,
 				}),
 			));
 		}
@@ -4022,22 +4058,6 @@ pub(crate) mod helpers {
 			.as_object_mut()
 			.expect("additional model request fields must be a JSON object")
 			.insert(key.to_string(), value);
-	}
-
-	/// The `reasoning.effort` value Bedrock accepts for OpenAI models: one of
-	/// `none | low | medium | high | xhigh | max` (Bedrock's own error text enumerates the set).
-	/// Callers have already collapsed OpenAI's `none` to no effort and `minimal` to `Low`.
-	pub fn openai_reasoning_effort_name(
-		effort: crate::types::messages::typed::ThinkingEffort,
-	) -> &'static str {
-		use crate::types::messages::typed::ThinkingEffort;
-		match effort {
-			ThinkingEffort::Low => "low",
-			ThinkingEffort::Medium => "medium",
-			ThinkingEffort::High => "high",
-			ThinkingEffort::Xhigh => "xhigh",
-			ThinkingEffort::Max => "max",
-		}
 	}
 
 	pub fn supports_prompt_caching(model_id: &str) -> bool {
@@ -4295,6 +4315,7 @@ impl ConverseResponseAdapter {
 		let mut content = None;
 		let mut reasoning_content = None;
 		let mut reasoning_signature = None;
+		let mut reasoning_blocks = 0;
 		for block in &self.message.content {
 			match block {
 				bedrock::ContentBlock::Text(text) => {
@@ -4312,12 +4333,14 @@ impl ConverseResponseAdapter {
 							reasoning_text.text.clone(),
 							reasoning_text.signature.clone(),
 						),
-						// Match the streaming path: encrypted reasoning surfaces as an
-						// opaque marker, never the ciphertext.
-						bedrock::ReasoningContentBlock::Redacted { .. } => ("[REDACTED]".to_string(), None),
+						// Completions has no field for encrypted reasoning.
+						bedrock::ReasoningContentBlock::Redacted { .. } => continue,
 						bedrock::ReasoningContentBlock::Simple { text } => (text.clone(), None),
 					};
-					reasoning_content = Some(text);
+					reasoning_blocks += 1;
+					reasoning_content
+						.get_or_insert_with(String::new)
+						.push_str(&text);
 					if let Some(sig) = signature
 						&& !sig.is_empty()
 					{
@@ -4345,6 +4368,11 @@ impl ConverseResponseAdapter {
 					continue;
 				},
 			}
+		}
+
+		// A single signature cannot authenticate multiple concatenated reasoning blocks.
+		if reasoning_blocks > 1 {
+			reasoning_signature = None;
 		}
 
 		let message = completions::ResponseMessage {

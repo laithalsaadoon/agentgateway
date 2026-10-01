@@ -419,7 +419,7 @@ export AGENTGATEWAY_IMAGE_REPO ?= agentgateway-controller
 
 .PHONY: agentgateway-controller
 agentgateway-controller:
-	 $(GO_BUILD_FLAGS) GOOS=linux go build -ldflags='$(LDFLAGS)' -gcflags='$(GCFLAGS)' -o $(CONTROLLER_OUTPUT_DIR)/agentgateway-linux-$(GOARCH) ./cmd/agentgateway
+	 $(GO_BUILD_FLAGS) GOOS=linux go build -trimpath -tags=disable_pgv,agent -ldflags='$(LDFLAGS)' -gcflags='$(GCFLAGS)' -o $(CONTROLLER_OUTPUT_DIR)/agentgateway-linux-$(GOARCH) ./cmd/agentgateway
 
 #----------------------------------------------------------------------------------
 # agctl CLI
@@ -768,7 +768,8 @@ bump-gtw: ## Bump Gateway API deps to $DEP_REF (or $DEP_VERSION). Example: make 
 
 .PHONY: bump-gie
 bump-gie: ## Bump Gateway API Inference Extension to $DEP_REF (or $DEP_VERSION). Example: make bump-gie DEP_REF=198e6cab...
-	@if [ -z "$${DEP_REF:-}" ] && [ -n "$${DEP_VERSION:-}" ]; then DEP_REF="$$DEP_VERSION"; fi; \
+	@set -e; \
+	if [ -z "$${DEP_REF:-}" ] && [ -n "$${DEP_VERSION:-}" ]; then DEP_REF="$$DEP_VERSION"; fi; \
 	if [ -z "$${DEP_REF:-}" ]; then \
 	  echo "DEP_REF is not set (or DEP_VERSION). e.g. make bump-gie DEP_REF=v0.5.1 or DEP_REF=198e6cab6774..."; \
 	  exit 2; \

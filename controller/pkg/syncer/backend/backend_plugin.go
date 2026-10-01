@@ -152,6 +152,9 @@ func BuildAgwBackend(
 	backend *agentgateway.AgentgatewayBackend,
 ) ([]*api.Backend, error) {
 	errs := []error{}
+	if owners := jwks.OwnersFromBackend(backend); len(owners) > 0 {
+		ctx.JWKSOwner = &owners[0]
+	}
 	pols, err := TranslateBackendPolicies(ctx, backend.Namespace, backend.Spec.Policies)
 	if err != nil {
 		errs = append(errs, err)
@@ -231,18 +234,27 @@ func TranslateAgwBackend(
 ) (*agentgateway.AgentgatewayBackendStatus, []agwir.AgwResource) {
 	var results []agwir.AgwResource
 	backends, err := BuildAgwBackend(ctx, backend)
+	condition := metav1.Condition{
+		Type:               "Accepted",
+		Status:             metav1.ConditionTrue,
+		Reason:             "Accepted",
+		Message:            "Backend successfully accepted",
+		ObservedGeneration: backend.Generation,
+		LastTransitionTime: metav1.Now(),
+	}
 	if err != nil {
 		logger.Error("failed to translate backend", "backend", backend.Name, "namespace", backend.Namespace, "err", err)
-		return &agentgateway.AgentgatewayBackendStatus{
-			Conditions: kstatus.UpdateConditionIfChanged(backend.Status.Conditions, metav1.Condition{
-				Type:               "Accepted",
-				Status:             metav1.ConditionFalse,
-				Reason:             "TranslationError",
-				Message:            fmt.Sprintf("failed to translate backend: %v", err),
-				ObservedGeneration: backend.Generation,
-				LastTransitionTime: metav1.Now(),
-			}),
-		}, results
+		condition.Message = fmt.Sprintf("failed to translate backend: %v", err)
+		condition.Reason = "PartiallyValid"
+		// Policy translation can return usable output alongside diagnostics. Preserve
+		// that output, including policies that enforce failure in the data plane.
+		if len(backends) == 0 {
+			condition.Status = metav1.ConditionFalse
+			condition.Reason = "TranslationError"
+			return &agentgateway.AgentgatewayBackendStatus{
+				Conditions: kstatus.UpdateConditionIfChanged(backend.Status.Conditions, condition),
+			}, results
+		}
 	}
 
 	gtws := references.LookupGatewaysForBackend(ctx.Krt, utils.TypedNamespacedName{
@@ -263,14 +275,7 @@ func TranslateAgwBackend(
 	}
 
 	return &agentgateway.AgentgatewayBackendStatus{
-		Conditions: kstatus.UpdateConditionIfChanged(backend.Status.Conditions, metav1.Condition{
-			Type:               "Accepted",
-			Status:             metav1.ConditionTrue,
-			Reason:             "Accepted",
-			Message:            "Backend successfully accepted",
-			ObservedGeneration: backend.Generation,
-			LastTransitionTime: metav1.Now(),
-		}),
+		Conditions: kstatus.UpdateConditionIfChanged(backend.Status.Conditions, condition),
 	}, results
 }
 
@@ -544,17 +549,27 @@ func translateLLMProvider(ctx plugins.PolicyCtx, namespace string, llm *agentgat
 		// TODO: publisher?
 		provider.Provider = &api.AIBackend_Provider_Vertex{
 			Vertex: &api.AIBackend_Vertex{
-				Region:    llm.VertexAI.Region,
+				Region:    ptr.NonEmptyOrDefault(llm.VertexAI.Region, "global"),
 				Model:     llm.VertexAI.Model,
 				ProjectId: llm.VertexAI.ProjectId,
 			},
 		}
 	} else if llm.Bedrock != nil {
-		region := llm.Bedrock.Region
+		region := ptr.NonEmptyOrDefault(llm.Bedrock.Region, "us-east-1")
 		var guardrailIdentifier, guardrailVersion *string
 		if llm.Bedrock.Guardrail != nil {
 			guardrailIdentifier = &llm.Bedrock.Guardrail.GuardrailIdentifier
 			guardrailVersion = &llm.Bedrock.Guardrail.GuardrailVersion
+		}
+
+		endpointPreference := api.AIBackend_BEDROCK_ENDPOINT_PREFERENCE_RUNTIME_PREFERRED
+		switch llm.Bedrock.EndpointPreference {
+		case agentgateway.BedrockEndpointPreferenceMantlePreferred:
+			endpointPreference = api.AIBackend_BEDROCK_ENDPOINT_PREFERENCE_MANTLE_PREFERRED
+		case agentgateway.BedrockEndpointPreferenceMantleOnly:
+			endpointPreference = api.AIBackend_BEDROCK_ENDPOINT_PREFERENCE_MANTLE_ONLY
+		case agentgateway.BedrockEndpointPreferenceRuntimeOnly:
+			endpointPreference = api.AIBackend_BEDROCK_ENDPOINT_PREFERENCE_RUNTIME_ONLY
 		}
 
 		provider.Provider = &api.AIBackend_Provider_Bedrock{
@@ -563,6 +578,7 @@ func translateLLMProvider(ctx plugins.PolicyCtx, namespace string, llm *agentgat
 				Region:              region,
 				GuardrailIdentifier: guardrailIdentifier,
 				GuardrailVersion:    guardrailVersion,
+				EndpointPreference:  endpointPreference,
 			},
 		}
 	} else if llm.Custom != nil {

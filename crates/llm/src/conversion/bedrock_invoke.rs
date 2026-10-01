@@ -54,7 +54,7 @@ use std::collections::HashSet;
 use std::sync::{LazyLock, Mutex};
 
 use agent_core::strng;
-use axum_core::body::Body;
+use agent_http::Body;
 use base64::Engine;
 use bytes::Bytes;
 use tracing::{debug, warn};

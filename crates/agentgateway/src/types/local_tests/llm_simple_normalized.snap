@@ -423,6 +423,7 @@ backends:
         name: "llm:router"
         namespace: ""
         target:
+          discovery: catalog
           models:
             - name: llama-3.1-8b-instant
               created: 0
@@ -432,25 +433,7 @@ backends:
                 backend: "/llm:model:llama-3.1-8b-instant:0"
                 weight: 1
               policies:
-                llm:
-                  routes:
-                    "*": passthrough
-                    /v1/chat/completions: completions
-                    /v1/embeddings: embeddings
-                    /v1/images/edits: detect
-                    /v1/images/generations: detect
-                    /v1/images/variations: detect
-                    /v1/messages: messages
-                    /v1/messages/count_tokens: anthropicTokenCount
-                    /v1/rerank: rerank
-                    /v1/responses: responses
-                    /v1/responses/compact: detect
-                    /v2/rerank: rerank
-                    ":countTokens": geminiCountTokens
-                    ":generateContent": generateContent
-                    ":rawPredict": messages
-                    ":streamGenerateContent": generateContent
-                    ":streamRawPredict": messages
+                llm: {}
                 authorization: ~
               backendPolicies: []
             - name: fireworks-llama
@@ -461,25 +444,7 @@ backends:
                 backend: "/llm:model:fireworks-llama:1"
                 weight: 1
               policies:
-                llm:
-                  routes:
-                    "*": passthrough
-                    /v1/chat/completions: completions
-                    /v1/embeddings: embeddings
-                    /v1/images/edits: detect
-                    /v1/images/generations: detect
-                    /v1/images/variations: detect
-                    /v1/messages: messages
-                    /v1/messages/count_tokens: anthropicTokenCount
-                    /v1/rerank: rerank
-                    /v1/responses: responses
-                    /v1/responses/compact: detect
-                    /v2/rerank: rerank
-                    ":countTokens": geminiCountTokens
-                    ":generateContent": generateContent
-                    ":rawPredict": messages
-                    ":streamGenerateContent": generateContent
-                    ":streamRawPredict": messages
+                llm: {}
                 authorization: ~
               backendPolicies: []
             - name: claude-3-haiku
@@ -493,25 +458,7 @@ backends:
                 backend: "/llm:model:claude-3-haiku:2"
                 weight: 1
               policies:
-                llm:
-                  routes:
-                    "*": passthrough
-                    /v1/chat/completions: completions
-                    /v1/embeddings: embeddings
-                    /v1/images/edits: detect
-                    /v1/images/generations: detect
-                    /v1/images/variations: detect
-                    /v1/messages: messages
-                    /v1/messages/count_tokens: anthropicTokenCount
-                    /v1/rerank: rerank
-                    /v1/responses: responses
-                    /v1/responses/compact: detect
-                    /v2/rerank: rerank
-                    ":countTokens": geminiCountTokens
-                    ":generateContent": generateContent
-                    ":rawPredict": messages
-                    ":streamGenerateContent": generateContent
-                    ":streamRawPredict": messages
+                llm: {}
                 authorization: ~
               backendPolicies: []
             - name: gpt-3.5-turbo
@@ -522,25 +469,7 @@ backends:
                 backend: "/llm:model:gpt-3.5-turbo:3"
                 weight: 1
               policies:
-                llm:
-                  routes:
-                    "*": passthrough
-                    /v1/chat/completions: completions
-                    /v1/embeddings: embeddings
-                    /v1/images/edits: detect
-                    /v1/images/generations: detect
-                    /v1/images/variations: detect
-                    /v1/messages: messages
-                    /v1/messages/count_tokens: anthropicTokenCount
-                    /v1/rerank: rerank
-                    /v1/responses: responses
-                    /v1/responses/compact: detect
-                    /v2/rerank: rerank
-                    ":countTokens": geminiCountTokens
-                    ":generateContent": generateContent
-                    ":rawPredict": messages
-                    ":streamGenerateContent": generateContent
-                    ":streamRawPredict": messages
+                llm: {}
                 authorization: ~
               backendPolicies: []
             - name: gpt-7-max
@@ -551,25 +480,7 @@ backends:
                 backend: "/llm:model:gpt-7-max:4"
                 weight: 1
               policies:
-                llm:
-                  routes:
-                    "*": passthrough
-                    /v1/chat/completions: completions
-                    /v1/embeddings: embeddings
-                    /v1/images/edits: detect
-                    /v1/images/generations: detect
-                    /v1/images/variations: detect
-                    /v1/messages: messages
-                    /v1/messages/count_tokens: anthropicTokenCount
-                    /v1/rerank: rerank
-                    /v1/responses: responses
-                    /v1/responses/compact: detect
-                    /v2/rerank: rerank
-                    ":countTokens": geminiCountTokens
-                    ":generateContent": generateContent
-                    ":rawPredict": messages
-                    ":streamGenerateContent": generateContent
-                    ":streamRawPredict": messages
+                llm: {}
                 authorization: ~
               backendPolicies: []
             - name: "*"
@@ -580,25 +491,7 @@ backends:
                 backend: "/llm:model:*:5"
                 weight: 1
               policies:
-                llm:
-                  routes:
-                    "*": passthrough
-                    /v1/chat/completions: completions
-                    /v1/embeddings: embeddings
-                    /v1/images/edits: detect
-                    /v1/images/generations: detect
-                    /v1/images/variations: detect
-                    /v1/messages: messages
-                    /v1/messages/count_tokens: anthropicTokenCount
-                    /v1/rerank: rerank
-                    /v1/responses: responses
-                    /v1/responses/compact: detect
-                    /v2/rerank: rerank
-                    ":countTokens": geminiCountTokens
-                    ":generateContent": generateContent
-                    ":rawPredict": messages
-                    ":streamGenerateContent": generateContent
-                    ":streamRawPredict": messages
+                llm: {}
                 authorization: ~
               backendPolicies: []
           virtualModels: []

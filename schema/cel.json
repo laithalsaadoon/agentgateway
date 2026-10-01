@@ -693,6 +693,10 @@
             "outputAudio": {
               "type": "number",
               "format": "double"
+            },
+            "pages": {
+              "type": "number",
+              "format": "double"
             }
           },
           "additionalProperties": false,
@@ -704,7 +708,8 @@
             "cacheWrite",
             "reasoning",
             "inputAudio",
-            "outputAudio"
+            "outputAudio",
+            "pages"
           ]
         },
         "costRates": {
@@ -757,6 +762,13 @@
               "format": "double"
             },
             "outputAudio": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "format": "double"
+            },
+            "perPage": {
               "type": [
                 "number",
                 "null"
@@ -950,7 +962,7 @@
       "additionalProperties": false
     },
     "mcp": {
-      "description": "`mcp` contains attributes about the MCP request.\nRequest-time CEL includes identity fields (`tool`, `prompt`, `resource`,\n`task`) plus `methodName`. Post-request CEL may also include fields like\n`sessionId` and tool payloads.",
+      "description": "`mcp` contains attributes about the MCP request.\nRequest-time CEL includes identity fields (`tool`, `prompt`, `resource`,\n`task`) plus `methodName`. Post-request CEL may also include fields like\n`sessionId`, tool payloads, and list results.",
       "type": [
         "object",
         "null"
@@ -966,6 +978,22 @@
           "type": [
             "string",
             "null"
+          ]
+        },
+        "target": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "name": {
+              "description": "The MCP target for the current target-scoped operation.",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name"
           ]
         },
         "tool": {
@@ -1061,6 +1089,18 @@
             "target",
             "name"
           ]
+        },
+        "toolsList": {
+          "description": "The terminal tools/list result returned to the client, if available."
+        },
+        "promptsList": {
+          "description": "The terminal prompts/list result returned to the client, if available."
+        },
+        "resourcesList": {
+          "description": "The terminal resources/list result returned to the client, if available."
+        },
+        "resourceTemplatesList": {
+          "description": "The terminal resources/templates/list result returned to the client, if available."
         }
       },
       "additionalProperties": false
@@ -1076,6 +1116,13 @@
           "description": "The name of the backend being used. For example, `my-service` or `service/my-namespace/my-service:8080`.",
           "type": "string",
           "default": ""
+        },
+        "endpoint": {
+          "description": "The resolved target for directly addressed backends, including the port for network endpoints.\nAbsent for Service backends, whose workload endpoints are selected separately.",
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "type": {
           "description": "The type of backend.",
@@ -1130,25 +1177,25 @@
       "additionalProperties": true
     },
     "guardrails": {
-      "description": "`guardrails` contains one entry per prompt-guard guardrail intervention, in either the\nrequest or response phase. Only present in CEL that runs after the request completes,\nsuch as log and metric fields.",
+      "description": "`guardrails` contains entries for prompt-guard guardrail evaluations, in either the\nrequest or response phase. Only present in CEL that runs after the request completes,\nsuch as log and metric fields.",
       "type": [
         "array",
         "null"
       ],
       "items": {
-        "description": "Records one prompt-guard guardrail intervention.",
+        "description": "Records one prompt-guard guardrail evaluation.",
         "type": "object",
         "properties": {
           "phase": {
-            "description": "The phase the guardrail intervened in: `request` or `response`.",
+            "description": "The phase the guardrail was evaluated in: `request` or `response`.",
             "type": "string"
           },
           "guard": {
-            "description": "The guard kind that intervened, such as `bedrockGuardrails`.",
+            "description": "The guard kind that was evaluated, such as `bedrockGuardrails`.",
             "type": "string"
           },
           "action": {
-            "description": "The action the guardrail took (mask/reject/audit/failOpen).",
+            "description": "The action the guardrail took (allow/mask/reject/audit/failOpen).",
             "type": "string"
           },
           "guardrailId": {

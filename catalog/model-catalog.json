@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-09-04T08:34:50Z"
+    "generatedAt": "2026-09-28T08:46:22Z"
   },
   "providers": {
     "anthropic": {
@@ -116,6 +116,17 @@
             "adaptive_thinking"
           ]
         },
+        "claude-opus-5-5": {
+          "rates": {
+            "input": "4",
+            "output": "20",
+            "cacheRead": "0.2",
+            "cacheWrite": "5"
+          },
+          "tags": [
+            "adaptive_thinking"
+          ]
+        },
         "claude-sonnet-4-5": {
           "rates": {
             "input": "3",
@@ -165,32 +176,114 @@
     },
     "aws.bedrock": {
       "models": {
+        "ai21.jamba-1-5-large-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "ai21.jamba-1-5-mini-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
         "amazon.nova-2-lite-v1:0": {
           "rates": {
             "input": "0.33",
-            "output": "2.75"
-          }
+            "output": "2.75",
+            "cacheRead": "0.0825",
+            "cacheWrite": "0.33"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "amazon.nova-2-multimodal-embeddings-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "amazon.nova-2-sonic-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "amazon.nova-canvas-v1:0": {
+          "tags": [
+            "runtime"
+          ]
         },
         "amazon.nova-lite-v1:0": {
           "rates": {
             "input": "0.06",
             "output": "0.24",
-            "cacheRead": "0.015"
-          }
+            "cacheRead": "0.015",
+            "cacheWrite": "0.06"
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "amazon.nova-micro-v1:0": {
           "rates": {
             "input": "0.035",
             "output": "0.14",
-            "cacheRead": "0.00875"
-          }
+            "cacheRead": "0.00875",
+            "cacheWrite": "0.035"
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "amazon.nova-pro-v1:0": {
           "rates": {
             "input": "0.8",
             "output": "3.2",
-            "cacheRead": "0.2"
-          }
+            "cacheRead": "0.2",
+            "cacheWrite": "0.8"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "amazon.nova-reel-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "amazon.nova-sonic-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "amazon.titan-embed-g1-text-02": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "amazon.titan-embed-image-v1": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "amazon.titan-embed-text-v2:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "amazon.titan-image-generator-v2:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "anthropic.claude-3-5-haiku-20241022-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "anthropic.claude-3-haiku-20240307-v1:0": {
+          "tags": [
+            "runtime"
+          ]
         },
         "anthropic.claude-fable-5": {
           "rates": {
@@ -200,7 +293,10 @@
             "cacheWrite": "12.5"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "anthropic.claude-fable-5-1": {
@@ -211,7 +307,10 @@
             "cacheWrite": "12.5"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "anthropic.claude-haiku-4-5-20251001-v1:0": {
@@ -222,7 +321,26 @@
             "cacheWrite": "1.25"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "anthropic.claude-mythos-5": {
+          "tags": [
+            "anthropic_messages",
+            "mantle"
+          ]
+        },
+        "anthropic.claude-mythos-5-1": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "anthropic.claude-opus-4-1-20250805-v1:0": {
+          "tags": [
+            "runtime"
           ]
         },
         "anthropic.claude-opus-4-5-20251101-v1:0": {
@@ -233,18 +351,20 @@
             "cacheWrite": "6.25"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "runtime"
           ]
         },
         "anthropic.claude-opus-4-6-v1": {
           "rates": {
-            "input": "5",
-            "output": "25",
-            "cacheRead": "0.5",
-            "cacheWrite": "6.25"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
           },
           "tags": [
             "legacy_thinking",
+            "runtime",
             "adaptive_thinking"
           ]
         },
@@ -256,7 +376,10 @@
             "cacheWrite": "6.25"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "anthropic.claude-opus-4-8": {
@@ -267,7 +390,10 @@
             "cacheWrite": "6.25"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "anthropic.claude-opus-5": {
@@ -276,6 +402,20 @@
             "output": "25",
             "cacheRead": "0.5",
             "cacheWrite": "6.25"
+          },
+          "tags": [
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "anthropic.claude-opus-5-5": {
+          "rates": {
+            "input": "4",
+            "output": "20",
+            "cacheRead": "0.2",
+            "cacheWrite": "5"
           },
           "tags": [
             "adaptive_thinking"
@@ -289,18 +429,20 @@
             "cacheWrite": "3.75"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "runtime"
           ]
         },
         "anthropic.claude-sonnet-4-6": {
           "rates": {
-            "input": "3",
-            "output": "15",
-            "cacheRead": "0.3",
-            "cacheWrite": "3.75"
+            "input": "3.3",
+            "output": "16.5",
+            "cacheRead": "0.33",
+            "cacheWrite": "4.125"
           },
           "tags": [
             "legacy_thinking",
+            "runtime",
             "adaptive_thinking"
           ]
         },
@@ -312,49 +454,125 @@
             "cacheWrite": "2.5"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "apac.amazon.nova-lite-v1:0": {
+          "rates": {
+            "input": "0.063",
+            "output": "0.252",
+            "cacheRead": "0.01575",
+            "cacheWrite": "0.063"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "apac.amazon.nova-micro-v1:0": {
+          "rates": {
+            "input": "0.037",
+            "output": "0.148",
+            "cacheRead": "0.00925",
+            "cacheWrite": "0.037"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "apac.amazon.nova-pro-v1:0": {
+          "rates": {
+            "input": "0.84",
+            "output": "3.36",
+            "cacheRead": "0.21",
+            "cacheWrite": "0.84"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "apac.anthropic.claude-sonnet-4-20250514-v1:0": {
+          "tags": [
+            "runtime"
           ]
         },
         "au.anthropic.claude-haiku-4-5-20251001-v1:0": {
           "rates": {
-            "input": "1",
-            "output": "5",
-            "cacheRead": "0.1",
-            "cacheWrite": "1.25"
+            "input": "1.1",
+            "output": "5.5",
+            "cacheRead": "0.11",
+            "cacheWrite": "1.375"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "au.anthropic.claude-opus-4-6-v1": {
           "rates": {
-            "input": "16.5",
-            "output": "82.5",
-            "cacheRead": "1.65",
-            "cacheWrite": "20.625"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
           },
           "tags": [
             "legacy_thinking",
+            "runtime",
             "adaptive_thinking"
+          ]
+        },
+        "au.anthropic.claude-opus-4-7": {
+          "rates": {
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
+          },
+          "tags": [
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "au.anthropic.claude-opus-4-8": {
           "rates": {
-            "input": "5",
-            "output": "25",
-            "cacheRead": "0.5",
-            "cacheWrite": "6.25"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "au.anthropic.claude-opus-5": {
           "rates": {
-            "input": "5",
-            "output": "25",
-            "cacheRead": "0.5",
-            "cacheWrite": "6.25"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
+          },
+          "tags": [
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "au.anthropic.claude-opus-5-5": {
+          "rates": {
+            "input": "4.4",
+            "output": "22",
+            "cacheRead": "0.22",
+            "cacheWrite": "5.5"
           },
           "tags": [
             "adaptive_thinking"
@@ -362,13 +580,14 @@
         },
         "au.anthropic.claude-sonnet-4-5-20250929-v1:0": {
           "rates": {
-            "input": "3",
-            "output": "15",
-            "cacheRead": "0.3",
-            "cacheWrite": "3.75"
+            "input": "3.3",
+            "output": "16.5",
+            "cacheRead": "0.33",
+            "cacheWrite": "4.125"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "runtime"
           ]
         },
         "au.anthropic.claude-sonnet-4-6": {
@@ -380,37 +599,143 @@
           },
           "tags": [
             "legacy_thinking",
+            "runtime",
             "adaptive_thinking"
           ]
         },
         "au.anthropic.claude-sonnet-5": {
           "rates": {
-            "input": "2",
-            "output": "10",
-            "cacheRead": "0.2",
-            "cacheWrite": "2.5"
+            "input": "2.2",
+            "output": "11",
+            "cacheRead": "0.22",
+            "cacheWrite": "2.75"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "ca.amazon.nova-lite-v1:0": {
+          "rates": {
+            "input": "0.064",
+            "output": "0.256",
+            "cacheRead": "0.016",
+            "cacheWrite": "0.064"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "cohere.command-r-plus-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "cohere.command-r-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "cohere.embed-english-v3": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "cohere.embed-multilingual-v3": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "cohere.embed-v4:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "cohere.rerank-v3-5:0": {
+          "tags": [
+            "runtime"
           ]
         },
         "deepseek.r1-v1:0": {
           "rates": {
             "input": "1.35",
             "output": "5.4"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "deepseek.v3-v1:0": {
           "rates": {
             "input": "0.58",
             "output": "1.68"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "deepseek.v3.1": {
+          "tags": [
+            "mantle",
+            "openai_completions"
+          ]
         },
         "deepseek.v3.2": {
           "rates": {
             "input": "0.62",
             "output": "1.85"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
+        },
+        "eu.amazon.nova-2-lite-v1:0": {
+          "rates": {
+            "input": "0.374",
+            "output": "3.157",
+            "cacheRead": "0.0935",
+            "cacheWrite": "0.374"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "eu.amazon.nova-lite-v1:0": {
+          "rates": {
+            "input": "0.069",
+            "output": "0.276",
+            "cacheRead": "0.01725",
+            "cacheWrite": "0.069"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "eu.amazon.nova-micro-v1:0": {
+          "rates": {
+            "input": "0.04",
+            "output": "0.16",
+            "cacheRead": "0.01",
+            "cacheWrite": "0.04"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "eu.amazon.nova-pro-v1:0": {
+          "rates": {
+            "input": "0.92",
+            "output": "3.68",
+            "cacheRead": "0.23",
+            "cacheWrite": "0.92"
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "eu.anthropic.claude-fable-5": {
           "rates": {
@@ -420,7 +745,10 @@
             "cacheWrite": "13.75"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "eu.anthropic.claude-haiku-4-5-20251001-v1:0": {
@@ -431,7 +759,10 @@
             "cacheWrite": "1.375"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "eu.anthropic.claude-opus-4-5-20251101-v1:0": {
@@ -442,7 +773,8 @@
             "cacheWrite": "6.875"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "runtime"
           ]
         },
         "eu.anthropic.claude-opus-4-6-v1": {
@@ -454,6 +786,7 @@
           },
           "tags": [
             "legacy_thinking",
+            "runtime",
             "adaptive_thinking"
           ]
         },
@@ -465,7 +798,10 @@
             "cacheWrite": "6.875"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "eu.anthropic.claude-opus-4-8": {
@@ -476,7 +812,10 @@
             "cacheWrite": "6.875"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "eu.anthropic.claude-opus-5": {
@@ -487,7 +826,26 @@
             "cacheWrite": "6.875"
           },
           "tags": [
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "eu.anthropic.claude-opus-5-5": {
+          "rates": {
+            "input": "4.4",
+            "output": "22",
+            "cacheRead": "0.22",
+            "cacheWrite": "5.5"
+          },
+          "tags": [
             "adaptive_thinking"
+          ]
+        },
+        "eu.anthropic.claude-sonnet-4-20250514-v1:0": {
+          "tags": [
+            "runtime"
           ]
         },
         "eu.anthropic.claude-sonnet-4-5-20250929-v1:0": {
@@ -498,7 +856,8 @@
             "cacheWrite": "4.125"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "runtime"
           ]
         },
         "eu.anthropic.claude-sonnet-4-6": {
@@ -510,6 +869,7 @@
           },
           "tags": [
             "legacy_thinking",
+            "runtime",
             "adaptive_thinking"
           ]
         },
@@ -521,7 +881,27 @@
             "cacheWrite": "2.75"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "eu.mistral.pixtral-large-2502-v1:0": {
+          "rates": {
+            "input": "2",
+            "output": "6"
+          }
+        },
+        "global.amazon.nova-2-lite-v1:0": {
+          "rates": {
+            "input": "0.3",
+            "output": "2.5",
+            "cacheRead": "0.075",
+            "cacheWrite": "0.3"
+          },
+          "tags": [
+            "runtime"
           ]
         },
         "global.anthropic.claude-fable-5": {
@@ -532,7 +912,10 @@
             "cacheWrite": "12.5"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "global.anthropic.claude-fable-5-1": {
@@ -543,7 +926,10 @@
             "cacheWrite": "12.5"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "global.anthropic.claude-haiku-4-5-20251001-v1:0": {
@@ -554,7 +940,10 @@
             "cacheWrite": "1.25"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "global.anthropic.claude-opus-4-5-20251101-v1:0": {
@@ -565,7 +954,8 @@
             "cacheWrite": "6.25"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "runtime"
           ]
         },
         "global.anthropic.claude-opus-4-6-v1": {
@@ -577,6 +967,7 @@
           },
           "tags": [
             "legacy_thinking",
+            "runtime",
             "adaptive_thinking"
           ]
         },
@@ -588,7 +979,10 @@
             "cacheWrite": "6.25"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "global.anthropic.claude-opus-4-8": {
@@ -599,7 +993,10 @@
             "cacheWrite": "6.25"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "global.anthropic.claude-opus-5": {
@@ -610,7 +1007,26 @@
             "cacheWrite": "6.25"
           },
           "tags": [
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "global.anthropic.claude-opus-5-5": {
+          "rates": {
+            "input": "4",
+            "output": "20",
+            "cacheRead": "0.2",
+            "cacheWrite": "5"
+          },
+          "tags": [
             "adaptive_thinking"
+          ]
+        },
+        "global.anthropic.claude-sonnet-4-20250514-v1:0": {
+          "tags": [
+            "runtime"
           ]
         },
         "global.anthropic.claude-sonnet-4-5-20250929-v1:0": {
@@ -621,7 +1037,8 @@
             "cacheWrite": "3.75"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "runtime"
           ]
         },
         "global.anthropic.claude-sonnet-4-6": {
@@ -633,6 +1050,7 @@
           },
           "tags": [
             "legacy_thinking",
+            "runtime",
             "adaptive_thinking"
           ]
         },
@@ -644,8 +1062,19 @@
             "cacheWrite": "2.5"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
+        },
+        "global.moonshotai.kimi-k3": {
+          "rates": {
+            "input": "3",
+            "output": "15",
+            "cacheRead": "0.3",
+            "cacheWrite": "3.75"
+          }
         },
         "global.openai.gpt-5.6-luna": {
           "rates": {
@@ -664,6 +1093,12 @@
                 "cacheWrite": "0.5"
               }
             }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
           ]
         },
         "global.openai.gpt-5.6-sol": {
@@ -683,6 +1118,12 @@
                 "cacheWrite": "10"
               }
             }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
           ]
         },
         "global.openai.gpt-5.6-terra": {
@@ -702,65 +1143,279 @@
                 "cacheWrite": "5"
               }
             }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
+        },
+        "global.openai.gpt-6-astra": {
+          "rates": {
+            "input": "10",
+            "output": "50",
+            "cacheRead": "1",
+            "cacheWrite": "12.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "20",
+                "output": "75",
+                "cacheRead": "2",
+                "cacheWrite": "25"
+              }
+            }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
+        },
+        "global.openai.gpt-6-luna": {
+          "rates": {
+            "input": "0.1",
+            "output": "0.5",
+            "cacheRead": "0.01",
+            "cacheWrite": "0.125"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "0.2",
+                "output": "0.75",
+                "cacheRead": "0.02",
+                "cacheWrite": "0.25"
+              }
+            }
+          ]
+        },
+        "global.openai.gpt-6-sol": {
+          "rates": {
+            "input": "2",
+            "output": "10",
+            "cacheRead": "0.2",
+            "cacheWrite": "2.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "4",
+                "output": "15",
+                "cacheRead": "0.4",
+                "cacheWrite": "5"
+              }
+            }
+          ]
+        },
+        "global.xai.grok-4.6": {
+          "rates": {
+            "input": "2",
+            "output": "6",
+            "cacheRead": "0.5"
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
           ]
         },
         "google.gemma-3-12b-it": {
           "rates": {
-            "input": "0.05",
-            "output": "0.1"
-          }
+            "input": "0.09",
+            "output": "0.29"
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "google.gemma-3-27b-it": {
           "rates": {
-            "input": "0.12",
-            "output": "0.2"
-          }
+            "input": "0.23",
+            "output": "0.38"
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "google.gemma-3-4b-it": {
           "rates": {
             "input": "0.04",
             "output": "0.08"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
+        },
+        "google.gemma-4-26b-a4b": {
+          "rates": {
+            "input": "0.13",
+            "output": "0.4"
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses"
+          ]
+        },
+        "google.gemma-4-31b": {
+          "rates": {
+            "input": "0.14",
+            "output": "0.4"
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses"
+          ]
+        },
+        "google.gemma-4-e2b": {
+          "rates": {
+            "input": "0.04",
+            "output": "0.08"
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses"
+          ]
+        },
+        "in.openai.gpt-5.6-luna": {
+          "rates": {
+            "input": "0.22",
+            "output": "1.32",
+            "cacheRead": "0.022",
+            "cacheWrite": "0.275"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "0.44",
+                "output": "1.98",
+                "cacheRead": "0.044",
+                "cacheWrite": "0.55"
+              }
+            }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
+        },
+        "in.openai.gpt-5.6-terra": {
+          "rates": {
+            "input": "2.2",
+            "output": "13.2",
+            "cacheRead": "0.22",
+            "cacheWrite": "2.75"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "4.4",
+                "output": "19.8",
+                "cacheRead": "0.44",
+                "cacheWrite": "5.5"
+              }
+            }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
+        },
+        "jp.amazon.nova-2-lite-v1:0": {
+          "rates": {
+            "input": "0.396",
+            "output": "3.311",
+            "cacheRead": "0.099",
+            "cacheWrite": "0.396"
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "jp.anthropic.claude-haiku-4-5-20251001-v1:0": {
           "rates": {
-            "input": "1",
-            "output": "5",
-            "cacheRead": "0.1",
-            "cacheWrite": "1.25"
+            "input": "1.1",
+            "output": "5.5",
+            "cacheRead": "0.11",
+            "cacheWrite": "1.375"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "jp.anthropic.claude-opus-4-7": {
           "rates": {
-            "input": "5",
-            "output": "25",
-            "cacheRead": "0.5",
-            "cacheWrite": "6.25"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "jp.anthropic.claude-opus-4-8": {
           "rates": {
-            "input": "5",
-            "output": "25",
-            "cacheRead": "0.5",
-            "cacheWrite": "6.25"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "jp.anthropic.claude-opus-5": {
           "rates": {
-            "input": "5",
-            "output": "25",
-            "cacheRead": "0.5",
-            "cacheWrite": "6.25"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
+          },
+          "tags": [
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "jp.anthropic.claude-opus-5-5": {
+          "rates": {
+            "input": "4.4",
+            "output": "22",
+            "cacheRead": "0.22",
+            "cacheWrite": "5.5"
           },
           "tags": [
             "adaptive_thinking"
@@ -768,189 +1423,374 @@
         },
         "jp.anthropic.claude-sonnet-4-5-20250929-v1:0": {
           "rates": {
-            "input": "3",
-            "output": "15",
-            "cacheRead": "0.3",
-            "cacheWrite": "3.75"
+            "input": "3.3",
+            "output": "16.5",
+            "cacheRead": "0.33",
+            "cacheWrite": "4.125"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "runtime"
           ]
         },
         "jp.anthropic.claude-sonnet-4-6": {
           "rates": {
-            "input": "3",
-            "output": "15",
-            "cacheRead": "0.3",
-            "cacheWrite": "3.75"
+            "input": "3.3",
+            "output": "16.5",
+            "cacheRead": "0.33",
+            "cacheWrite": "4.125"
           },
           "tags": [
             "legacy_thinking",
+            "runtime",
             "adaptive_thinking"
           ]
         },
         "jp.anthropic.claude-sonnet-5": {
           "rates": {
-            "input": "2",
-            "output": "10",
-            "cacheRead": "0.2",
-            "cacheWrite": "2.5"
+            "input": "2.2",
+            "output": "11",
+            "cacheRead": "0.22",
+            "cacheWrite": "2.75"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "meta.llama3-1-405b-instruct-v1:0": {
+          "tags": [
+            "runtime"
           ]
         },
         "meta.llama3-1-70b-instruct-v1:0": {
           "rates": {
             "input": "0.72",
             "output": "0.72"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "meta.llama3-1-8b-instruct-v1:0": {
           "rates": {
             "input": "0.22",
             "output": "0.22"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "meta.llama3-2-11b-instruct-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "meta.llama3-2-1b-instruct-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "meta.llama3-2-3b-instruct-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "meta.llama3-2-90b-instruct-v1:0": {
+          "tags": [
+            "runtime"
+          ]
         },
         "meta.llama3-3-70b-instruct-v1:0": {
           "rates": {
             "input": "0.72",
             "output": "0.72"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "meta.llama3-70b-instruct-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "meta.llama3-8b-instruct-v1:0": {
+          "tags": [
+            "runtime"
+          ]
         },
         "meta.llama4-maverick-17b-instruct-v1:0": {
           "rates": {
             "input": "0.24",
             "output": "0.97"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "meta.llama4-scout-17b-instruct-v1:0": {
           "rates": {
             "input": "0.17",
             "output": "0.66"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "minimax.minimax-m2": {
           "rates": {
             "input": "0.3",
             "output": "1.2"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "minimax.minimax-m2.1": {
           "rates": {
             "input": "0.3",
             "output": "1.2"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "minimax.minimax-m2.5": {
           "rates": {
             "input": "0.3",
             "output": "1.2"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "mistral.devstral-2-123b": {
           "rates": {
             "input": "0.4",
             "output": "2"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "mistral.magistral-small-2509": {
           "rates": {
             "input": "0.5",
             "output": "1.5"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "mistral.ministral-3-14b-instruct": {
           "rates": {
             "input": "0.2",
             "output": "0.2"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "mistral.ministral-3-3b-instruct": {
           "rates": {
             "input": "0.1",
             "output": "0.1"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "mistral.ministral-3-8b-instruct": {
           "rates": {
             "input": "0.15",
             "output": "0.15"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
+        },
+        "mistral.mistral-7b-instruct-v0:2": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "mistral.mistral-large-2402-v1:0": {
+          "tags": [
+            "runtime"
+          ]
         },
         "mistral.mistral-large-3-675b-instruct": {
           "rates": {
             "input": "0.5",
             "output": "1.5"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
+        },
+        "mistral.mistral-small-2402-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "mistral.mixtral-8x7b-instruct-v0:1": {
+          "tags": [
+            "runtime"
+          ]
         },
         "mistral.pixtral-large-2502-v1:0": {
           "rates": {
             "input": "2",
             "output": "6"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "mistral.voxtral-mini-3b-2507": {
           "rates": {
             "input": "0.04",
             "output": "0.04"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "mistral.voxtral-small-24b-2507": {
           "rates": {
-            "input": "0.15",
-            "output": "0.35"
-          }
+            "input": "0.1",
+            "output": "0.3"
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "moonshot.kimi-k2-thinking": {
           "rates": {
             "input": "0.6",
             "output": "2.5"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "moonshotai.kimi-k2.5": {
           "rates": {
             "input": "0.6",
             "output": "3"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
+        },
+        "moonshotai.kimi-k3": {
+          "tags": [
+            "runtime"
+          ]
         },
         "nvidia.nemotron-nano-12b-v2": {
           "rates": {
             "input": "0.2",
             "output": "0.6"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "nvidia.nemotron-nano-3-30b": {
           "rates": {
             "input": "0.06",
             "output": "0.24"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "nvidia.nemotron-nano-9b-v2": {
           "rates": {
             "input": "0.06",
             "output": "0.23"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "nvidia.nemotron-super-3-120b": {
           "rates": {
             "input": "0.15",
             "output": "0.65"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "openai.gpt-5.4": {
           "rates": {
             "input": "2.75",
             "output": "16.5",
             "cacheRead": "0.275"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses"
+          ]
         },
         "openai.gpt-5.5": {
           "rates": {
             "input": "5.5",
             "output": "33",
             "cacheRead": "0.55"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses"
+          ]
+        },
+        "openai.gpt-5.6-cyber": {
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses"
+          ]
         },
         "openai.gpt-5.6-luna": {
           "rates": {
@@ -969,6 +1809,12 @@
                 "cacheWrite": "0.55"
               }
             }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
           ]
         },
         "openai.gpt-5.6-sol": {
@@ -988,6 +1834,12 @@
                 "cacheWrite": "11"
               }
             }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
           ]
         },
         "openai.gpt-5.6-terra": {
@@ -1007,13 +1859,95 @@
                 "cacheWrite": "5.5"
               }
             }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
+        },
+        "openai.gpt-6-astra": {
+          "rates": {
+            "input": "11",
+            "output": "55",
+            "cacheRead": "1.1",
+            "cacheWrite": "13.75"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "22",
+                "output": "82.5",
+                "cacheRead": "2.2",
+                "cacheWrite": "27.5"
+              }
+            }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
+        },
+        "openai.gpt-6-luna": {
+          "rates": {
+            "input": "0.11",
+            "output": "0.55",
+            "cacheRead": "0.011",
+            "cacheWrite": "0.1375"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "0.22",
+                "output": "0.825",
+                "cacheRead": "0.022",
+                "cacheWrite": "0.275"
+              }
+            }
+          ]
+        },
+        "openai.gpt-6-sol": {
+          "rates": {
+            "input": "2.2",
+            "output": "11",
+            "cacheRead": "0.22",
+            "cacheWrite": "2.75"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "4.4",
+                "output": "16.5",
+                "cacheRead": "0.44",
+                "cacheWrite": "5.5"
+              }
+            }
+          ]
+        },
+        "openai.gpt-daybreak-blue-5.6-sol": {
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses"
           ]
         },
         "openai.gpt-oss-120b": {
           "rates": {
             "input": "0.15",
             "output": "0.6"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
         },
         "openai.gpt-oss-120b-1:0": {
           "rates": {
@@ -1025,7 +1959,13 @@
           "rates": {
             "input": "0.07",
             "output": "0.3"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
         },
         "openai.gpt-oss-20b-1:0": {
           "rates": {
@@ -1037,65 +1977,264 @@
           "rates": {
             "input": "0.15",
             "output": "0.6"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
         },
         "openai.gpt-oss-safeguard-20b": {
           "rates": {
             "input": "0.07",
             "output": "0.2"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
         },
         "qwen.qwen3-235b-a22b-2507-v1:0": {
           "rates": {
             "input": "0.22",
             "output": "0.88"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "qwen.qwen3-32b-v1:0": {
           "rates": {
             "input": "0.15",
             "output": "0.6"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
+        },
+        "qwen.qwen3-coder-30b-a3b-instruct": {
+          "tags": [
+            "mantle",
+            "openai_completions"
+          ]
         },
         "qwen.qwen3-coder-30b-a3b-v1:0": {
           "rates": {
             "input": "0.15",
             "output": "0.6"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "qwen.qwen3-coder-480b-a35b-instruct": {
+          "tags": [
+            "mantle",
+            "openai_completions"
+          ]
         },
         "qwen.qwen3-coder-480b-a35b-v1:0": {
           "rates": {
-            "input": "0.22",
+            "input": "0.45",
             "output": "1.8"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "qwen.qwen3-coder-next": {
           "rates": {
-            "input": "0.22",
-            "output": "1.8"
-          }
+            "input": "0.5",
+            "output": "1.2"
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "qwen.qwen3-next-80b-a3b": {
           "rates": {
-            "input": "0.14",
-            "output": "1.4"
-          }
+            "input": "0.15",
+            "output": "1.2"
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "qwen.qwen3-vl-235b-a22b": {
           "rates": {
-            "input": "0.3",
-            "output": "1.5"
+            "input": "0.53",
+            "output": "2.66"
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
+        },
+        "stability.stable-conservative-upscale-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-creative-upscale-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-fast-upscale-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-image-control-sketch-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-image-control-structure-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-image-erase-object-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-image-inpaint-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-image-remove-background-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-image-search-recolor-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-image-search-replace-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-image-style-guide-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-outpaint-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "stability.stable-style-transfer-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "twelvelabs.marengo-embed-2-7-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "twelvelabs.marengo-embed-3-0-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "twelvelabs.pegasus-1-2-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "us-gov.openai.gpt-oss-120b-1:0": {
+          "rates": {
+            "input": "0.18",
+            "output": "0.72"
           }
+        },
+        "us-gov.openai.gpt-oss-20b-1:0": {
+          "rates": {
+            "input": "0.084",
+            "output": "0.36"
+          }
+        },
+        "us.amazon.nova-2-lite-v1:0": {
+          "rates": {
+            "input": "0.33",
+            "output": "2.75",
+            "cacheRead": "0.0825",
+            "cacheWrite": "0.33"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "us.amazon.nova-lite-v1:0": {
+          "rates": {
+            "input": "0.06",
+            "output": "0.24",
+            "cacheRead": "0.015",
+            "cacheWrite": "0.06"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "us.amazon.nova-micro-v1:0": {
+          "rates": {
+            "input": "0.035",
+            "output": "0.14",
+            "cacheRead": "0.00875",
+            "cacheWrite": "0.035"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "us.amazon.nova-premier-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
+        "us.amazon.nova-pro-v1:0": {
+          "rates": {
+            "input": "0.8",
+            "output": "3.2",
+            "cacheRead": "0.2",
+            "cacheWrite": "0.8"
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "us.anthropic.claude-fable-5": {
           "rates": {
-            "input": "10",
-            "output": "50",
-            "cacheRead": "1",
-            "cacheWrite": "12.5"
+            "input": "11",
+            "output": "55",
+            "cacheRead": "1.1",
+            "cacheWrite": "13.75"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "us.anthropic.claude-fable-5-1": {
@@ -1106,171 +2245,469 @@
             "cacheWrite": "13.75"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "us.anthropic.claude-haiku-4-5-20251001-v1:0": {
           "rates": {
-            "input": "1",
-            "output": "5",
-            "cacheRead": "0.1",
-            "cacheWrite": "1.25"
+            "input": "1.1",
+            "output": "5.5",
+            "cacheRead": "0.11",
+            "cacheWrite": "1.375"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "us.anthropic.claude-opus-4-1-20250805-v1:0": {
+          "tags": [
+            "runtime"
           ]
         },
         "us.anthropic.claude-opus-4-5-20251101-v1:0": {
           "rates": {
-            "input": "5",
-            "output": "25",
-            "cacheRead": "0.5",
-            "cacheWrite": "6.25"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "runtime"
           ]
         },
         "us.anthropic.claude-opus-4-6-v1": {
           "rates": {
-            "input": "5",
-            "output": "25",
-            "cacheRead": "0.5",
-            "cacheWrite": "6.25"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
           },
           "tags": [
             "legacy_thinking",
+            "runtime",
             "adaptive_thinking"
           ]
         },
         "us.anthropic.claude-opus-4-7": {
           "rates": {
-            "input": "5",
-            "output": "25",
-            "cacheRead": "0.5",
-            "cacheWrite": "6.25"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "us.anthropic.claude-opus-4-8": {
           "rates": {
-            "input": "5",
-            "output": "25",
-            "cacheRead": "0.5",
-            "cacheWrite": "6.25"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "us.anthropic.claude-opus-5": {
           "rates": {
-            "input": "5",
-            "output": "25",
-            "cacheRead": "0.5",
-            "cacheWrite": "6.25"
+            "input": "5.5",
+            "output": "27.5",
+            "cacheRead": "0.55",
+            "cacheWrite": "6.875"
+          },
+          "tags": [
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
+          ]
+        },
+        "us.anthropic.claude-opus-5-5": {
+          "rates": {
+            "input": "4.4",
+            "output": "22",
+            "cacheRead": "0.22",
+            "cacheWrite": "5.5"
           },
           "tags": [
             "adaptive_thinking"
           ]
         },
+        "us.anthropic.claude-sonnet-4-20250514-v1:0": {
+          "tags": [
+            "runtime"
+          ]
+        },
         "us.anthropic.claude-sonnet-4-5-20250929-v1:0": {
           "rates": {
-            "input": "3",
-            "output": "15",
-            "cacheRead": "0.3",
-            "cacheWrite": "3.75"
+            "input": "3.3",
+            "output": "16.5",
+            "cacheRead": "0.33",
+            "cacheWrite": "4.125"
           },
           "tags": [
-            "legacy_thinking"
+            "legacy_thinking",
+            "runtime"
           ]
         },
         "us.anthropic.claude-sonnet-4-6": {
           "rates": {
-            "input": "3",
-            "output": "15",
-            "cacheRead": "0.3",
-            "cacheWrite": "3.75"
+            "input": "3.3",
+            "output": "16.5",
+            "cacheRead": "0.33",
+            "cacheWrite": "4.125"
           },
           "tags": [
             "legacy_thinking",
+            "runtime",
             "adaptive_thinking"
           ]
         },
         "us.anthropic.claude-sonnet-5": {
           "rates": {
-            "input": "2",
-            "output": "10",
-            "cacheRead": "0.2",
-            "cacheWrite": "2.5"
+            "input": "2.2",
+            "output": "11",
+            "cacheRead": "0.22",
+            "cacheWrite": "2.75"
           },
           "tags": [
-            "adaptive_thinking"
+            "adaptive_thinking",
+            "anthropic_messages",
+            "mantle",
+            "runtime"
           ]
         },
         "us.deepseek.r1-v1:0": {
           "rates": {
             "input": "1.35",
             "output": "5.4"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "us.meta.llama3-1-70b-instruct-v1:0": {
+          "rates": {
+            "input": "0.72",
+            "output": "0.72"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "us.meta.llama3-1-8b-instruct-v1:0": {
+          "rates": {
+            "input": "0.22",
+            "output": "0.22"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "us.meta.llama3-3-70b-instruct-v1:0": {
+          "rates": {
+            "input": "0.72",
+            "output": "0.72"
           }
         },
         "us.meta.llama4-maverick-17b-instruct-v1:0": {
           "rates": {
             "input": "0.24",
             "output": "0.97"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "us.meta.llama4-scout-17b-instruct-v1:0": {
           "rates": {
             "input": "0.17",
             "output": "0.66"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "us.mistral.pixtral-large-2502-v1:0": {
+          "rates": {
+            "input": "2",
+            "output": "6"
           }
+        },
+        "us.moonshotai.kimi-k3": {
+          "rates": {
+            "input": "3.3",
+            "output": "16.5",
+            "cacheRead": "0.33",
+            "cacheWrite": "4.125"
+          }
+        },
+        "us.openai.gpt-5.6-luna": {
+          "rates": {
+            "input": "0.22",
+            "output": "1.32",
+            "cacheRead": "0.022",
+            "cacheWrite": "0.275"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "0.44",
+                "output": "1.98",
+                "cacheRead": "0.044",
+                "cacheWrite": "0.55"
+              }
+            }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
+        },
+        "us.openai.gpt-5.6-sol": {
+          "rates": {
+            "input": "4.4",
+            "output": "22",
+            "cacheRead": "0.44",
+            "cacheWrite": "5.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "8.8",
+                "output": "33",
+                "cacheRead": "0.88",
+                "cacheWrite": "11"
+              }
+            }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
+        },
+        "us.openai.gpt-5.6-terra": {
+          "rates": {
+            "input": "2.2",
+            "output": "13.2",
+            "cacheRead": "0.22",
+            "cacheWrite": "2.75"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "4.4",
+                "output": "19.8",
+                "cacheRead": "0.44",
+                "cacheWrite": "5.5"
+              }
+            }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
+        },
+        "us.openai.gpt-6-astra": {
+          "rates": {
+            "input": "11",
+            "output": "55",
+            "cacheRead": "1.1",
+            "cacheWrite": "13.75"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "22",
+                "output": "82.5",
+                "cacheRead": "2.2",
+                "cacheWrite": "27.5"
+              }
+            }
+          ],
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
+        },
+        "us.openai.gpt-6-luna": {
+          "rates": {
+            "input": "0.11",
+            "output": "0.55",
+            "cacheRead": "0.011",
+            "cacheWrite": "0.1375"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "0.22",
+                "output": "0.825",
+                "cacheRead": "0.022",
+                "cacheWrite": "0.275"
+              }
+            }
+          ]
+        },
+        "us.openai.gpt-6-sol": {
+          "rates": {
+            "input": "2.2",
+            "output": "11",
+            "cacheRead": "0.22",
+            "cacheWrite": "2.75"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "4.4",
+                "output": "16.5",
+                "cacheRead": "0.44",
+                "cacheWrite": "5.5"
+              }
+            }
+          ]
+        },
+        "us.writer.palmyra-x4-v1:0": {
+          "rates": {
+            "input": "2.5",
+            "output": "10"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "us.writer.palmyra-x5-v1:0": {
+          "rates": {
+            "input": "0.6",
+            "output": "6"
+          },
+          "tags": [
+            "runtime"
+          ]
+        },
+        "us.xai.grok-4.6": {
+          "rates": {
+            "input": "2.2",
+            "output": "6.6",
+            "cacheRead": "0.55"
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
+        },
+        "writer.palmyra-vision-7b": {
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "writer.palmyra-x4-v1:0": {
           "rates": {
             "input": "2.5",
             "output": "10"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "writer.palmyra-x5-v1:0": {
           "rates": {
             "input": "0.6",
             "output": "6"
-          }
+          },
+          "tags": [
+            "runtime"
+          ]
         },
         "xai.grok-4.3": {
           "rates": {
             "input": "1.25",
             "output": "2.5",
             "cacheRead": "0.2"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses"
+          ]
         },
         "xai.grok-4.6": {
           "rates": {
             "input": "2.2",
             "output": "6.6",
             "cacheRead": "0.55"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "openai_responses",
+            "runtime"
+          ]
         },
         "zai.glm-4.7": {
           "rates": {
             "input": "0.6",
             "output": "2.2"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "zai.glm-4.7-flash": {
           "rates": {
             "input": "0.07",
             "output": "0.4"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         },
         "zai.glm-5": {
           "rates": {
             "input": "1",
             "output": "3.2"
-          }
+          },
+          "tags": [
+            "mantle",
+            "openai_completions",
+            "runtime"
+          ]
         }
       }
     },
@@ -1404,6 +2841,17 @@
             "output": "25",
             "cacheRead": "0.5",
             "cacheWrite": "6.25"
+          },
+          "tags": [
+            "adaptive_thinking"
+          ]
+        },
+        "claude-opus-5-5": {
+          "rates": {
+            "input": "4",
+            "output": "20",
+            "cacheRead": "0.2",
+            "cacheWrite": "5"
           },
           "tags": [
             "adaptive_thinking"
@@ -1700,6 +3148,63 @@
             }
           ]
         },
+        "gpt-6-astra": {
+          "rates": {
+            "input": "10",
+            "output": "50",
+            "cacheRead": "1",
+            "cacheWrite": "12.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "20",
+                "output": "75",
+                "cacheRead": "2",
+                "cacheWrite": "25"
+              }
+            }
+          ]
+        },
+        "gpt-6-luna": {
+          "rates": {
+            "input": "0.1",
+            "output": "0.5",
+            "cacheRead": "0.01",
+            "cacheWrite": "0.125"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "0.2",
+                "output": "0.75",
+                "cacheRead": "0.02",
+                "cacheWrite": "0.25"
+              }
+            }
+          ]
+        },
+        "gpt-6-sol": {
+          "rates": {
+            "input": "2",
+            "output": "10",
+            "cacheRead": "0.2",
+            "cacheWrite": "2.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "4",
+                "output": "15",
+                "cacheRead": "0.4",
+                "cacheWrite": "5"
+              }
+            }
+          ]
+        },
         "gpt-chat-latest": {
           "rates": {
             "input": "5",
@@ -1722,6 +3227,20 @@
           }
         },
         "gpt-image-2": {
+          "rates": {
+            "input": "5",
+            "output": "30",
+            "cacheRead": "1.25"
+          }
+        },
+        "gpt-image-2.5-flare": {
+          "rates": {
+            "input": "5",
+            "output": "30",
+            "cacheRead": "1.25"
+          }
+        },
+        "gpt-image-2.5-sunburst": {
           "rates": {
             "input": "5",
             "output": "30",
@@ -1901,6 +3420,13 @@
             "output": "3.96"
           }
         },
+        "deepseek-ai/DeepSeek-V4.1-Flash": {
+          "rates": {
+            "input": "0.3",
+            "output": "1.2",
+            "cacheRead": "0.03"
+          }
+        },
         "moonshotai/Kimi-K2.5": {
           "rates": {
             "input": "0.6",
@@ -2019,16 +3545,16 @@
     },
     "cerebras": {
       "models": {
-        "gemma-4-31b": {
-          "rates": {
-            "input": "0.99",
-            "output": "1.49"
-          }
-        },
         "gpt-oss-120b": {
           "rates": {
             "input": "0.35",
             "output": "0.75"
+          }
+        },
+        "qwen-3.8-27b": {
+          "rates": {
+            "input": "0.99",
+            "output": "1.49"
           }
         }
       }
@@ -2160,6 +3686,17 @@
             "output": "25",
             "cacheRead": "0.5",
             "cacheWrite": "6.25"
+          },
+          "tags": [
+            "adaptive_thinking"
+          ]
+        },
+        "claude-opus-5.5": {
+          "rates": {
+            "input": "4",
+            "output": "20",
+            "cacheRead": "0.2",
+            "cacheWrite": "5"
           },
           "tags": [
             "adaptive_thinking"
@@ -2300,19 +3837,19 @@
         },
         "gpt-5.6-sol": {
           "rates": {
-            "input": "2",
-            "output": "10",
-            "cacheRead": "0.2",
-            "cacheWrite": "2.5"
+            "input": "4",
+            "output": "20",
+            "cacheRead": "0.4",
+            "cacheWrite": "5"
           },
           "tiers": [
             {
               "contextOver": 272000,
               "rates": {
-                "input": "4",
-                "output": "15",
-                "cacheRead": "0.4",
-                "cacheWrite": "5"
+                "input": "8",
+                "output": "30",
+                "cacheRead": "0.8",
+                "cacheWrite": "10"
               }
             }
           ]
@@ -2330,6 +3867,63 @@
               "rates": {
                 "input": "4",
                 "output": "18",
+                "cacheRead": "0.4",
+                "cacheWrite": "5"
+              }
+            }
+          ]
+        },
+        "gpt-6-astra": {
+          "rates": {
+            "input": "10",
+            "output": "50",
+            "cacheRead": "1",
+            "cacheWrite": "12.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "20",
+                "output": "75",
+                "cacheRead": "2",
+                "cacheWrite": "25"
+              }
+            }
+          ]
+        },
+        "gpt-6-luna": {
+          "rates": {
+            "input": "0.1",
+            "output": "0.5",
+            "cacheRead": "0.01",
+            "cacheWrite": "0.125"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "0.2",
+                "output": "0.75",
+                "cacheRead": "0.02",
+                "cacheWrite": "0.25"
+              }
+            }
+          ]
+        },
+        "gpt-6-sol": {
+          "rates": {
+            "input": "2",
+            "output": "10",
+            "cacheRead": "0.2",
+            "cacheWrite": "2.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "4",
+                "output": "15",
                 "cacheRead": "0.4",
                 "cacheWrite": "5"
               }
@@ -2354,6 +3948,23 @@
           ]
         },
         "grok-4.6": {
+          "rates": {
+            "input": "2",
+            "output": "6",
+            "cacheRead": "0.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 200000,
+              "rates": {
+                "input": "4",
+                "output": "12",
+                "cacheRead": "1"
+              }
+            }
+          ]
+        },
+        "grok-4.7": {
           "rates": {
             "input": "2",
             "output": "6",
@@ -2452,13 +4063,6 @@
               }
             }
           ]
-        },
-        "MiniMaxAI/MiniMax-M2.7": {
-          "rates": {
-            "input": "0.25",
-            "output": "1",
-            "cacheRead": "0.05"
-          }
         },
         "MiniMaxAI/MiniMax-M3": {
           "rates": {
@@ -2608,9 +4212,16 @@
         },
         "Qwen/Qwen3.8-27B": {
           "rates": {
-            "input": "0.4",
-            "output": "3",
-            "cacheRead": "0.04"
+            "input": "0.2",
+            "output": "2.5",
+            "cacheRead": "0.05"
+          }
+        },
+        "Qwen/Qwen3.8-Flash": {
+          "rates": {
+            "input": "0.113",
+            "output": "0.382",
+            "cacheRead": "0.0141"
           }
         },
         "Qwen/Qwen3.8-Max": {
@@ -2622,9 +4233,9 @@
         },
         "XiaomiMiMo/MiMo-V2.5": {
           "rates": {
-            "input": "0.4",
-            "output": "2",
-            "cacheRead": "0.08"
+            "input": "0.14",
+            "output": "0.28",
+            "cacheRead": "0.0028"
           }
         },
         "XiaomiMiMo/MiMo-V2.5-Pro": {
@@ -2632,6 +4243,20 @@
             "input": "1",
             "output": "3",
             "cacheRead": "0.2"
+          }
+        },
+        "XiaomiMiMo/MiMo-V2.6-Flash": {
+          "rates": {
+            "input": "0.14",
+            "output": "0.28",
+            "cacheRead": "0.0027"
+          }
+        },
+        "XiaomiMiMo/MiMo-V2.6-Pro": {
+          "rates": {
+            "input": "0.43",
+            "output": "0.87",
+            "cacheRead": "0.0036"
           }
         },
         "deepseek-ai/DeepSeek-R1-0528": {
@@ -2677,16 +4302,16 @@
         },
         "deepseek-ai/DeepSeek-V4-Flash-0731": {
           "rates": {
-            "input": "0.08",
+            "input": "0.06",
             "output": "0.18",
-            "cacheRead": "0.016"
+            "cacheRead": "0.015"
           }
         },
         "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp": {
           "rates": {
             "input": "0.44",
             "output": "1.32",
-            "cacheRead": "0.14"
+            "cacheRead": "0.014"
           }
         },
         "deepseek-ai/DeepSeek-V4-Pro": {
@@ -2701,6 +4326,31 @@
             "input": "1.3",
             "output": "2.6",
             "cacheRead": "0.1"
+          }
+        },
+        "deepseek-ai/DeepSeek-V4.1-Flash": {
+          "rates": {
+            "input": "0.2",
+            "output": "0.6",
+            "cacheRead": "0.006"
+          }
+        },
+        "google/gemma-3-12b-it": {
+          "rates": {
+            "input": "0.05",
+            "output": "0.15"
+          }
+        },
+        "google/gemma-3-27b-it": {
+          "rates": {
+            "input": "0.08",
+            "output": "0.16"
+          }
+        },
+        "google/gemma-3-4b-it": {
+          "rates": {
+            "input": "0.05",
+            "output": "0.1"
           }
         },
         "google/gemma-4-26B-A4B-it": {
@@ -2737,13 +4387,6 @@
           "rates": {
             "input": "0.1",
             "output": "0.3"
-          }
-        },
-        "moonshotai/Kimi-K2.5": {
-          "rates": {
-            "input": "0.45",
-            "output": "2.25",
-            "cacheRead": "0.07"
           }
         },
         "moonshotai/Kimi-K2.6": {
@@ -2795,9 +4438,16 @@
         },
         "tencent/Hy3": {
           "rates": {
-            "input": "0.14",
-            "output": "0.58",
-            "cacheRead": "0.035"
+            "input": "0.13",
+            "output": "0.53",
+            "cacheRead": "0.033"
+          }
+        },
+        "tencent/Hy4-preview": {
+          "rates": {
+            "input": "0.834",
+            "output": "2.501",
+            "cacheRead": "0.042"
           }
         },
         "thinkingmachines/Inkling": {
@@ -2828,20 +4478,6 @@
             "cacheRead": "0.08"
           }
         },
-        "zai-org/GLM-4.7-Flash": {
-          "rates": {
-            "input": "0.06",
-            "output": "0.4",
-            "cacheRead": "0.01"
-          }
-        },
-        "zai-org/GLM-5": {
-          "rates": {
-            "input": "0.6",
-            "output": "2.08",
-            "cacheRead": "0.12"
-          }
-        },
         "zai-org/GLM-5.1": {
           "rates": {
             "input": "1.05",
@@ -2858,9 +4494,9 @@
         },
         "zai-org/GLM-5.3": {
           "rates": {
-            "input": "1.2",
+            "input": "0.9",
             "output": "4",
-            "cacheRead": "0.12"
+            "cacheRead": "0.2"
           }
         },
         "zai-org/GLM-5.3-Flash": {
@@ -2874,20 +4510,12 @@
     },
     "deepseek": {
       "models": {
-        "deepseek-v4-flash": {
+        "deepseek-flash": {
           "rates": {
-            "input": "0.14",
-            "output": "0.28",
-            "cacheRead": "0.0028",
-            "reasoning": "0.28"
-          }
-        },
-        "deepseek-v4-flash-vision-exp": {
-          "rates": {
-            "input": "0.14",
-            "output": "0.28",
-            "cacheRead": "0.0028",
-            "reasoning": "0.28"
+            "input": "0.15",
+            "output": "0.6",
+            "cacheRead": "0.003",
+            "reasoning": "0.6"
           }
         },
         "deepseek-v4-pro": {
@@ -2902,32 +4530,18 @@
     },
     "fireworks": {
       "models": {
-        "accounts/fireworks/models/deepseek-v4-flash-0731": {
+        "accounts/fireworks/models/deepseek-v4p1-flash": {
           "rates": {
             "input": "0.22",
             "output": "0.66",
             "cacheRead": "0.007"
           }
         },
-        "accounts/fireworks/models/deepseek-v4-flash-vision-exp": {
+        "accounts/fireworks/models/ember-1": {
           "rates": {
-            "input": "0.22",
-            "output": "0.66",
-            "cacheRead": "0.007"
-          }
-        },
-        "accounts/fireworks/models/deepseek-v4-pro-0813": {
-          "rates": {
-            "input": "1.32",
-            "output": "3.96",
-            "cacheRead": "0.044"
-          }
-        },
-        "accounts/fireworks/models/glm-5p2": {
-          "rates": {
-            "input": "1.4",
-            "output": "4.4",
-            "cacheRead": "0.14"
+            "input": "3",
+            "output": "15",
+            "cacheRead": "0.3"
           }
         },
         "accounts/fireworks/models/glm-5p3": {
@@ -2958,20 +4572,6 @@
             "cacheRead": "0.17"
           }
         },
-        "accounts/fireworks/models/kimi-k2p6": {
-          "rates": {
-            "input": "0.95",
-            "output": "4",
-            "cacheRead": "0.16"
-          }
-        },
-        "accounts/fireworks/models/kimi-k2p7-code": {
-          "rates": {
-            "input": "0.95",
-            "output": "4",
-            "cacheRead": "0.19"
-          }
-        },
         "accounts/fireworks/models/kimi-k3": {
           "rates": {
             "input": "3",
@@ -2986,18 +4586,11 @@
             "cacheRead": "0.06"
           }
         },
-        "accounts/fireworks/models/muse-glimmer-30b": {
-          "rates": {
-            "input": "0.35",
-            "output": "1.5",
-            "cacheRead": "0.04"
-          }
-        },
         "accounts/fireworks/models/nemotron-3-ultra-nvfp4": {
           "rates": {
             "input": "0.6",
             "output": "2.4",
-            "cacheRead": "0.119"
+            "cacheRead": "0.12"
           }
         },
         "accounts/fireworks/models/nemotron-lightning-3p5-30b-a3b": {
@@ -3007,11 +4600,11 @@
             "cacheRead": "0.01"
           }
         },
-        "accounts/fireworks/models/qwen3p7-plus": {
+        "accounts/fireworks/models/qwen3p8-2p4t-a95b": {
           "rates": {
-            "input": "0.4",
-            "output": "1.6",
-            "cacheRead": "0.08"
+            "input": "2",
+            "output": "6",
+            "cacheRead": "0.25"
           }
         },
         "accounts/fireworks/models/qwen3p8-max": {
@@ -3021,11 +4614,46 @@
             "cacheRead": "0.25"
           }
         },
-        "accounts/fireworks/routers/glm-5p2-fast": {
+        "accounts/fireworks/routers/deepseek-flash-latest": {
+          "rates": {
+            "input": "0.22",
+            "output": "0.66",
+            "cacheRead": "0.007"
+          }
+        },
+        "accounts/fireworks/routers/glm-5p3-fast": {
           "rates": {
             "input": "2.1",
             "output": "6.6",
-            "cacheRead": "0.21"
+            "cacheRead": "0.39"
+          }
+        },
+        "accounts/fireworks/routers/glm-fast-latest": {
+          "rates": {
+            "input": "2.1",
+            "output": "6.6",
+            "cacheRead": "0.39"
+          }
+        },
+        "accounts/fireworks/routers/glm-flash-latest": {
+          "rates": {
+            "input": "0.15",
+            "output": "0.5",
+            "cacheRead": "0.03"
+          }
+        },
+        "accounts/fireworks/routers/glm-latest": {
+          "rates": {
+            "input": "1.4",
+            "output": "4.4",
+            "cacheRead": "0.26"
+          }
+        },
+        "accounts/fireworks/routers/kimi-fast-latest": {
+          "rates": {
+            "input": "4.5",
+            "output": "22.5",
+            "cacheRead": "0.45"
           }
         },
         "accounts/fireworks/routers/kimi-k3-fast": {
@@ -3033,6 +4661,27 @@
             "input": "4.5",
             "output": "22.5",
             "cacheRead": "0.45"
+          }
+        },
+        "accounts/fireworks/routers/kimi-latest": {
+          "rates": {
+            "input": "3",
+            "output": "15",
+            "cacheRead": "0.3"
+          }
+        },
+        "accounts/fireworks/routers/minimax-latest": {
+          "rates": {
+            "input": "0.3",
+            "output": "1.2",
+            "cacheRead": "0.06"
+          }
+        },
+        "accounts/fireworks/routers/qwen-max-latest": {
+          "rates": {
+            "input": "2",
+            "output": "6",
+            "cacheRead": "0.25"
           }
         }
       }
@@ -3442,6 +5091,17 @@
             "adaptive_thinking"
           ]
         },
+        "claude-opus-5-5@default": {
+          "rates": {
+            "input": "4",
+            "output": "20",
+            "cacheRead": "0.2",
+            "cacheWrite": "5"
+          },
+          "tags": [
+            "adaptive_thinking"
+          ]
+        },
         "claude-opus-5@default": {
           "rates": {
             "input": "5",
@@ -3684,6 +5344,81 @@
           "rates": {
             "input": "0.09",
             "output": "0.36"
+          }
+        },
+        "xai/grok-4.20-non-reasoning": {
+          "rates": {
+            "input": "1.25",
+            "output": "2.5",
+            "cacheRead": "0.2"
+          },
+          "tiers": [
+            {
+              "contextOver": 200000,
+              "rates": {
+                "input": "2.5",
+                "output": "5",
+                "cacheRead": "0.4"
+              }
+            }
+          ]
+        },
+        "xai/grok-4.20-reasoning": {
+          "rates": {
+            "input": "1.25",
+            "output": "2.5",
+            "cacheRead": "0.2"
+          },
+          "tiers": [
+            {
+              "contextOver": 200000,
+              "rates": {
+                "input": "2.5",
+                "output": "5",
+                "cacheRead": "0.4"
+              }
+            }
+          ]
+        },
+        "xai/grok-4.3": {
+          "rates": {
+            "input": "1.25",
+            "output": "2.5",
+            "cacheRead": "0.2"
+          },
+          "tiers": [
+            {
+              "contextOver": 200000,
+              "rates": {
+                "input": "2.5",
+                "output": "5",
+                "cacheRead": "0.4"
+              }
+            }
+          ]
+        },
+        "xai/grok-4.6": {
+          "rates": {
+            "input": "2",
+            "output": "6",
+            "cacheRead": "0.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 200000,
+              "rates": {
+                "input": "4",
+                "output": "12",
+                "cacheRead": "1"
+              }
+            }
+          ]
+        },
+        "zai-org/glm-5.2-maas": {
+          "rates": {
+            "input": "1.4",
+            "output": "4.4",
+            "cacheRead": "0.14"
           }
         }
       }
@@ -4018,6 +5753,30 @@
             "output": "3.96"
           }
         },
+        "deepseek-ai/DeepSeek-V4.1-Flash": {
+          "rates": {
+            "input": "0.3",
+            "output": "1.2"
+          }
+        },
+        "google/gemma-3-12b-it": {
+          "rates": {
+            "input": "0.05",
+            "output": "0.15"
+          }
+        },
+        "google/gemma-3-27b-it": {
+          "rates": {
+            "input": "0.08",
+            "output": "0.16"
+          }
+        },
+        "google/gemma-3-4b-it": {
+          "rates": {
+            "input": "0.05",
+            "output": "0.1"
+          }
+        },
         "google/gemma-4-26B-A4B-it": {
           "rates": {
             "input": "0.13",
@@ -4115,6 +5874,12 @@
           "rates": {
             "input": "0.14",
             "output": "0.58"
+          }
+        },
+        "tencent/Hy4-preview": {
+          "rates": {
+            "input": "0.834",
+            "output": "2.501"
           }
         },
         "thinkingmachines/Inkling": {
@@ -4347,6 +6112,13 @@
           }
         },
         "zai-glm-5-2": {
+          "rates": {
+            "input": "1.4",
+            "output": "4.4",
+            "cacheRead": "0.14"
+          }
+        },
+        "zai-glm-5-3": {
           "rates": {
             "input": "1.4",
             "output": "4.4",
@@ -4614,6 +6386,90 @@
             }
           ]
         },
+        "gpt-6-astra": {
+          "rates": {
+            "input": "10",
+            "output": "50",
+            "cacheRead": "1",
+            "cacheWrite": "12.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "20",
+                "output": "75",
+                "cacheRead": "2",
+                "cacheWrite": "25"
+              }
+            }
+          ]
+        },
+        "gpt-6-luna": {
+          "rates": {
+            "input": "0.1",
+            "output": "0.5",
+            "cacheRead": "0.01",
+            "cacheWrite": "0.125"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "0.2",
+                "output": "0.75",
+                "cacheRead": "0.02",
+                "cacheWrite": "0.25"
+              }
+            }
+          ]
+        },
+        "gpt-6-sol": {
+          "rates": {
+            "input": "2",
+            "output": "10",
+            "cacheRead": "0.2",
+            "cacheWrite": "2.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "4",
+                "output": "15",
+                "cacheRead": "0.4",
+                "cacheWrite": "5"
+              }
+            }
+          ]
+        },
+        "gpt-daybreak-blue-latest": {
+          "rates": {
+            "input": "4",
+            "output": "20",
+            "cacheRead": "0.4",
+            "cacheWrite": "5"
+          },
+          "tiers": [
+            {
+              "contextOver": 272000,
+              "rates": {
+                "input": "8",
+                "output": "30",
+                "cacheRead": "0.8",
+                "cacheWrite": "10"
+              }
+            }
+          ]
+        },
+        "gpt-daybreak-red-latest": {
+          "rates": {
+            "input": "12.5",
+            "output": "75",
+            "cacheRead": "1.25",
+            "cacheWrite": "15.625"
+          }
+        },
         "gpt-image-2": {
           "rates": {
             "input": "5",
@@ -4735,6 +6591,13 @@
             "input": "1.32",
             "output": "3.96",
             "cacheRead": "0.13"
+          }
+        },
+        "deepseek-ai/DeepSeek-V4.1-Flash": {
+          "rates": {
+            "input": "0.3",
+            "output": "1.2",
+            "cacheRead": "0.006"
           }
         },
         "google/gemma-3n-E4B-it": {
@@ -4925,6 +6788,23 @@
           ]
         },
         "grok-4.6": {
+          "rates": {
+            "input": "2",
+            "output": "6",
+            "cacheRead": "0.5"
+          },
+          "tiers": [
+            {
+              "contextOver": 200000,
+              "rates": {
+                "input": "4",
+                "output": "12",
+                "cacheRead": "1"
+              }
+            }
+          ]
+        },
+        "grok-4.7": {
           "rates": {
             "input": "2",
             "output": "6",
